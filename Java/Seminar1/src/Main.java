@@ -1,15 +1,84 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+class MathBody {
+    private static void TwoNumbers(int choice, String number) {
+        double a = Double.parseDouble(number.split(" ")[0]);
+        double b = Double.parseDouble(number.split(" ")[1]);
+
+        if (choice == 3) {
+            System.out.println(a + b);
+        }
+        else if (choice == 4) {
+            System.out.println(a - b);
+        }
+        else if (choice == 5) {
+            System.out.println(a * b);
+        }
+        else if (choice == 6) {
+            System.out.println(a / b);
+        }
+        else if (choice == 7) {
+            System.out.println(a % b);
+        }
+        else if (choice == 9) {
+            System.out.println(Math.pow(a, b));
+        }
+
+    }
+    private static void OneNumber(int choice, String number) {
+        int a = Integer.parseInt(number);
+        System.out.println(Math.abs(a));
+    }
+    private static  void SQLManagement(int choice) {
+        System.out.println();
+    }
+
+    public static void InfoOut(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("1. Вывести все таблицы PostgresSQL");
+        System.out.println("2. Создать таблицу PostgresSQL");
+        System.out.println("3. Сложение");
+        System.out.println("4. Вычитание");
+        System.out.println("5. Умножение");
+        System.out.println("6. Деление");
+        System.out.println("7. Деление по модулю");
+        System.out.println("8. Модуль числа");
+        System.out.println("9. Возведение в степень");
+        System.out.println("10. Экспорт данных из PostgresSQL в Excel");
+        System.out.print("Выберите действие: ");
+        int choice = sc.nextInt();
+        sc.nextLine();
+        switch (choice){
+            case 3,4,5,6,7,9:
+                System.out.print("Введите два числа через пробел: ");
+                String number = sc.nextLine();
+                TwoNumbers(choice, number);
+                break;
+            case 1, 2, 10:
+                SQLManagement(choice);
+                break;
+            case 8:
+                System.out.print("Введите одно число: ");
+                OneNumber(choice, sc.next());
+                break;
+            default:
+                System.out.println("Введено неверное значение! Попробуйте снова.");
+                InfoOut();
+                break;
+
+
+        }
+
+    }
+}
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        MathBody.InfoOut();
+
     }
 }
