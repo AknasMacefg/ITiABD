@@ -1,8 +1,30 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 class MathBody {
+
+    private static Object Parser(String a) {
+        try{
+            return Byte.parseByte(a);
+        }
+        catch(Exception e){
+            try {
+                return Integer.parseInt(a);
+            }
+            catch(Exception e1){
+                try {
+                    return Double.parseDouble(a);
+                }
+                catch(Exception e2){
+                    return null;
+                }
+            }
+
+        }
+
+    }
+
     private static void TwoNumbers(int choice, String number) {
+
         double a = Double.parseDouble(number.split(" ")[0]);
         double b = Double.parseDouble(number.split(" ")[1]);
 
