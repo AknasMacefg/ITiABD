@@ -153,6 +153,7 @@ class SqlDatabase {
                     String number = sc.nextLine();
                     break;
                 case 1, 2, 10:
+                    SqlDatabase.SQLMethod(choice);
                     break;
                 case 8:
                     System.out.print("Введите одно число: ");
@@ -165,6 +166,31 @@ class SqlDatabase {
             }
         }
 
+    }
+
+    private static void TwoNumbersMethod(int choice, String answer) {
+
+    }
+
+    private static void OneNumberMethod(String answer) {
+
+    }
+
+    private static void SQLMethod(int choice) {
+        switch (choice) {
+            case 1:
+                Quare("SELECT table_name FROM information_schema.tables\n" +
+                        "WHERE table_schema NOT IN ('information_schema','pg_catalog');");
+        }
+
+    }
+
+    private static void Quare(String sql) {
+        try {
+            System.out.println( conn.createStatement().executeUpdate(sql));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
