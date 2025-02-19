@@ -2,18 +2,17 @@ import com.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 class SqlDatabase {
     static Scanner sc = new Scanner(System.in);
     private static Connection conn;
-    private static String url = "jdbc:postgresql://localhost:5432/postgres";
-    private static String user = "postgres";
-    private static String pass = "postgres";
+
     static {
         try {
+            String pass = "postgres";
+            String user = "postgres";
+            String url = "jdbc:postgresql://localhost:5432/postgres";
             conn = DriverManager.getConnection(url, user, pass);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("CREATE SCHEMA IF NOT EXISTS Seminar1");
@@ -137,15 +136,15 @@ class SqlDatabase {
    }
 
    private static void OneNumber(String[] answer){
-        Float a = Float.parseFloat(answer[0]);
+        float a = Float.parseFloat(answer[0]);
        System.out.println("Текущие таблицы: ");
        Query("SELECT tablename FROM pg_tables\n" +
                "WHERE schemaname = 'seminar1'", "select");
        System.out.print("Выберите таблицу введя её имя: ");
        String table_choice = sc.nextLine();
-       Float result = Math.abs(a);
+       float result = Math.abs(a);
        Query("INSERT INTO seminar1." + table_choice +
-               " (Operation, Result) VALUES('abs("+a+")',"+result+");", "insert");
+               " (Operation, Result) VALUES('abs("+a+")',"+result+");", "create");
        System.out.println("Ответ: " + result);
    }
 
@@ -174,34 +173,26 @@ class SqlDatabase {
     private static void Query(String sql, String type) {
         try {
             Statement stmt = conn.createStatement();
-            if (type == "select"){
+            if (type.equals("select")) {
                 ResultSet rs = stmt.executeQuery(sql);
                 while (rs.next()) {
                     System.out.println(rs.getString(1));
                 }
-            }
-            else if (type == "insert"){
+            } else if (type.equals("create")) {
                 stmt.executeUpdate(sql);
-            }
-            else if (type == "create"){
-                stmt.executeUpdate(sql);
-            }
-            else if (type == "CSV"){
+            } else if (type.equals("CSV")) {
                 ResultSet rs = stmt.executeQuery(sql);
                 Statement stmt2 = conn.createStatement();
                 while (rs.next()) {
                     String table = rs.getString(1);
-                    CSVWriter writer = new CSVWriter(new FileWriter(table +".csv"));
+                    CSVWriter writer = new CSVWriter(new FileWriter(table + ".csv"));
                     ResultSet rs2 = stmt2.executeQuery("SELECT * FROM seminar1." + table);
                     writer.writeAll(rs2, true);
                     writer.close();
                 }
                 System.out.println("Информация успешно экспортирована.");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
