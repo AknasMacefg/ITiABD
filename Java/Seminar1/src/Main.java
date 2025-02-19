@@ -1,6 +1,6 @@
 import com.opencsv.CSVWriter;
-import com.sun.jdi.connect.Connector;
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -131,21 +131,20 @@ class SqlDatabase {
     }
 
     public static void Selector() {
-
-        System.out.println("1. Вывести все таблицы PostgresSQL");
-        System.out.println("2. Создать таблицу PostgresSQL");
-        System.out.println("3. Сложение");
-        System.out.println("4. Вычитание");
-        System.out.println("5. Умножение");
-        System.out.println("6. Деление");
-        System.out.println("7. Деление по модулю");
-        System.out.println("8. Модуль числа");
-        System.out.println("9. Возведение в степень");
-        System.out.println("10. Экспорт данных из PostgresSQL в Excel");
-        System.out.println("0. Выход из программы");
-        System.out.print("Выберите действие: ");
-
         while (true) {
+            System.out.println("1. Вывести все таблицы PostgresSQL");
+            System.out.println("2. Создать таблицу PostgresSQL");
+            System.out.println("3. Сложение");
+            System.out.println("4. Вычитание");
+            System.out.println("5. Умножение");
+            System.out.println("6. Деление");
+            System.out.println("7. Деление по модулю");
+            System.out.println("8. Модуль числа");
+            System.out.println("9. Возведение в степень");
+            System.out.println("10. Экспорт данных из PostgresSQL в Excel");
+            System.out.println("0. Выход из программы");
+            System.out.print("Выберите действие: ");
+
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -180,16 +179,56 @@ class SqlDatabase {
     private static void SQLMethod(int choice) {
         switch (choice) {
             case 1:
-                Quare("SELECT table_name FROM information_schema.tables\n" +
-                        "WHERE table_schema NOT IN ('information_schema','pg_catalog');");
+                System.out.println("Текущие таблицы: ");
+                Query("SELECT tablename FROM pg_tables\n" +
+                        "WHERE schemaname = 'seminar1'", "select");
+                break;
+            case 2:
+                System.out.print("Введите название таблицы: ");
+                String tablename = sc.nextLine();
+                Query("CREATE TABLE IF NOT EXISTS seminar1." + tablename +
+                        "(ID int, Operation varchar(10), Result int)", "create");
+                break;
+
+            case 10:
+                Query("SELECT tablename FROM pg_tables\n" +
+                        "WHERE schemaname = 'seminar1'", "CSV");
+                break;
         }
 
     }
 
-    private static void Quare(String sql) {
+    private static void Query(String sql, String type) {
         try {
-            System.out.println( conn.createStatement().executeUpdate(sql));
+            Statement stmt = conn.createStatement();
+            if (type == "select"){
+                ResultSet rs = stmt.executeQuery(sql);
+                while (rs.next()) {
+                    System.out.println(rs.getString(1));
+                }
+            }
+            else if (type == "insert"){
+                stmt.executeUpdate(sql);
+            }
+            else if (type == "create"){
+                stmt.executeUpdate(sql);
+            }
+            else if (type == "CSV"){
+                ResultSet rs = stmt.executeQuery(sql);
+                Statement stmt2 = conn.createStatement();
+                while (rs.next()) {
+                    String table = rs.getString(1);
+                    CSVWriter writer = new CSVWriter(new FileWriter(table +".csv"));
+                    ResultSet rs2 = stmt2.executeQuery("SELECT * FROM seminar1." + table);
+                    writer.writeAll(rs2, true);
+                    writer.close();
+                }
+                System.out.println("Информация успешно экспортирована.");
+            }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
