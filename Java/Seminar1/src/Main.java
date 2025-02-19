@@ -7,7 +7,6 @@ import java.util.Scanner;
 class SqlDatabase {
     static Scanner sc = new Scanner(System.in);
     private static Connection conn;
-
     static {
         try {
             String pass = "postgres";
@@ -23,6 +22,7 @@ class SqlDatabase {
 
     public static void Selector() {
         while (true) {
+            System.out.println("\n-------------------------------------\n");
             System.out.println("1. Вывести все таблицы PostgresSQL");
             System.out.println("2. Создать таблицу PostgresSQL");
             System.out.println("3. Сложение");
@@ -38,6 +38,7 @@ class SqlDatabase {
 
             int choice = sc.nextInt();
             sc.nextLine();
+            System.out.println("\n-------------------------------------\n");
             String[] split_answer;
             switch (choice) {
                 case 3, 4, 5, 6, 7, 9:
@@ -47,7 +48,7 @@ class SqlDatabase {
                         split_answer = number.split(" ");
                         if (split_answer.length == 2) {
                             if ((choice == 6 || choice == 7) && Float.parseFloat(split_answer[1]) == 0f) {
-                                System.out.println("Введен неверный формат!");
+                                System.out.println("На 0 делить нельзя!");
                                 continue;
                             }
                             break;
@@ -87,10 +88,7 @@ class SqlDatabase {
 
     }
 
-
-
    private static void TwoNumbers(int choice, String[] answer){
-
         float a = Float.parseFloat(answer[0]);
         float b = Float.parseFloat(answer[1]);
         float result = 0f;
@@ -178,9 +176,11 @@ class SqlDatabase {
                 while (rs.next()) {
                     System.out.println(rs.getString(1));
                 }
-            } else if (type.equals("create")) {
+            }
+            else if (type.equals("create")) {
                 stmt.executeUpdate(sql);
-            } else if (type.equals("CSV")) {
+            }
+            else if (type.equals("CSV")) {
                 ResultSet rs = stmt.executeQuery(sql);
                 Statement stmt2 = conn.createStatement();
                 while (rs.next()) {
