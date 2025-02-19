@@ -2,117 +2,9 @@ import com.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
-/*class MathBody {
-
-    private static Object Parser(String a) {
-        try{
-            return Byte.parseByte(a);
-        }
-        catch(Exception e){
-            try {
-                return Integer.parseInt(a);
-            }
-            catch(Exception e1){
-                try {
-                    return Double.parseDouble(a);
-                }
-                catch(Exception e2){
-                    return null;
-                }
-            }
-
-        }
-
-    }
-
-    private static void TwoNumbers(int choice, String number) {
-
-        float a = Float.parseFloat(number.split(" ")[0]);
-        float b = Float.parseFloat(number.split(" ")[1]);
-
-        if (choice == 3) {
-            System.out.println(a + b);
-        }
-        else if (choice == 4) {
-            System.out.println(a - b);
-        }
-        else if (choice == 5) {
-            System.out.println(a * b);
-        }
-        else if (choice == 6) {
-            System.out.println(a / b);
-        }
-        else if (choice == 7) {
-            System.out.println(a % b);
-        }
-        else if (choice == 9) {
-            System.out.println(Math.pow(a, b));
-        }
-
-    }
-    private static void OneNumber(String number) {
-        int a = Integer.parseInt(number);
-        System.out.println(Math.abs(a));
-    }
-    private static void SQLManagement(int choice) {
-        System.out.println();
-        if (choice == 1){
-            try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres")) {
-                Statement stmt = conn.createStatement();
-                stmt.executeUpdate("CREATE SCHEMA IF NOT EXISTS Seminar1");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        else if (choice == 2){
-
-        }
-        else if (choice == 10){
-
-        }
-    }
-
-    public static void InfoOut(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("1. Вывести все таблицы PostgresSQL");
-        System.out.println("2. Создать таблицу PostgresSQL");
-        System.out.println("3. Сложение");
-        System.out.println("4. Вычитание");
-        System.out.println("5. Умножение");
-        System.out.println("6. Деление");
-        System.out.println("7. Деление по модулю");
-        System.out.println("8. Модуль числа");
-        System.out.println("9. Возведение в степень");
-        System.out.println("10. Экспорт данных из PostgresSQL в Excel");
-        System.out.print("Выберите действие: ");
-        int choice = sc.nextInt();
-        sc.nextLine();
-        switch (choice){
-            case 3,4,5,6,7,9:
-                System.out.print("Введите два числа через пробел: ");
-                String number = sc.nextLine();
-                TwoNumbers(choice, number);
-                break;
-            case 1, 2, 10:
-                SQLManagement(choice);
-                break;
-            case 8:
-                System.out.print("Введите одно число: ");
-                OneNumber(sc.next());
-                break;
-            default:
-                System.out.println("Введено неверное значение! Попробуйте снова.");
-                InfoOut();
-                break;
-
-
-        }
-
-    }
-}
-*/
 
 class SqlDatabase {
     static Scanner sc = new Scanner(System.in);
@@ -147,19 +39,47 @@ class SqlDatabase {
 
             int choice = sc.nextInt();
             sc.nextLine();
+            String[] split_answer;
             switch (choice) {
                 case 3, 4, 5, 6, 7, 9:
-                    System.out.print("Введите два числа через пробел: ");
-                    String number = sc.nextLine();
+                    while (true) {
+                        System.out.print("Введите два числа через пробел: ");
+                        String number = sc.nextLine();
+                        split_answer = number.split(" ");
+                        if (split_answer.length == 2) {
+                            if ((choice == 6 || choice == 7) && Float.parseFloat(split_answer[1]) == 0f) {
+                                System.out.println("Введен неверный формат!");
+                                continue;
+                            }
+                            break;
+                        }
+                        else {
+                            System.out.println("Введен неверный формат!");
+                        }
+                    }
+                    TwoNumbers(choice, split_answer);
                     break;
+
                 case 1, 2, 10:
                     SqlDatabase.SQLMethod(choice);
                     break;
                 case 8:
-                    System.out.print("Введите одно число: ");
+                    while (true) {
+                        System.out.print("Введите одно число: ");
+                        String number = sc.nextLine();
+                        split_answer = number.split(" ");
+                        if (split_answer.length == 1) {
+                            break;
+                        }
+                        else {
+                            System.out.println("Введен неверный формат!");
+                        }
+                    }
+                    OneNumber(split_answer);
                     break;
                 case 0:
                     System.exit(0);
+                    break;
                 default:
                     System.out.println("Введено неверное значение! Попробуйте снова.");
                     break;
@@ -168,13 +88,66 @@ class SqlDatabase {
 
     }
 
-    private static void TwoNumbersMethod(int choice, String answer) {
 
-    }
 
-    private static void OneNumberMethod(String answer) {
+   private static void TwoNumbers(int choice, String[] answer){
 
-    }
+        float a = Float.parseFloat(answer[0]);
+        float b = Float.parseFloat(answer[1]);
+        float result = 0f;
+       System.out.println("Текущие таблицы: ");
+       Query("SELECT tablename FROM pg_tables\n" +
+               "WHERE schemaname = 'seminar1'", "select");
+        System.out.print("Выберите таблицу введя её имя: ");
+        String table_choice = sc.nextLine();
+        switch (choice){
+            case 3:
+                result = a + b;
+                Query("INSERT INTO seminar1." + table_choice +
+                        " (Operation, Result) VALUES('"+a+"+"+b+"',"+result+");", "insert");
+                break;
+            case 4:
+                result = a - b;
+                Query("INSERT INTO seminar1." + table_choice +
+                        " (Operation, Result) VALUES('"+a+"-"+b+"',"+result+");", "insert");
+                break;
+            case 5:
+                result = a * b;
+                Query("INSERT INTO seminar1." + table_choice +
+                        " (Operation, Result) VALUES('"+a+"*"+b+"',"+result+");", "insert");
+                break;
+            case 6:
+                result = a / b;
+                Query("INSERT INTO seminar1." + table_choice +
+                        " (Operation, Result) VALUES('"+a+"/"+b+"',"+result+");", "insert");
+                break;
+            case 7:
+                result = a % b;
+                Query("INSERT INTO seminar1." + table_choice +
+                        " (Operation, Result) VALUES('"+a+"%"+b+"',"+result+");", "insert");
+                break;
+            case 9:
+                result = (float) Math.pow(a, b);
+                Query("INSERT INTO seminar1." + table_choice +
+                        " (Operation, Result) VALUES('"+a+"^"+b+"',"+result+");", "insert");
+                break;
+
+        }
+       System.out.println("Ответ: " + result);
+   }
+
+   private static void OneNumber(String[] answer){
+        Float a = Float.parseFloat(answer[0]);
+       System.out.println("Текущие таблицы: ");
+       Query("SELECT tablename FROM pg_tables\n" +
+               "WHERE schemaname = 'seminar1'", "select");
+       System.out.print("Выберите таблицу введя её имя: ");
+       String table_choice = sc.nextLine();
+       Float result = Math.abs(a);
+       Query("INSERT INTO seminar1." + table_choice +
+               " (Operation, Result) VALUES('abs("+a+")',"+result+");", "insert");
+       System.out.println("Ответ: " + result);
+   }
 
     private static void SQLMethod(int choice) {
         switch (choice) {
@@ -187,7 +160,7 @@ class SqlDatabase {
                 System.out.print("Введите название таблицы: ");
                 String tablename = sc.nextLine();
                 Query("CREATE TABLE IF NOT EXISTS seminar1." + tablename +
-                        "(ID int, Operation varchar(10), Result int)", "create");
+                        "(ID serial, Operation varchar(100), Result float)", "create");
                 break;
 
             case 10:
