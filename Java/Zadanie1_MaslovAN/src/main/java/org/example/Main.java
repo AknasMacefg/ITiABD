@@ -1,11 +1,13 @@
-import com.opencsv.CSVWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+package org.example;
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.*;
 import java.sql.*;
 import java.util.Scanner;
 
 class SqlDatabase {
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
     private static Connection conn;
     static {
         try {
@@ -16,12 +18,14 @@ class SqlDatabase {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("CREATE SCHEMA IF NOT EXISTS Seminar1");
         } catch (SQLException e) {
+            System.out.println("Не удалось подключиться к базе данных!");
             throw new RuntimeException(e);
         }
     }
 
     public static void Selector() {
-        while (true) {
+        boolean exit = false;
+        while (!exit) {
             System.out.println("\n-------------------------------------\n");
             System.out.println("1. Вывести все таблицы PostgresSQL");
             System.out.println("2. Создать таблицу PostgresSQL");
@@ -40,6 +44,7 @@ class SqlDatabase {
             sc.nextLine();
             System.out.println("\n-------------------------------------\n");
             String[] split_answer;
+
             switch (choice) {
                 case 3, 4, 5, 6, 7, 9:
                     while (true) {
@@ -52,14 +57,12 @@ class SqlDatabase {
                                 continue;
                             }
                             break;
-                        }
-                        else {
+                        } else {
                             System.out.println("Введен неверный формат!");
                         }
                     }
                     TwoNumbers(choice, split_answer);
                     break;
-
                 case 1, 2, 10:
                     SqlDatabase.SQLMethod(choice);
                     break;
@@ -70,81 +73,86 @@ class SqlDatabase {
                         split_answer = number.split(" ");
                         if (split_answer.length == 1) {
                             break;
-                        }
-                        else {
+                        } else {
                             System.out.println("Введен неверный формат!");
                         }
                     }
                     OneNumber(split_answer);
                     break;
                 case 0:
-                    System.exit(0);
+                    exit = true;
+                    sc.close();
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 default:
                     System.out.println("Введено неверное значение! Попробуйте снова.");
                     break;
+
             }
         }
 
     }
 
-   private static void TwoNumbers(int choice, String[] answer){
+    private static void TwoNumbers(int choice, String[] answer){
         float a = Float.parseFloat(answer[0]);
         float b = Float.parseFloat(answer[1]);
         float result = 0f;
-       System.out.println("Текущие таблицы: ");
-       Query("SELECT tablename FROM pg_tables\n" +
-               "WHERE schemaname = 'seminar1'", "select");
+        System.out.println("Текущие таблицы: ");
+        Query("SELECT tablename FROM pg_tables\n" +
+                "WHERE schemaname = 'seminar1'", "select");
         System.out.print("Выберите таблицу введя её имя: ");
         String table_choice = sc.nextLine();
-        switch (choice){
+        switch (choice) {
             case 3:
                 result = a + b;
                 Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('"+a+"+"+b+"',"+result+");", "insert");
+                        " (Operation, Result) VALUES('" + a + "+" + b + "'," + result + ");", "create");
                 break;
             case 4:
                 result = a - b;
-                Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('"+a+"-"+b+"',"+result+");", "insert");
+                Query("INSERT INTO semi-nar1." + table_choice +
+                        " (Operation, Result) VALUES('" + a + "-" + b + "'," + result + ");", "create");
                 break;
             case 5:
                 result = a * b;
                 Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('"+a+"*"+b+"',"+result+");", "insert");
+                        " (Operation, Result) VALUES('" + a + "*" + b + "'," + result + ");", "create");
                 break;
             case 6:
                 result = a / b;
                 Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('"+a+"/"+b+"',"+result+");", "insert");
+                        " (Operation, Result) VALUES('" + a + "/" + b + "'," + result + ");", "create");
                 break;
             case 7:
                 result = a % b;
                 Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('"+a+"%"+b+"',"+result+");", "insert");
+                        " (Operation, Result) VALUES('" + a + "%" + b + "'," + result + ");", "create");
                 break;
             case 9:
                 result = (float) Math.pow(a, b);
                 Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('"+a+"^"+b+"',"+result+");", "insert");
+                        " (Operation, Result) VALUES('" + a + "^" + b + "'," + result + ");", "create");
                 break;
-
         }
-       System.out.println("Ответ: " + result);
-   }
+        System.out.println("Ответ: " + result);
+    }
 
-   private static void OneNumber(String[] answer){
+    private static void OneNumber(String[] answer){
         float a = Float.parseFloat(answer[0]);
-       System.out.println("Текущие таблицы: ");
-       Query("SELECT tablename FROM pg_tables\n" +
-               "WHERE schemaname = 'seminar1'", "select");
-       System.out.print("Выберите таблицу введя её имя: ");
-       String table_choice = sc.nextLine();
-       float result = Math.abs(a);
-       Query("INSERT INTO seminar1." + table_choice +
-               " (Operation, Result) VALUES('abs("+a+")',"+result+");", "create");
-       System.out.println("Ответ: " + result);
-   }
+        System.out.println("Текущие таблицы: ");
+        Query("SELECT tablename FROM pg_tables\n" +
+                "WHERE schemaname = 'seminar1'", "select");
+        System.out.print("Выберите таблицу введя её имя: ");
+        String table_choice = sc.nextLine();
+        float result = Math.abs(a);
+        Query("INSERT INTO seminar1." + table_choice +
+                " (Operation, Result) VALUES('abs("+a+")',"+result+");", "create");
+        System.out.println("Ответ: " + result);
+    }
 
     private static void SQLMethod(int choice) {
         switch (choice) {
@@ -159,10 +167,9 @@ class SqlDatabase {
                 Query("CREATE TABLE IF NOT EXISTS seminar1." + tablename +
                         "(ID serial, Operation varchar(100), Result float)", "create");
                 break;
-
             case 10:
                 Query("SELECT tablename FROM pg_tables\n" +
-                        "WHERE schemaname = 'seminar1'", "CSV");
+                        "WHERE schemaname = 'seminar1'", "excel");
                 break;
         }
 
@@ -176,24 +183,48 @@ class SqlDatabase {
                 while (rs.next()) {
                     System.out.println(rs.getString(1));
                 }
-            }
-            else if (type.equals("create")) {
+            } else if (type.equals("create")) {
                 stmt.executeUpdate(sql);
-            }
-            else if (type.equals("CSV")) {
+            } else if (type.equals("excel")) {
                 ResultSet rs = stmt.executeQuery(sql);
                 Statement stmt2 = conn.createStatement();
                 while (rs.next()) {
+                    Workbook workbook = new XSSFWorkbook();
                     String table = rs.getString(1);
-                    CSVWriter writer = new CSVWriter(new FileWriter(table + ".csv"));
+                    Sheet sheet = workbook.createSheet(table);
                     ResultSet rs2 = stmt2.executeQuery("SELECT * FROM seminar1." + table);
-                    writer.writeAll(rs2, true);
-                    writer.close();
+                    int rowindex = 0;
+                    while (rs2.next()) {
+                        Row row = sheet.createRow(rowindex);
+                        if (rowindex == 0) {
+                            row.createCell(0).setCellValue("Id");
+                            row.createCell(1).setCellValue("Operation");
+                            row.createCell(2).setCellValue("Result");
+                        }
+                        else {
+                            row.createCell(0).setCellValue(rs2.getInt(1));
+                            row.createCell(1).setCellValue(rs2.getString(2));
+                            row.createCell(2).setCellValue(rs2.getDouble(3));
+                        }
+                        rowindex++;
+                    }
+                    if (sheet.getRow(0) != null) {
+                        int columnCount = sheet.getRow(0).getPhysicalNumberOfCells();
+                        for (int i = 0; i < columnCount; i++) {
+                            sheet.autoSizeColumn(i);
+                        }
+                    }
+                    workbook.write(new FileOutputStream(table + ".xlsx"));
+                    System.out.println("Данные успешно экспортированы в Excel-файл "+table+".xlsx");
+                    workbook.close();
                 }
-                System.out.println("Информация успешно экспортирована.");
+
+
             }
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e){
+            System.out.println("Выбранной таблицы не существует." + e);
+        } catch (IOException e) {
+            System.out.println("Информацию не удалось экспортировать." + e);
         }
     }
 }
