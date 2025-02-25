@@ -52,6 +52,8 @@ class SqlDatabase {
             sc.nextLine();
             System.out.println("\n-------------------------------------\n");
             String[] split_answer;
+            double a;
+            double b;
 
             switch (choice) {
                 case 3, 4, 5, 6, 7, 9:
@@ -59,9 +61,16 @@ class SqlDatabase {
                         System.out.print("Введите два числа через пробел: ");
                         String number = sc.nextLine();
                         split_answer = number.split(" ");
-                        if (split_answer.length == 2 && (split_answer[0].matches("-?[0-9]+?.?[0-9]+") && split_answer[1].matches("-?[0-9]+?.?[0-9]+"))) {
+                        if (split_answer.length == 2) {
                             if ((choice == 6 || choice == 7) && Double.parseDouble(split_answer[1]) == 0) {
                                 System.out.println("На 0 делить нельзя!");
+                                continue;
+                            }
+                            try {
+                                a = Double.parseDouble(split_answer[0]);
+                                b = Double.parseDouble(split_answer[1]);
+                            } catch (Exception e){
+                                System.out.println("Введен неверный формат! " + e);
                                 continue;
                             }
                             break;
@@ -69,7 +78,7 @@ class SqlDatabase {
                             System.out.println("Введен неверный формат!");
                         }
                     }
-                    TwoNumbers(choice, split_answer);
+                    TwoNumbers(choice, a, b);
                     break;
                 case 1, 2, 10:
                     SqlDatabase.SQLMethod(choice);
@@ -80,13 +89,20 @@ class SqlDatabase {
                         String number = sc.nextLine();
                         split_answer = number.split(" ");
 
-                        if (split_answer.length == 1 && number.matches("-?[0-9]+?.?[0-9]+"))
+                        if (split_answer.length == 1) {
+                            try {
+                                a = Double.parseDouble(split_answer[0]);
+                            } catch (Exception e) {
+                                System.out.println("Введен неверный формат! " + e);
+                                continue;
+                            }
                             break;
+                        }
                         else {
                             System.out.println("Введен неверный формат!");
                         }
                     }
-                    OneNumber(split_answer);
+                    OneNumber(a);
                     break;
                 case 0:
                     exit = true;
@@ -106,10 +122,9 @@ class SqlDatabase {
 
     }
 
-    private static void TwoNumbers(int choice, String[] answer){
-        double a = Double.parseDouble(answer[0]);
-        double b = Double.parseDouble(answer[1]);
+    private static void TwoNumbers(int choice, Double a, Double b) {
         double result = 0;
+        String operation = "";
         System.out.println("Текущие таблицы: ");
         Query("SELECT tablename FROM pg_tables\n" +
                 "WHERE schemaname = 'seminar1'", "select");
@@ -118,53 +133,53 @@ class SqlDatabase {
         switch (choice) {
             case 3:
                 result = a + b;
-                Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('" + a + "+" + b + "'," + result + ");", "create");
+                operation = "+";
                 break;
             case 4:
                 result = a - b;
-                Query("INSERT INTO semi-nar1." + table_choice +
-                        " (Operation, Result) VALUES('" + a + "-" + b + "'," + result + ");", "create");
+                operation = "-";
                 break;
             case 5:
                 result = a * b;
-                Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('" + a + "*" + b + "'," + result + ");", "create");
-                break;
+                operation = "*";
+               break;
             case 6:
                 result = a / b;
-                Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('" + a + "/" + b + "'," + result + ");", "create");
-                break;
+                operation = "/";
+               break;
             case 7:
                 result = a % b;
-                Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('" + a + "%" + b + "'," + result + ");", "create");
+                operation = "%";
                 break;
             case 9:
                 result = Math.pow(a, b);
-                if (Double.isInfinite(result))
-                {
-                    System.out.println("Результат вышел за рамки значений!");
-                    break;
-                }
-                Query("INSERT INTO seminar1." + table_choice +
-                        " (Operation, Result) VALUES('" + a + "^" + b + "'," + result + ");", "create");
+                operation = "^";
                 break;
+        }
+        if (Double.isInfinite(result))
+        {
+            System.out.println("Результат вышел за рамки значений! Невозможно занести значение в базу данных!");
+        } else {
+            Query("INSERT INTO seminar1." + table_choice +
+                    " (Operation, Result) VALUES('" + a + operation + b + "'," + result + ");", "create");
         }
         System.out.println("Ответ: " + result);
     }
 
-    private static void OneNumber(String[] answer){
-        double a = Double.parseDouble(answer[0]);
+    private static void OneNumber(double a){
         System.out.println("Текущие таблицы: ");
         Query("SELECT tablename FROM pg_tables\n" +
                 "WHERE schemaname = 'seminar1'", "select");
         System.out.print("Выберите таблицу введя её имя: ");
         String table_choice = sc.nextLine();
         double result = Math.abs(a);
-        Query("INSERT INTO seminar1." + table_choice +
-                " (Operation, Result) VALUES('abs("+a+")',"+result+");", "create");
+        if (Double.isInfinite(result))
+        {
+            System.out.println("Результат вышел за рамки значений! Невозможно занести значение в базу данных!");
+        } else {
+            Query("INSERT INTO seminar1." + table_choice +
+                    " (Operation, Result) VALUES('abs(" + a + ")'," + result + ");", "create");
+        }
         System.out.println("Ответ: " + result);
     }
 
@@ -209,22 +224,19 @@ class SqlDatabase {
                     ResultSet rs2 = stmt2.executeQuery("SELECT * FROM seminar1." + table);
                     int rowindex = 0;
                     while (rs2.next()) {
-                        Row row = sheet.createRow(rowindex);
                         if (rowindex == 0) {
+                            Row row = sheet.createRow(rowindex);
                             row.createCell(0).setCellValue("Id");
                             row.createCell(1).setCellValue("Operation");
                             row.createCell(2).setCellValue("Result");
-                            System.out.println("Id \t Operation \t Result");
+                            System.out.printf("%-22s%-22s%-22s\n", "Id", "Operation", "Result");
+                            rowindex++;
                         }
-                        else {
-                            row.createCell(0).setCellValue(rs2.getInt(1));
-                            row.createCell(1).setCellValue(rs2.getString(2));
-                            row.createCell(2).setCellValue(rs2.getDouble(3));
-                            System.out.print(rs2.getInt(1)+" \t ");
-                            System.out.print(rs2.getString(2)+" \t ");
-                            System.out.println(rs2.getDouble(3));
-                        }
-
+                        Row row = sheet.createRow(rowindex);
+                        row.createCell(0).setCellValue(rs2.getInt(1));
+                        row.createCell(1).setCellValue(rs2.getString(2));
+                        row.createCell(2).setCellValue(rs2.getDouble(3));
+                        System.out.printf("%-22d%-22s%-22f\n", rs2.getInt(1), rs2.getString(2), rs2.getDouble(3));
                         rowindex++;
                     }
                     if (sheet.getRow(0) != null) {
