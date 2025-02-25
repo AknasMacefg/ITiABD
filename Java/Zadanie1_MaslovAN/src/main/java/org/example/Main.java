@@ -59,8 +59,8 @@ class SqlDatabase {
                         System.out.print("Введите два числа через пробел: ");
                         String number = sc.nextLine();
                         split_answer = number.split(" ");
-                        if (split_answer.length == 2 && number.matches("[0-9. -]+")) {
-                            if ((choice == 6 || choice == 7) && Double.parseDouble(split_answer[1]) == 0f) {
+                        if (split_answer.length == 2 && (split_answer[0].matches("-?[0-9]+?.?[0-9]+") && split_answer[1].matches("-?[0-9]+?.?[0-9]+"))) {
+                            if ((choice == 6 || choice == 7) && Double.parseDouble(split_answer[1]) == 0) {
                                 System.out.println("На 0 делить нельзя!");
                                 continue;
                             }
@@ -79,7 +79,8 @@ class SqlDatabase {
                         System.out.print("Введите одно число: ");
                         String number = sc.nextLine();
                         split_answer = number.split(" ");
-                        if (split_answer.length == 1 && number.matches("[0-9. -]+"))
+
+                        if (split_answer.length == 1 && number.matches("-?[0-9]+?.?[0-9]+"))
                             break;
                         else {
                             System.out.println("Введен неверный формат!");
@@ -106,7 +107,7 @@ class SqlDatabase {
     }
 
     private static void TwoNumbers(int choice, String[] answer){
-        double  a = Double.parseDouble(answer[0]);
+        double a = Double.parseDouble(answer[0]);
         double b = Double.parseDouble(answer[1]);
         double result = 0;
         System.out.println("Текущие таблицы: ");
