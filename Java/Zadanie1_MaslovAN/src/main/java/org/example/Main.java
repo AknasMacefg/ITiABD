@@ -2,6 +2,8 @@ package org.example;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.awt.dnd.DragSource;
 import java.io.*;
 import java.sql.*;
 import java.util.Scanner;
@@ -18,8 +20,8 @@ class SqlDatabase {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("CREATE SCHEMA IF NOT EXISTS Seminar1");
         } catch (SQLException e) {
-            System.out.println("Не удалось подключиться к базе данных!");
-            throw new RuntimeException(e);
+            System.out.println("Не удалось подключиться к базе данных! " + e);
+            System.exit(0);
         }
     }
 
@@ -39,8 +41,14 @@ class SqlDatabase {
             System.out.println("10. Экспорт данных из PostgresSQL в Excel");
             System.out.println("0. Выход из программы");
             System.out.print("Выберите действие: ");
+            int choice = -1;
+            try {
+                choice = sc.nextInt();
+            }
+            catch (Exception e) {
+                System.out.println("Введено неверное значение! Попробуйте снова." + e);
+            }
 
-            int choice = sc.nextInt();
             sc.nextLine();
             System.out.println("\n-------------------------------------\n");
             String[] split_answer;
@@ -51,8 +59,8 @@ class SqlDatabase {
                         System.out.print("Введите два числа через пробел: ");
                         String number = sc.nextLine();
                         split_answer = number.split(" ");
-                        if (split_answer.length == 2) {
-                            if ((choice == 6 || choice == 7) && Float.parseFloat(split_answer[1]) == 0f) {
+                        if (split_answer.length == 2 && number.matches("[0-9. -]+")) {
+                            if ((choice == 6 || choice == 7) && Double.parseDouble(split_answer[1]) == 0f) {
                                 System.out.println("На 0 делить нельзя!");
                                 continue;
                             }
@@ -71,9 +79,9 @@ class SqlDatabase {
                         System.out.print("Введите одно число: ");
                         String number = sc.nextLine();
                         split_answer = number.split(" ");
-                        if (split_answer.length == 1) {
+                        if (split_answer.length == 1 && number.matches("[0-9. -]+"))
                             break;
-                        } else {
+                        else {
                             System.out.println("Введен неверный формат!");
                         }
                     }
@@ -98,9 +106,9 @@ class SqlDatabase {
     }
 
     private static void TwoNumbers(int choice, String[] answer){
-        float a = Float.parseFloat(answer[0]);
-        float b = Float.parseFloat(answer[1]);
-        float result = 0f;
+        double  a = Double.parseDouble(answer[0]);
+        double b = Double.parseDouble(answer[1]);
+        double result = 0;
         System.out.println("Текущие таблицы: ");
         Query("SELECT tablename FROM pg_tables\n" +
                 "WHERE schemaname = 'seminar1'", "select");
@@ -133,7 +141,12 @@ class SqlDatabase {
                         " (Operation, Result) VALUES('" + a + "%" + b + "'," + result + ");", "create");
                 break;
             case 9:
-                result = (float) Math.pow(a, b);
+                result = Math.pow(a, b);
+                if (Double.isInfinite(result))
+                {
+                    System.out.println("Результат вышел за рамки значений!");
+                    break;
+                }
                 Query("INSERT INTO seminar1." + table_choice +
                         " (Operation, Result) VALUES('" + a + "^" + b + "'," + result + ");", "create");
                 break;
@@ -142,13 +155,13 @@ class SqlDatabase {
     }
 
     private static void OneNumber(String[] answer){
-        float a = Float.parseFloat(answer[0]);
+        double a = Double.parseDouble(answer[0]);
         System.out.println("Текущие таблицы: ");
         Query("SELECT tablename FROM pg_tables\n" +
                 "WHERE schemaname = 'seminar1'", "select");
         System.out.print("Выберите таблицу введя её имя: ");
         String table_choice = sc.nextLine();
-        float result = Math.abs(a);
+        double result = Math.abs(a);
         Query("INSERT INTO seminar1." + table_choice +
                 " (Operation, Result) VALUES('abs("+a+")',"+result+");", "create");
         System.out.println("Ответ: " + result);
@@ -165,7 +178,7 @@ class SqlDatabase {
                 System.out.print("Введите название таблицы: ");
                 String tablename = sc.nextLine();
                 Query("CREATE TABLE IF NOT EXISTS seminar1." + tablename +
-                        "(ID serial, Operation varchar(100), Result float)", "create");
+                        "(ID serial, Operation varchar(100), Result double precision)", "create");
                 break;
             case 10:
                 Query("SELECT tablename FROM pg_tables\n" +
@@ -200,12 +213,17 @@ class SqlDatabase {
                             row.createCell(0).setCellValue("Id");
                             row.createCell(1).setCellValue("Operation");
                             row.createCell(2).setCellValue("Result");
+                            System.out.println("Id \t Operation \t Result");
                         }
                         else {
                             row.createCell(0).setCellValue(rs2.getInt(1));
                             row.createCell(1).setCellValue(rs2.getString(2));
                             row.createCell(2).setCellValue(rs2.getDouble(3));
+                            System.out.print(rs2.getInt(1)+" \t ");
+                            System.out.print(rs2.getString(2)+" \t ");
+                            System.out.println(rs2.getDouble(3));
                         }
+
                         rowindex++;
                     }
                     if (sheet.getRow(0) != null) {
@@ -222,9 +240,9 @@ class SqlDatabase {
 
             }
         } catch (SQLException e){
-            System.out.println("Выбранной таблицы не существует." + e);
+            System.out.println("Выбранной таблицы не существует ошибка синтаксиса. " + e);
         } catch (IOException e) {
-            System.out.println("Информацию не удалось экспортировать." + e);
+            System.out.println("Информацию не удалось экспортировать. " + e);
         }
     }
 }
@@ -232,5 +250,6 @@ class SqlDatabase {
 public class Main {
     public static void main(String[] args) {
         SqlDatabase.Selector();
+
     }
 }
