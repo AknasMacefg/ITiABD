@@ -1,9 +1,6 @@
 package org.example;
-
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.awt.dnd.DragSource;
 import java.io.*;
 import java.sql.*;
 import java.util.Scanner;
@@ -61,16 +58,18 @@ class SqlDatabase {
                         System.out.print("Введите два числа через пробел: ");
                         String number = sc.nextLine();
                         split_answer = number.split(" ");
+
                         if (split_answer.length == 2) {
-                            if ((choice == 6 || choice == 7) && Double.parseDouble(split_answer[1]) == 0) {
-                                System.out.println("На 0 делить нельзя!");
-                                continue;
-                            }
                             try {
                                 a = Double.parseDouble(split_answer[0]);
                                 b = Double.parseDouble(split_answer[1]);
                             } catch (Exception e){
                                 System.out.println("Введен неверный формат! " + e);
+                                continue;
+                            }
+
+                            if ((choice == 6 || choice == 7) && Double.parseDouble(split_answer[1]) == 0) {
+                                System.out.println("На 0 делить нельзя!");
                                 continue;
                             }
                             break;
@@ -261,8 +260,7 @@ class SqlDatabase {
 }
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         SqlDatabase.Selector();
-
     }
 }
