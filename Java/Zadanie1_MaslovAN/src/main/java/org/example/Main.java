@@ -221,21 +221,35 @@ class SqlDatabase {
                     String table = rs.getString(1);
                     Sheet sheet = workbook.createSheet(table);
                     ResultSet rs2 = stmt2.executeQuery("SELECT * FROM seminar1." + table);
+                    ResultSetMetaData rsmd = rs2.getMetaData();
                     int rowindex = 0;
                     while (rs2.next()) {
-                        if (rowindex == 0) {
-                            Row row = sheet.createRow(rowindex);
-                            row.createCell(0).setCellValue("Id");
-                            row.createCell(1).setCellValue("Operation");
-                            row.createCell(2).setCellValue("Result");
-                            System.out.printf("%-22s%-22s%-22s\n", "Id", "Operation", "Result");
-                            rowindex++;
-                        }
                         Row row = sheet.createRow(rowindex);
-                        row.createCell(0).setCellValue(rs2.getInt(1));
-                        row.createCell(1).setCellValue(rs2.getString(2));
-                        row.createCell(2).setCellValue(rs2.getDouble(3));
-                        System.out.printf("%-22d%-22s%-22f\n", rs2.getInt(1), rs2.getString(2), rs2.getDouble(3));
+                        for (int x = 1; x <= rsmd.getColumnCount(); x++)
+                        {
+                            if (rowindex == 0) {
+                                row.createCell(x-1).setCellValue(rsmd.getColumnName(x));
+                                System.out.printf("%-22s", rsmd.getColumnName(x));
+                                if (x == rsmd.getColumnCount())
+                                {
+                                    rowindex++;
+                                    x=1;
+                                    System.out.println();
+                                    row = sheet.createRow(rowindex);
+                                } else continue;
+                            }
+                            if (rsmd.getColumnClassName(x).equals("java.lang.Integer") || rsmd.getColumnClassName(x).equals("java.lang.Short")) {
+                                row.createCell(x-1).setCellValue(rs2.getInt(x));
+                                System.out.printf("%-22d", rs2.getInt(x));
+                            } else if (rsmd.getColumnClassName(x).equals("java.lang.String")) {
+                                row.createCell(x-1).setCellValue(rs2.getString(x));
+                                System.out.printf("%-22s", rs2.getString(x));
+                            } else if (rsmd.getColumnClassName(x).equals("java.lang.Double") || rsmd.getColumnClassName(x).equals("java.lang.Float")) {
+                                row.createCell(x-1).setCellValue(rs2.getDouble(x));
+                                System.out.printf("%-22f", rs2.getDouble(x));
+                            }
+                        }
+                        System.out.println();
                         rowindex++;
                     }
                     if (sheet.getRow(0) != null) {
