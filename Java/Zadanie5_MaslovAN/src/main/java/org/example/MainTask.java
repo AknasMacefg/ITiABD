@@ -43,7 +43,7 @@ public class MainTask {
                 System.out.print("Введите позицию в первом предложении, куда нужно вставить второе предложение: ");
                 int i = sc.nextInt();
                 sc.nextLine();
-                if (i > 0 && i <= s1.length()){
+                if (i >= 0 && i <= s1.length()){
                     String temp_s1 = s1.toString();
                     System.out.println("Результат: " + s1.insert(i, s2));
                     return new String[]{temp_s1, s2.toString(), String.valueOf(i), s1.toString()};
@@ -51,6 +51,7 @@ public class MainTask {
                 System.out.println("Введенный индекс выходит за рамки первого предложения.");
             } catch (Exception e) {
                 System.out.println("Введенное значение не число. " + e);
+                sc.nextLine();
             }
 
         }

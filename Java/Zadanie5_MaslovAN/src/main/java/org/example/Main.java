@@ -4,11 +4,9 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
     public static void Selector() {
         boolean exit = false;
-        SQLManager sql = new SQLManager();
-
         while (!exit) {
             System.out.println("\n-------------------------------------\n");
             System.out.println("1. Вывести все таблицы PostgresSQL");
@@ -23,42 +21,45 @@ public class Main {
                 choice = sc.nextInt();
             }
             catch (Exception e) {
-                System.out.println("Введено неверное значение! Попробуйте снова." + e);
+                System.out.println("Введено неверное значение! Попробуйте снова. " + e);
+                sc.nextLine();
+                continue;
             }
             sc.nextLine();
+            System.out.println("\n-------------------------------------\n");
             String[] result;
             switch (choice) {
                 case 1:
-                    sql.SQLQueries("", "select");
+                    SQLManager.SQLQueries("", "select");
                     break;
                 case 2:
                     System.out.print("Введите название таблицы: ");
                     String tablename = sc.nextLine();
-                    sql.SQLQueries("CREATE TABLE IF NOT EXISTS "+sql.schemaname + "." + tablename +
+                    SQLManager.SQLQueries("CREATE TABLE IF NOT EXISTS "+ SQLManager.schemaname + "." + tablename +
                             "(ID serial, Operation varchar(20), First_sentence text, Second_sentence text, Result text)", "create");
                     break;
                 case 3:
                     result = MainTask.ReverseSentence(sc);
-                    sql.SQLQueries("", "select");
+                    SQLManager.SQLQueries("", "select");
                     System.out.print("Выберите таблицу для записи введя её имя: ");
-                    sql.SQLQueries("INSERT INTO "+sql.schemaname+"." + sc.nextLine() +
+                    SQLManager.SQLQueries("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
                             " (Operation, First_sentence, Result) VALUES('Reverse','" + result[0] + "','" + result[1] + "');", "create");
                     break;
                 case 4:
                     result = MainTask.InsertSentence(sc);
-                    sql.SQLQueries("", "select");
+                    SQLManager.SQLQueries("", "select");
                     System.out.print("Выберите таблицу для записи введя её имя: ");
-                    sql.SQLQueries("INSERT INTO "+sql.schemaname+"." + sc.nextLine() +
+                    SQLManager.SQLQueries("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
                             " (Operation, First_sentence, Second_sentence, Result) VALUES('Insert to " + result[2]+" pos','" + result[0] + "','" + result[1] + "','" + result[3] + "');", "create");
                     break;
                 case 5:
-                    sql.ExcelWriter();
+                    SQLManager.ExcelWriter();
                     break;
                 case 0:
                     exit = true;
                     sc.close();
                     try {
-                        sql.conn.close();
+                        SQLManager.conn.close();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
