@@ -53,6 +53,7 @@ class SQLManager {
                 ResultSet rs2 = stmt2.executeQuery("SELECT * FROM "+ schemaname +"." + table);
                 ResultSetMetaData rsmd = rs2.getMetaData();
                 int rowindex = 0;
+                System.out.println(table);
                 while (rs2.next()) {
                     Row row = sheet.createRow(rowindex);
                     for (int x = 1; x <= rsmd.getColumnCount(); x++)

@@ -3,6 +3,7 @@ package org.example;
 import java.util.Scanner;
 
 public class MainTask {
+
     protected static String[] ReverseSentence(Scanner sc){
         StringBuffer s;
         while (true) {
