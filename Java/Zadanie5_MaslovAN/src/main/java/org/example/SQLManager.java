@@ -60,7 +60,7 @@ class SQLManager {
                     {
                         if (rowindex == 0) {
                             row.createCell(x-1).setCellValue(rsmd.getColumnName(x));
-                            System.out.printf("%-22s", rsmd.getColumnName(x));
+                            System.out.printf("%-25s", rsmd.getColumnName(x));
                             if (x == rsmd.getColumnCount())
                             {
                                 rowindex++;
@@ -97,13 +97,17 @@ class SQLManager {
    private static void TypeExtractor(Row row, ResultSet rs, int x , String classname) throws SQLException {
        if (classname.equals("java.lang.Integer") || classname.equals("java.lang.Short")) {
            row.createCell(x-1).setCellValue(rs.getInt(x));
-           System.out.printf("%-22d", rs.getInt(x));
+           System.out.printf("%-25d", rs.getInt(x));
        } else if (classname.equals("java.lang.String")) {
            row.createCell(x-1).setCellValue(rs.getString(x));
-           System.out.printf("%-22s", rs.getString(x));
+           if (rs.getString(x) != null && rs.getString(x).length() > 20){
+               System.out.printf("%-25s", rs.getString(x).substring(0, 20) + "...");
+           } else {
+               System.out.printf("%-25s", rs.getString(x));
+           }
        } else if (classname.equals("java.lang.Double") || classname.equals("java.lang.Float")) {
            row.createCell(x-1).setCellValue(rs.getDouble(x));
-           System.out.printf("%-22f", rs.getDouble(x));
+           System.out.printf("%-25f", rs.getDouble(x));
        }
    }
 

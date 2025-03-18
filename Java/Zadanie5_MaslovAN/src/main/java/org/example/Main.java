@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     private static final Scanner sc = new Scanner(System.in);
     public static void Selector() {
+
         boolean exit = false;
         while (!exit) {
             System.out.println("\n-------------------------------------\n");
@@ -36,21 +37,21 @@ public class Main {
                     System.out.print("Введите название таблицы: ");
                     String tablename = sc.nextLine();
                     SQLManager.SQLQueries("CREATE TABLE IF NOT EXISTS "+ SQLManager.schemaname + "." + tablename +
-                            "(ID serial, Operation varchar(20), First_sentence text, Second_sentence text, Result text)", "create");
+                            "(ID serial, Operation varchar(100), First_sentence text, Second_sentence text, Result text)", "create");
                     break;
                 case 3:
                     result = MainTask.ReverseSentence(sc);
                     SQLManager.SQLQueries("", "select");
                     System.out.print("Выберите таблицу для записи введя её имя: ");
                     SQLManager.SQLQueries("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
-                            " (Operation, First_sentence, Result) VALUES('Reverse','" + result[0] + "','" + result[1] + "');", "create");
+                            " (Operation, First_sentence, Result) VALUES('Отзеркалить','" + result[0] + "','" + result[1] + "');", "create");
                     break;
                 case 4:
                     result = MainTask.InsertSentence(sc);
                     SQLManager.SQLQueries("", "select");
                     System.out.print("Выберите таблицу для записи введя её имя: ");
                     SQLManager.SQLQueries("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
-                            " (Operation, First_sentence, Second_sentence, Result) VALUES('Insert to " + result[2]+" pos','" + result[0] + "','" + result[1] + "','" + result[3] + "');", "create");
+                            " (Operation, First_sentence, Second_sentence, Result) VALUES('Вставить в " + result[2]+" позицию','" + result[0] + "','" + result[1] + "','" + result[3] + "');", "create");
                     break;
                 case 5:
                     SQLManager.ExcelWriter();
