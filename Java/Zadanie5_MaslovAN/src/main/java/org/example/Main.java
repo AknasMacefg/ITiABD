@@ -8,6 +8,7 @@ public class Main {
     public static void Selector() {
 
         boolean exit = false;
+        boolean checker = false;
         while (!exit) {
             System.out.println("\n-------------------------------------\n");
             System.out.println("1. Вывести все таблицы PostgresSQL");
@@ -41,7 +42,8 @@ public class Main {
                     break;
                 case 3:
                     result = MainTask.ReverseSentence(sc);
-                    SQLManager.SQLQueries("", "select");
+                    checker = SQLManager.SQLQueries("", "select");
+                    if (!checker) continue;
                     System.out.print("Выберите таблицу для записи введя её имя: ");
                     SQLManager.SQLQueries("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
                             " (Operation, First_sentence, Result) VALUES('Отзеркалить','" + result[0] + "','" + result[1] + "');", "create");
@@ -49,6 +51,7 @@ public class Main {
                 case 4:
                     result = MainTask.InsertSentence(sc);
                     SQLManager.SQLQueries("", "select");
+                    if (!checker) continue;
                     System.out.print("Выберите таблицу для записи введя её имя: ");
                     SQLManager.SQLQueries("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
                             " (Operation, First_sentence, Second_sentence, Result) VALUES('Вставить в " + result[2]+" позицию','" + result[0] + "','" + result[1] + "','" + result[3] + "');", "create");

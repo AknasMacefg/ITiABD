@@ -24,28 +24,43 @@ class SQLManager {
         }
     }
 
-    protected static void SQLQueries(String query, String type) {
+    protected static boolean SQLQueries(String query, String type) {
         try {
             Statement stmt = conn.createStatement();
             if (type.equals("select")) {
                 ResultSet rs = stmt.executeQuery("SELECT tablename FROM pg_tables WHERE schemaname = '" + schemaname + "'");
+                if (!rs.next()) {
+                    System.out.println("Создайте хотя бы одну таблицу! ");
+                    return false;
+                }
+                rs = stmt.executeQuery("SELECT tablename FROM pg_tables WHERE schemaname = '" + schemaname + "'");
                 System.out.println("Текущие таблицы: ");
                 while (rs.next()) {
                     System.out.println(rs.getString(1));
                 }
+                return true;
             } else if (type.equals("create")) {
                 stmt.executeUpdate(query);
+                return true;
             }
-        } catch (SQLException e){
+            return false;
+        } catch (SQLException e) {
             System.out.println("Выбранной таблицы не существует ошибка синтаксиса. " + e);
-            }
+            return false;
+        }
     }
+
 
     protected static void ExcelWriter() {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT tablename FROM pg_tables WHERE schemaname = '" + schemaname+"'");
             Statement stmt2 = conn.createStatement();
+            if (!rs.next()) {
+                System.out.println("Создайте хотя бы одну таблицу! ");
+                return;
+            }
+            rs = stmt.executeQuery("SELECT tablename FROM pg_tables WHERE schemaname = '" + schemaname + "'");
             while (rs.next()) {
                 Workbook workbook = new XSSFWorkbook();
                 String table = rs.getString(1);
