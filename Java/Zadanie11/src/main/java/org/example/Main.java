@@ -13,8 +13,8 @@ public class Main {
             System.out.println("\n-------------------------------------\n");
             System.out.println("1. Вывести все таблицы PostgresSQL");
             System.out.println("2. Создать таблицу PostgresSQL");
-            System.out.println("3. Изменить порядок символов строки на обратный");
-            System.out.println("4. Добавить одну строку в другую");
+            System.out.println("3. Решение базового варианта, сохранение результатов в MySQL");
+            System.out.println("4. Вывод данных по ID строки. ");
             System.out.println("5. Экспорт данных из PostgresSQL в Excel");
             System.out.println("0. Выход из программы");
             System.out.print("Выберите действие: ");
@@ -29,32 +29,47 @@ public class Main {
             }
             sc.nextLine();
             System.out.println("\n-------------------------------------\n");
-            String[] result;
+            int result;
+            String tablename;
             switch (choice) {
                 case 1:
-                    SQLManager.SQLQueries("", "select");
+                    checker = SQLManager.SQLQuerySelectTable();
                     break;
                 case 2:
                     System.out.print("Введите название таблицы: ");
-                    String tablename = sc.nextLine();
-                    SQLManager.SQLQueries("CREATE TABLE IF NOT EXISTS "+ SQLManager.schemaname + "." + tablename +
-                            "(ID serial, Operation varchar(100), First_sentence text, Second_sentence text, Result text)", "create");
+                    tablename = sc.nextLine();
+                    SQLManager.SQLQueryCreate("CREATE TABLE IF NOT EXISTS "+ SQLManager.schemaname + "." + tablename +
+                            "(ID serial, Triangle_sizes varchar(100), Perimeter Double, Square Double, Number Integer, Factorial Bigint, Odd_even varchar(20))");
                     break;
                 case 3:
-                    result = MainTask.ReverseSentence(sc);
-                    checker = SQLManager.SQLQueries("", "select");
+                    int number = sc.nextInt();
+                    result = Factorial.FactorialCalculator(number);
+                    System.out.println(result);
+                    checker = SQLManager.SQLQuerySelectTable();
                     if (!checker) continue;
                     System.out.print("Выберите таблицу для записи введя её имя: ");
-                    SQLManager.SQLQueries("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
-                            " (Operation, First_sentence, Result) VALUES('Отзеркалить','" + result[0] + "','" + result[1] + "');", "create");
+                    SQLManager.SQLQueryCreate("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
+                            " (Triangle_sizes, Perimeter, Square, Number, Factorial, Odd_even) VALUES('Отзеркалить','"  + "','" + "');");
                     break;
                 case 4:
-                    result = MainTask.InsertSentence(sc);
-                    SQLManager.SQLQueries("", "select");
+                    checker = SQLManager.SQLQuerySelectTable();
                     if (!checker) continue;
                     System.out.print("Выберите таблицу для записи введя её имя: ");
-                    SQLManager.SQLQueries("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
-                            " (Operation, First_sentence, Second_sentence, Result) VALUES('Вставить в " + result[2]+" позицию','" + result[0] + "','" + result[1] + "','" + result[3] + "');", "create");
+                    tablename = sc.nextLine();
+                    int id;
+                    while (true){
+                        try {
+                            System.out.print("Выберите строку по ID: ");
+                            id = sc.nextInt();
+                            break;
+                        }
+                        catch (Exception e) {
+                            System.out.println("Введено неверное значение! Попробуйте снова. " + e);
+                            sc.nextLine();
+                        }
+                    }
+                    SQLManager.SQLQuerySelect("SELECT * FROM "+ SQLManager.schemaname +"." + tablename +
+                            " WHERE ID = " + id);
                     break;
                 case 5:
                     SQLManager.ExcelWriter();

@@ -10,7 +10,7 @@ import java.sql.*;
 
 class SQLManager {
     protected static Connection conn;
-    protected static final String schemaname = "task5";
+    protected static final String schemaname = "task11";
     static {
         try {
             String pass = "postgres";
@@ -24,28 +24,67 @@ class SQLManager {
         }
     }
 
-    protected static boolean SQLQueries(String query, String type) {
+    protected static void SQLQueryCreate(String query){
+        try{
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+        } catch (SQLException e){
+            System.out.println("Ошибка синтаксиса. " + e);
+        }
+    }
+
+    private static ResultSet SQLSelectAllTable(){
         try {
             Statement stmt = conn.createStatement();
-            if (type.equals("select")) {
-                ResultSet rs = stmt.executeQuery("SELECT tablename FROM pg_tables WHERE schemaname = '" + schemaname + "'");
-                if (!rs.next()) {
-                    System.out.println("Создайте хотя бы одну таблицу! ");
-                    return false;
+            return stmt.executeQuery("SELECT tablename FROM pg_tables WHERE schemaname = '" + schemaname + "'");
+        }catch (SQLException e){
+            return null;
+        }
+    }
+
+    protected static boolean SQLQuerySelectTable(){
+        try {
+            if (!SQLSelectAllTable().next() || SQLSelectAllTable() == null) {
+                System.out.println("Создайте хотя бы одну таблицу! ");
+                return false;
+            }
+            ResultSet rs = SQLSelectAllTable();
+            System.out.println("Текущие таблицы: ");
+            while (rs.next().) {
+                System.out.println(rs.getString());
+            }
+            return true;
+        }catch (SQLException e){
+            System.out.println("Ошибка синтаксиса. " + e);
+            return false;
+        }
+    }
+    protected static boolean SQLQuerySelect(String query) {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int rowindex = 0;
+            while (rs.next()) {
+                for (int x = 1; x <= rsmd.getColumnCount(); x++)
+                {
+                    if (rowindex == 0) {
+                        System.out.printf("%-25s", rsmd.getColumnName(x));
+                        if (x == rsmd.getColumnCount())
+                        {
+                            rowindex++;
+                            x=1;
+                            System.out.println();
+                        } else continue;
+                    }
+                    TypeExtractor(null, rs, x, rsmd.getColumnClassName(x));
                 }
-                rs = stmt.executeQuery("SELECT tablename FROM pg_tables WHERE schemaname = '" + schemaname + "'");
-                System.out.println("Текущие таблицы: ");
-                while (rs.next()) {
-                    System.out.println(rs.getString(1));
-                }
-                return true;
-            } else if (type.equals("create")) {
-                stmt.executeUpdate(query);
-                return true;
+                System.out.println();
+                rowindex++;
             }
             return false;
-        } catch (SQLException e) {
-            System.out.println("Выбранной таблицы не существует ошибка синтаксиса. " + e);
+        }catch (SQLException e){
+            System.out.println("Ошибка синтаксиса. " + e);
             return false;
         }
     }
@@ -111,17 +150,23 @@ class SQLManager {
 
    private static void TypeExtractor(Row row, ResultSet rs, int x , String classname) throws SQLException {
        if (classname.equals("java.lang.Integer") || classname.equals("java.lang.Short")) {
-           row.createCell(x-1).setCellValue(rs.getInt(x));
+           if (row != null) {
+               row.createCell(x - 1).setCellValue(rs.getInt(x));
+           }
            System.out.printf("%-25d", rs.getInt(x));
        } else if (classname.equals("java.lang.String")) {
-           row.createCell(x-1).setCellValue(rs.getString(x));
+           if (row != null) {
+               row.createCell(x-1).setCellValue(rs.getString(x));
+           }
            if (rs.getString(x) != null && rs.getString(x).length() > 20){
                System.out.printf("%-25s", rs.getString(x).substring(0, 20) + "...");
            } else {
                System.out.printf("%-25s", rs.getString(x));
            }
        } else if (classname.equals("java.lang.Double") || classname.equals("java.lang.Float")) {
-           row.createCell(x-1).setCellValue(rs.getDouble(x));
+           if (row != null) {
+               row.createCell(x-1).setCellValue(rs.getDouble(x));
+           }
            System.out.printf("%-25f", rs.getDouble(x));
        }
    }
