@@ -8,7 +8,7 @@ public class Main {
     public static void Selector() {
 
         boolean exit = false;
-        boolean checker = false;
+        boolean checker;
         while (!exit) {
             System.out.println("\n-------------------------------------\n");
             System.out.println("1. Вывести все таблицы PostgresSQL");
@@ -18,7 +18,7 @@ public class Main {
             System.out.println("5. Экспорт данных из PostgresSQL в Excel");
             System.out.println("0. Выход из программы");
             System.out.print("Выберите действие: ");
-            int choice = -1;
+            int choice;
             try {
                 choice = sc.nextInt();
             }
@@ -33,23 +33,38 @@ public class Main {
             String tablename;
             switch (choice) {
                 case 1:
-                    checker = SQLManager.SQLQuerySelectTable();
+                    SQLManager.SQLQuerySelectTable();
                     break;
                 case 2:
                     System.out.print("Введите название таблицы: ");
                     tablename = sc.nextLine();
                     SQLManager.SQLQueryCreate("CREATE TABLE IF NOT EXISTS "+ SQLManager.schemaname + "." + tablename +
-                            "(ID serial, Triangle_sizes varchar(100), Perimeter Double, Square Double, Number Integer, Factorial Bigint, Odd_even varchar(20))");
+                            "(ID serial, Triangle_sizes varchar(100), Perimeter Float, Square Float, Number Integer, Factorial Bigint, Odd_even varchar(20))");
                     break;
                 case 3:
-                    int number = sc.nextInt();
+                    TriangleMenu triangle = new TriangleMenu();
+                    double[] triresult = triangle.processTriangle();
+                    System.out.print("Введите число: ");
+                    int number;
+                    while (true){
+                        try {
+                            number = sc.nextInt();
+                            break;
+                        } catch (Exception e){
+                            System.out.println("Неверный формат числа. Попробуйте снова. " + e);
+                        }
+                    }
+                    sc.nextLine();
                     result = Factorial.FactorialCalculator(number);
-                    System.out.println(result);
+                    String odd_even;
+                    if (number % 2 == 0) odd_even = "Четное";
+                    else odd_even = "Нечетное";
+                    System.out.println("Четность числа: "+ odd_even);
                     checker = SQLManager.SQLQuerySelectTable();
                     if (!checker) continue;
                     System.out.print("Выберите таблицу для записи введя её имя: ");
                     SQLManager.SQLQueryCreate("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
-                            " (Triangle_sizes, Perimeter, Square, Number, Factorial, Odd_even) VALUES('Отзеркалить','"  + "','" + "');");
+                            " (Triangle_sizes, Perimeter, Square, Number, Factorial, Odd_even) VALUES('a:"+ triresult[0]+" b:"+triresult[1]+" c:"+triresult[2] + "'," +triresult[3] + ","+ triresult[4] +","+number+","+result+",'"+odd_even+"')");
                     break;
                 case 4:
                     checker = SQLManager.SQLQuerySelectTable();

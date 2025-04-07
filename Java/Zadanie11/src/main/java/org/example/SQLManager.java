@@ -13,10 +13,13 @@ class SQLManager {
     protected static final String schemaname = "task11";
     static {
         try {
+
             String pass = "postgres";
             String user = "postgres";
             String url = "jdbc:postgresql://localhost:5432/postgres";
             conn = DriverManager.getConnection(url, user, pass);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("CREATE SCHEMA IF NOT EXISTS " + schemaname);
             System.out.println("База данных подключена. Выбранная схема: " + schemaname);
         } catch (SQLException e) {
             System.out.println("Не удалось подключиться к базе данных! " + e);
@@ -50,8 +53,8 @@ class SQLManager {
             }
             ResultSet rs = SQLSelectAllTable();
             System.out.println("Текущие таблицы: ");
-            while (rs.next().) {
-                System.out.println(rs.getString());
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
             }
             return true;
         }catch (SQLException e){
@@ -65,6 +68,11 @@ class SQLManager {
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
             int rowindex = 0;
+            if (!rs.next()) {
+                System.out.println("Не найдено результатов с таким ID");
+                return false;
+            }
+            rs = stmt.executeQuery(query);
             while (rs.next()) {
                 for (int x = 1; x <= rsmd.getColumnCount(); x++)
                 {
@@ -149,17 +157,17 @@ class SQLManager {
 
 
    private static void TypeExtractor(Row row, ResultSet rs, int x , String classname) throws SQLException {
-       if (classname.equals("java.lang.Integer") || classname.equals("java.lang.Short")) {
+       if (classname.equals("java.lang.Integer") || classname.equals("java.lang.Short") || classname.equals("java.lang.Long")) {
            if (row != null) {
-               row.createCell(x - 1).setCellValue(rs.getInt(x));
+               row.createCell(x - 1).setCellValue(rs.getLong(x));
            }
            System.out.printf("%-25d", rs.getInt(x));
        } else if (classname.equals("java.lang.String")) {
            if (row != null) {
                row.createCell(x-1).setCellValue(rs.getString(x));
            }
-           if (rs.getString(x) != null && rs.getString(x).length() > 20){
-               System.out.printf("%-25s", rs.getString(x).substring(0, 20) + "...");
+           if (rs.getString(x) != null && rs.getString(x).length() > 25){
+               System.out.printf("%-25s", rs.getString(x).substring(0, 25) + "...");
            } else {
                System.out.printf("%-25s", rs.getString(x));
            }
@@ -168,6 +176,11 @@ class SQLManager {
                row.createCell(x-1).setCellValue(rs.getDouble(x));
            }
            System.out.printf("%-25f", rs.getDouble(x));
+       } else {
+           if (row != null) {
+               row.createCell(x-1).setCellValue("err");
+           }
+           System.out.printf("%-25s", "err");
        }
    }
 
