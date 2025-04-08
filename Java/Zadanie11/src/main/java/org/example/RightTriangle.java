@@ -1,4 +1,3 @@
-// RightTriangle.java
 package org.example;
 
 public class RightTriangle extends Triangle {

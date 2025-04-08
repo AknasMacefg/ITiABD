@@ -1,4 +1,3 @@
-// Triangle.java
 package org.example;
 
 public class Triangle {

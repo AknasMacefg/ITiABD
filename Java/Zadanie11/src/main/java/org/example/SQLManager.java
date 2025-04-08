@@ -14,9 +14,9 @@ class SQLManager {
     static {
         try {
 
-            String pass = "postgres";
+            String pass = "9052";
             String user = "postgres";
-            String url = "jdbc:postgresql://localhost:5432/postgres";
+            String url = "jdbc:postgresql://localhost:5432/test";
             conn = DriverManager.getConnection(url, user, pass);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("CREATE SCHEMA IF NOT EXISTS " + schemaname);
@@ -27,12 +27,14 @@ class SQLManager {
         }
     }
 
-    protected static void SQLQueryCreate(String query){
-        try{
+    protected static void SQLQueryCreate(String query) {
+        try {
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate(query);
-        } catch (SQLException e){
-            System.out.println("Ошибка синтаксиса. " + e);
+            int rowsAffected = stmt.executeUpdate(query);
+            System.out.println("Данные успешно сохранены");
+        } catch (SQLException e) {
+            System.out.println("Ошибка при выполнении запроса: " + e.getMessage());
+            System.out.println("Проблемный запрос: " + query);
         }
     }
 
