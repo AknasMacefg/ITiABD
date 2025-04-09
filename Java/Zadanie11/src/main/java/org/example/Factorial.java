@@ -5,7 +5,10 @@ public class Factorial {
     public static double FactorialCalculator(int number) {
         double result = number;
         int i = number;
-        if (number == 0) return 1;
+        if (number == 0){
+            System.out.println("Факториал числа "+number+" равняется: 1");
+            return 1;
+        }
         while (i >= 1){
             if (i-2 <= 0) break;
             else i -= 2;

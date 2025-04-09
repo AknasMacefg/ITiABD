@@ -55,9 +55,14 @@ public class Main {
                         System.out.print("Введите число для нахождения факториала: ");
                         try {
                             number = sc.nextInt();
+                            if (number < 0) {
+                                System.out.println("Неверный формат числа. Попробуйте снова.");
+                                continue;
+                            }
                             break;
                         } catch (Exception e) {
                             System.out.println("Неверный формат числа. Попробуйте снова.");
+                            sc.nextLine();
                         }
                     }
                     sc.nextLine();
