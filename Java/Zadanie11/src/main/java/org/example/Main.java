@@ -2,6 +2,7 @@ package org.example;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.Locale;
 
 public class Main {
     private static final Scanner sc = new Scanner(System.in);
@@ -35,37 +36,63 @@ public class Main {
                 case 1:
                     SQLManager.SQLQuerySelectTable();
                     break;
+
+
                 case 2:
                     System.out.print("Введите название таблицы: ");
                     tablename = sc.nextLine();
                     SQLManager.SQLQueryCreate("CREATE TABLE IF NOT EXISTS "+ SQLManager.schemaname + "." + tablename +
                             "(ID serial, Triangle_sizes varchar(100), Perimeter Float, Square Float, Number Integer, Factorial Bigint, Odd_even varchar(20))");
                     break;
+
+
                 case 3:
                     TriangleMenu triangle = new TriangleMenu();
                     double[] triresult = triangle.processTriangle();
+
                     System.out.print("Введите число: ");
                     int number;
-                    while (true){
+                    while (true) {
                         try {
                             number = sc.nextInt();
                             break;
-                        } catch (Exception e){
-                            System.out.println("Неверный формат числа. Попробуйте снова. " + e);
+                        } catch (Exception e) {
+                            System.out.println("Неверный формат числа. Попробуйте снова.");
+                            sc.nextLine();
                         }
                     }
                     sc.nextLine();
+
                     result = Factorial.FactorialCalculator(number);
-                    String odd_even;
-                    if (number % 2 == 0) odd_even = "Четное";
-                    else odd_even = "Нечетное";
-                    System.out.println("Четность числа: "+ odd_even);
+                    String odd_even = (number % 2 == 0) ? "Четное" : "Нечетное";
+                    System.out.println("Четность числа: " + odd_even);
+
                     checker = SQLManager.SQLQuerySelectTable();
                     if (!checker) continue;
+
                     System.out.print("Выберите таблицу для записи введя её имя: ");
-                    SQLManager.SQLQueryCreate("INSERT INTO "+ SQLManager.schemaname +"." + sc.nextLine() +
-                            " (Triangle_sizes, Perimeter, Square, Number, Factorial, Odd_even) VALUES('a:"+ triresult[0]+" b:"+triresult[1]+" c:"+triresult[2] + "'," +triresult[3] + ","+ triresult[4] +","+number+","+result+",'"+odd_even+"')");
+                    String tableName = sc.nextLine();
+
+                    // Locale.US для форматирования чисел с точкой
+                    String query = String.format(Locale.US,
+                            "INSERT INTO %s.%s (Triangle_sizes, Perimeter, Square, Number, Factorial, Odd_even) " +
+                                    "VALUES ('a:%.2f b:%.2f c:%.2f', %.2f, %.2f, %d, %d, '%s')",
+                            SQLManager.schemaname,
+                            tableName,
+                            triresult[0], // A
+                            triresult[1], // B
+                            triresult[2], // C
+                            triresult[3], // perimeter
+                            triresult[4], // area
+                            number,
+                            result,
+                            odd_even
+                    );
+
+                    SQLManager.SQLQueryCreate(query);
                     break;
+
+
                 case 4:
                     checker = SQLManager.SQLQuerySelectTable();
                     if (!checker) continue;

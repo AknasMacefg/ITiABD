@@ -11,25 +11,9 @@ public class TriangleMenu {
     }
 
     public double[] processTriangle() {
-
-        System.out.println("\nВыберите тип треугольника:");
-        System.out.println("1. Произвольный треугольник (не прямоугольный)");
-        System.out.println("2. Прямоугольный треугольник");
-        System.out.print("Ваш выбор: ");
-
-        int choice;
         while (true) {
             try {
-                choice = scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Ошибка ввода! Введите число 1 или 2.");
-                scanner.nextLine();
-                continue;
-            }
-
-            scanner.nextLine();
-            try {
-                System.out.println("Введите длины сторон треугольника:");
+                System.out.println("\nВведите длины сторон треугольника:");
                 System.out.print("Сторона A: ");
                 double a = scanner.nextDouble();
                 System.out.print("Сторона B: ");
@@ -38,64 +22,39 @@ public class TriangleMenu {
                 double c = scanner.nextDouble();
                 scanner.nextLine();
 
-                // Создаем временный объект для проверки
-                RightTriangle tempTriangle = new RightTriangle(a, b, c);
+                // Создаем оба типа треугольников для проверки
+                Triangle triangle = new Triangle(a, b, c);
+                RightTriangle rightTriangle = new RightTriangle(a, b, c);
 
-                if (choice == 1) {
-                    if (tempTriangle.isRight()) {
-                        System.out.println("Введенный треугольник является прямоугольным. " +
-                                "Выберите другой тип треугольника или измените стороны.");
-                        continue;
-                    }
-                    return processRegularTriangle(a, b, c);
-                } else if (choice == 2) {
-                    return processRightTriangle(a, b, c);
-                } else {
-                    System.out.println("Неверный выбор типа треугольника.");
+                if (!triangle.isValid()) {
+                    System.out.println("Треугольник с такими сторонами не существует!");
+                    continue;
                 }
+
+                // Автоматическое определение типа треугольника
+                String triangleType;
+                double area, perimeter;
+
+                if (rightTriangle.isRight()) {
+                    triangleType = "Прямоугольный";
+                    perimeter = rightTriangle.calculatePerimeter();
+                    area = rightTriangle.calculateArea();
+                } else {
+                    triangleType = "Произвольный";
+                    perimeter = triangle.calculatePerimeter();
+                    area = triangle.calculateArea();
+                }
+
+                System.out.println("\nОпределен тип треугольника: " + triangleType);
+                System.out.printf("Периметр: %.2f\n", perimeter);
+                System.out.printf("Площадь: %.2f\n", area);
+
+                return new double[]{a, b, c, perimeter, area};
+
             } catch (InputMismatchException e) {
-                System.out.println("Ошибка ввода: Введите числовые значения для сторон.");
+                System.out.println("Ошибка ввода! Введите числовые значения для сторон.");
                 scanner.nextLine();
             }
         }
-    }
-
-    private double[] processRegularTriangle(double a, double b, double c) {
-        Triangle triangle = new Triangle(a, b, c);
-        if (!triangle.isValid()) {
-            System.out.println("Треугольник с такими сторонами не существует");
-            return new double[]{a,b,c,0,0};
-        }
-
-        double perimeter = triangle.calculatePerimeter();
-        double area = triangle.calculateArea();
-
-        printResults(perimeter, area);
-        return new double[]{a,b,c,area,perimeter};
-    }
-
-    private double[] processRightTriangle(double a, double b, double c) {
-        RightTriangle rightTriangle = new RightTriangle(a, b, c);
-        if (!rightTriangle.isValid()) {
-            System.out.println("Треугольник с такими сторонами не существует");
-            return new double[]{a,b,c,0,0};
-        }
-
-        if (!rightTriangle.isRight()) {
-            System.out.println("Введенный треугольник не является прямоугольным");
-            return new double[]{a,b,c,0,0};
-        }
-
-        double perimeter = rightTriangle.calculatePerimeter();
-        double area = rightTriangle.calculateArea();
-
-        printResults(perimeter, area);
-        return new double[]{a,b,c,area,perimeter};
-    }
-
-    private void printResults(double perimeter, double area) {
-        System.out.println("\nРезультаты расчетов:");
-        System.out.printf("Периметр: %.2f\n", perimeter);
-        System.out.printf("Площадь: %.2f\n", area);
     }
 }
