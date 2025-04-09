@@ -33,7 +33,7 @@ class SQLManager {
     protected static void SQLQueryCreate(String query) {
         try {
             Statement stmt = conn.createStatement();
-            int rowsAffected = stmt.executeUpdate(query);
+            stmt.executeUpdate(query);
             System.out.println("Данные успешно сохранены");
         } catch (SQLException e) {
             System.out.println("Ошибка при выполнении запроса: " + e.getMessage());
@@ -185,7 +185,8 @@ class SQLManager {
            if (row != null) {
                row.createCell(x-1).setCellValue(rs.getDouble(x));
            }
-           System.out.printf("%-25e", rs.getDouble(x));
+           if (rs.getDouble(x) < 100000000) System.out.printf("%-25.0f", rs.getDouble(x));
+           else System.out.printf("%-25e", rs.getDouble(x));
        } else {
            if (row != null) {
                row.createCell(x-1).setCellValue("err");

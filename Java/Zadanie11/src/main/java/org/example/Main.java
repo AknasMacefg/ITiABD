@@ -72,10 +72,8 @@ public class Main {
                     System.out.print("Выберите таблицу для записи введя её имя: ");
                     String tableName = sc.nextLine();
 
-                    // Locale.US для форматирования чисел с точкой
-                    String query = String.format(Locale.US,
-                            "INSERT INTO %s.%s (Triangle_sizes, Perimeter, Square, Number, Factorial, Odd_even) " +
-                                    "VALUES ('a:%.2f b:%.2f c:%.2f', %.2f, %.2f, %d, %e, '%s')",
+                    String query = String.format(Locale.US,"INSERT INTO %s.%s (Triangle_sizes, Perimeter, Square, Number, Factorial, Odd_even) " +
+                                    "VALUES ('a:%.2f b:%.2f c:%.2f', %.2f, %.2f, %d, %.0f, '%s')",
                             SQLManager.schemaname,
                             tableName,
                             triresult[0], // A
