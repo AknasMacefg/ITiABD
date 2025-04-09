@@ -14,9 +14,12 @@ class SQLManager {
     static {
         try {
 
-            String pass = "9052";
+            String pass = "postgres";
             String user = "postgres";
-            String url = "jdbc:postgresql://localhost:5432/test";
+            String db_name = "postgres";
+            String port = "5432";
+            String ip = "127.0.0.1";
+            String url = "jdbc:postgresql://"+ip+":"+port+"/"+db_name;
             conn = DriverManager.getConnection(url, user, pass);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("CREATE SCHEMA IF NOT EXISTS " + schemaname);
@@ -173,11 +176,16 @@ class SQLManager {
            } else {
                System.out.printf("%-25s", rs.getString(x));
            }
-       } else if (classname.equals("java.lang.Double") || classname.equals("java.lang.Float")) {
+       } else if (classname.equals("java.lang.Float")) {
+           if (row != null) {
+               row.createCell(x-1).setCellValue(rs.getFloat(x));
+           }
+           System.out.printf("%-25.2f", rs.getFloat(x));
+       } else if (classname.equals("java.lang.Double")){
            if (row != null) {
                row.createCell(x-1).setCellValue(rs.getDouble(x));
            }
-           System.out.printf("%-25f", rs.getDouble(x));
+           System.out.printf("%-25e", rs.getDouble(x));
        } else {
            if (row != null) {
                row.createCell(x-1).setCellValue("err");

@@ -10,6 +10,7 @@ public class Main {
 
         boolean exit = false;
         boolean checker;
+        new SQLManager();
         while (!exit) {
             System.out.println("\n-------------------------------------\n");
             System.out.println("1. Вывести все таблицы PostgresSQL");
@@ -30,7 +31,7 @@ public class Main {
             }
             sc.nextLine();
             System.out.println("\n-------------------------------------\n");
-            int result;
+
             String tablename;
             switch (choice) {
                 case 1:
@@ -42,28 +43,26 @@ public class Main {
                     System.out.print("Введите название таблицы: ");
                     tablename = sc.nextLine();
                     SQLManager.SQLQueryCreate("CREATE TABLE IF NOT EXISTS "+ SQLManager.schemaname + "." + tablename +
-                            "(ID serial, Triangle_sizes varchar(100), Perimeter Float, Square Float, Number Integer, Factorial Bigint, Odd_even varchar(20))");
+                            "(ID serial, Triangle_sizes varchar(100), Perimeter Real, Square Real, Number Integer, Factorial Float, Odd_even varchar(20))");
                     break;
 
 
                 case 3:
                     TriangleMenu triangle = new TriangleMenu();
                     double[] triresult = triangle.processTriangle();
-
-                    System.out.print("Введите число: ");
                     int number;
                     while (true) {
+                        System.out.print("Введите число для нахождения факториала: ");
                         try {
                             number = sc.nextInt();
                             break;
                         } catch (Exception e) {
                             System.out.println("Неверный формат числа. Попробуйте снова.");
-                            sc.nextLine();
                         }
                     }
                     sc.nextLine();
 
-                    result = Factorial.FactorialCalculator(number);
+                    double result = Factorial.FactorialCalculator(number);
                     String odd_even = (number % 2 == 0) ? "Четное" : "Нечетное";
                     System.out.println("Четность числа: " + odd_even);
 
@@ -76,7 +75,7 @@ public class Main {
                     // Locale.US для форматирования чисел с точкой
                     String query = String.format(Locale.US,
                             "INSERT INTO %s.%s (Triangle_sizes, Perimeter, Square, Number, Factorial, Odd_even) " +
-                                    "VALUES ('a:%.2f b:%.2f c:%.2f', %.2f, %.2f, %d, %d, '%s')",
+                                    "VALUES ('a:%.2f b:%.2f c:%.2f', %.2f, %.2f, %d, %e, '%s')",
                             SQLManager.schemaname,
                             tableName,
                             triresult[0], // A
@@ -136,6 +135,7 @@ public class Main {
 
     }
     public static void main(String[] args) {
+
         Selector();
     }
 

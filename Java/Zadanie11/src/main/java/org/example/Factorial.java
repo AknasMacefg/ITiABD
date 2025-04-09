@@ -2,8 +2,8 @@ package org.example;
 
 public class Factorial {
 
-    public static int FactorialCalculator(int number) {
-        int result = number;
+    public static double FactorialCalculator(int number) {
+        double result = number;
         int i = number;
         if (number == 0) return 1;
         while (i >= 1){
