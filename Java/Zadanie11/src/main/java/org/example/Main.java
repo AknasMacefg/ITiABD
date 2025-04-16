@@ -50,27 +50,9 @@ public class Main {
                 case 3:
                     TriangleMenu triangle = new TriangleMenu();
                     double[] triresult = triangle.processTriangle();
-                    int number;
-                    while (true) {
-                        System.out.print("Введите число для нахождения факториала: ");
-                        try {
-                            number = sc.nextInt();
-                            if (number < 0) {
-                                System.out.println("Неверный формат числа. Попробуйте снова.");
-                                continue;
-                            }
-                            break;
-                        } catch (Exception e) {
-                            System.out.println("Неверный формат числа. Попробуйте снова.");
-                            sc.nextLine();
-                        }
-                    }
-                    sc.nextLine();
-
-                    double result = Factorial.FactorialCalculator(number);
-                    String odd_even = (number % 2 == 0) ? "Четное" : "Нечетное";
-                    System.out.println("Четность числа: " + odd_even);
-
+                    Factorial factorial = new Factorial();
+                    double[] result = factorial.FactorialCalculator();
+                    String odd_even = factorial.FactorialOddEven();
                     checker = SQLManager.SQLQuerySelectTable();
                     if (!checker) continue;
 
@@ -78,7 +60,7 @@ public class Main {
                     String tableName = sc.nextLine();
 
                     String query = String.format(Locale.US,"INSERT INTO %s.%s (Triangle_sizes, Perimeter, Square, Number, Factorial, Odd_even) " +
-                                    "VALUES ('a:%.2f b:%.2f c:%.2f', %.2f, %.2f, %d, %.0f, '%s')",
+                                    "VALUES ('a:%.2f b:%.2f c:%.2f', %.2f, %.2f, %.0f, %.0f, '%s')",
                             SQLManager.schemaname,
                             tableName,
                             triresult[0], // A
@@ -86,8 +68,8 @@ public class Main {
                             triresult[2], // C
                             triresult[3], // perimeter
                             triresult[4], // area
-                            number,
-                            result,
+                            result[0],
+                            result[1],
                             odd_even
                     );
 
