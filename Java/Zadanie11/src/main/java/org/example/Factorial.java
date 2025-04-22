@@ -20,7 +20,7 @@ public class Factorial {
             }
         }
     }
-    public static double[] FactorialCalculator() {
+    public double[] FactorialCalculator() {
         double result = number;
         int i = number;
         if (number == 0){
@@ -37,7 +37,7 @@ public class Factorial {
         return new double[]{number, result};
     }
 
-    public static String FactorialOddEven() {
+    public String FactorialOddEven() {
         String odd_even = (number % 2 == 0) ? "Четное" : "Нечетное";
         System.out.println("Четность числа: " + odd_even);
         return odd_even;
