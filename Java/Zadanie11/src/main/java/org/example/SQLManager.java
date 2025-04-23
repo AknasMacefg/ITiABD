@@ -36,8 +36,7 @@ class SQLManager {
             stmt.executeUpdate(query);
             System.out.println("Данные успешно сохранены");
         } catch (SQLException e) {
-            System.out.println("Ошибка при выполнении запроса: " + e.getMessage());
-            System.out.println("Проблемный запрос: " + query);
+            System.out.println("Ошибка при выполнении запроса: " + e);
         }
     }
 

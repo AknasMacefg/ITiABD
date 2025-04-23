@@ -22,7 +22,6 @@ public class TriangleMenu {
                 double c = scanner.nextDouble();
                 scanner.nextLine();
 
-                // Создаем оба типа треугольников для проверки
                 Triangle triangle = new Triangle(a, b, c);
                 RightTriangle rightTriangle = new RightTriangle(a, b, c);
 
@@ -31,7 +30,7 @@ public class TriangleMenu {
                     continue;
                 }
 
-                // Автоматическое определение типа треугольника
+
                 String triangleType;
                 double area, perimeter;
 
