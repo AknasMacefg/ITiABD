@@ -1,7 +1,7 @@
 import psycopg2
 
 def create_tables():
-    conn = psycopg2.connect(dbname="your_db", user="your_user", password="your_password", host="localhost")
+    conn = psycopg2.connect(dbname="postgres", user="postgres", password="postgres", host="localhost")
     cur = conn.cursor()
 
     cur.execute("""
@@ -94,7 +94,7 @@ def delete_all_stores(conn):
     conn.commit()
 
 if __name__ == "__main__":
-    conn = psycopg2.connect(dbname="your_db", user="your_user", password="your_password", host="localhost")
+    conn = psycopg2.connect(dbname="postgres", user="postgres", password="postgres", host="localhost")
     create_tables()
 
     stores = [
