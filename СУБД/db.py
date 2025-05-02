@@ -35,12 +35,12 @@ def create_tables(conn):
     conn.commit()                  
     cur.close()
 
-def add_product(conn, name, brand, mass, price):
+def add_product(conn, products):
     with conn.cursor() as cur:
-        cur.execute("""
+        cur.executemany("""
             INSERT INTO Техника (Код, Название, Марка, Масса, Цена)
             VALUES (default, %s, %s, %s, %s);
-        """, (name, brand, mass, price))
+        """, products)
     conn.commit()
 
 def add_all_products(conn):
@@ -60,12 +60,12 @@ def add_all_products(conn):
         """)
     conn.commit()
 
-def add_store(conn, address, phone, director, employees_count):
+def add_store(conn, stores):
     with conn.cursor() as cur:
-        cur.execute("""
+        cur.executemany("""
             INSERT INTO Магазины(Адрес, Телефон, ФИО, Количество_сотрудников)
             VALUES (%s, %s, %s, %s);
-        """, (address, phone, director, employees_count))
+        """, stores)
     conn.commit()
 
 def add_all_stores(conn):
@@ -85,12 +85,12 @@ def add_all_stores(conn):
         """)
     conn.commit()
 
-def add_inventory(conn, store_code, product_code, amount):
+def add_inventory(conn, inventories):
     with conn.cursor() as cur:
-        cur.execute("""
+        cur.executemany("""
             INSERT INTO НаличиеТехники (Магазин, Техника, Количество)
             VALUES (%s, %s, %s);
-        """, (store_code, product_code, amount))
+        """, inventories)
     conn.commit()
 
 
@@ -122,26 +122,35 @@ def add_all_inventory(conn):
     conn.commit()
 
 
-def get_all_stores(conn):
+def get_all(conn, table):
     with conn.cursor() as cur:
-        cur.execute("SELECT * FROM stores;")
+        cur.execute("SELECT * FROM " + table + ";")
         return cur.fetchall()
 
-def get_store_by_phone(conn, phone):
+def get_one_by_name(conn, table, column, target):
     with conn.cursor() as cur:
-        cur.execute("SELECT * FROM stores WHERE phone = %s;", (phone,))
+        cur.execute("SELECT * FROM "+ table +" WHERE "+ column + " = %s;", (target,))
         return cur.fetchone()
 
-def get_inventory_by_store(conn, store_id):
+def get_inventory_by_store(conn, id):
     with conn.cursor() as cur:
         cur.execute("""
-            SELECT s.address, p.name, i.quantity
-            FROM inventory i
-            JOIN stores s ON i.store_id = s.id
-            JOIN products p ON i.product_id = p.id
-            WHERE s.id = %s;
-        """, (store_id,))
+            SELECT s.Адрес, p.Название, i.Количество
+            FROM НаличиеТехники i
+            JOIN Магазины s ON i.Магазин = s.Номер
+            JOIN Техника p ON i.Техника = p.Код
+            WHERE s.Номер = %s;
+        """, (id,))
         return cur.fetchall()
+
+def update_product_price(conn, store_id, new_count):
+    with conn.cursor() as cur:
+        cur.execute("""
+            UPDATE stores
+            SET employees_count = %s
+            WHERE id = %s;
+        """, (new_count, store_id))
+    conn.commit()
 
 def update_store_employees(conn, store_id, new_count):
     with conn.cursor() as cur:
@@ -151,6 +160,15 @@ def update_store_employees(conn, store_id, new_count):
             WHERE id = %s;
         """, (new_count, store_id))
     conn.commit()
+
+def update_inventory_amount(conn, store_id, new_count):
+    with conn.cursor() as cur:
+        cur.execute("""
+            UPDATE stores
+            SET employees_count = %s
+            WHERE id = %s;
+        """, (new_count, store_id))
+    conn.commit()    
 
 def delete_store_by_id(conn, store_id):
     with conn.cursor() as cur:
@@ -167,7 +185,10 @@ conn = psycopg2.connect(dbname="SUBD_PR9", user="postgres", password="postgres",
 #add_all_stores(conn)
 #add_all_products(conn)
 #add_all_inventory(conn)
-add_store(conn, 'Пушкино, 23', '123456', 'Гагаренко И.И', 24)
-add_product(conn, 'Мультиварка', 'Sony', 4, 5000)
-add_inventory(conn,11, 4, 50)
+#add_store(conn, ('Пушкино, 23', '123456', 'Гагаренко И.И', 24))
+#add_product(conn, [('Мультиварка', 'Sony', 4, 5000), ('Пароварка', 'Bosch', 5, 10000)])
+#add_inventory(conn,(11, 4, 50))
+#print(get_all(conn, "Техника"))
+#print(get_one_by_name(conn, "Магазины", "Номер", 1))
+#print(get_inventory_by_store(conn, 1))
 conn.close()
