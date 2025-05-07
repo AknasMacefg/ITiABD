@@ -10,7 +10,7 @@ import java.sql.*;
 
 class SQLManager {
     protected static Connection conn;
-    protected static final String schemaname = "task11";
+    protected static final String schemaname = "task15";
     static {
         try {
 
@@ -66,17 +66,19 @@ class SQLManager {
             return false;
         }
     }
-    protected static boolean SQLQuerySelect(String query) {
+    protected static String[] SQLQuerySelect(String query) {
         try {
+            String[] result = new String[]{};
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
             int rowindex = 0;
             if (!rs.next()) {
                 System.out.println("Не найдено результатов с таким ID");
-                return false;
+                return null;
             }
             rs = stmt.executeQuery(query);
+
             while (rs.next()) {
                 for (int x = 1; x <= rsmd.getColumnCount(); x++)
                 {
@@ -90,14 +92,16 @@ class SQLManager {
                         } else continue;
                     }
                     TypeExtractor(null, rs, x, rsmd.getColumnClassName(x));
+
                 }
+                result = new String[]{rs.getString(2), rs.getString(3), rs.getString(4)};
                 System.out.println();
                 rowindex++;
             }
-            return false;
+            return result;
         }catch (SQLException e){
             System.out.println("Ошибка синтаксиса. " + e);
-            return false;
+            return null;
         }
     }
 
@@ -161,7 +165,7 @@ class SQLManager {
 
 
    private static void TypeExtractor(Row row, ResultSet rs, int x , String classname) throws SQLException {
-       if (classname.equals("java.lang.Integer") || classname.equals("java.lang.Short") || classname.equals("java.lang.Long")) {
+        if (classname.equals("java.lang.Integer") || classname.equals("java.lang.Short") || classname.equals("java.lang.Long")) {
            if (row != null) {
                row.createCell(x - 1).setCellValue(rs.getLong(x));
            }
@@ -170,8 +174,8 @@ class SQLManager {
            if (row != null) {
                row.createCell(x-1).setCellValue(rs.getString(x));
            }
-           if (rs.getString(x) != null && rs.getString(x).length() > 25){
-               System.out.printf("%-25s", rs.getString(x).substring(0, 25) + "...");
+           if (rs.getString(x) != null && rs.getString(x).length() > 20){
+               System.out.printf("%-25s", rs.getString(x).substring(0, 20) + "...");
            } else {
                System.out.printf("%-25s", rs.getString(x));
            }
