@@ -87,14 +87,27 @@ public class Main {
                     String[] row_result = SQLManager.SQLQuerySelect("SELECT * FROM "+ SQLManager.schemaname +"." + tablename +
                             " WHERE ID = " + id);
                     System.out.println("Введите элемент, который вы хотите удалить: ");
+                    sc.nextLine();
                     String deleter = sc.nextLine();
                     if (row_result == null || row_result.length == 0) break;
                     for (int i = 0; i < row_result.length; i++) {
-                        if(row_result[i].startsWith("[") && row_result[i].endsWith("]")) {
+
+                        row_result[i] = row_result[i].replaceAll(deleter, "");
+                        System.out.println(row_result[i]);
+                        /*if(row_result[i].startsWith("[") && row_result[i].endsWith("]")) {
                             String[] row_temp = row_result[i].substring(1, row_result[i].length()-1).split(",");
-                            
-                        }
+
+                        }*/
                     }
+                    query = String.format(Locale.US,"UPDATE %s.%s SET List = '%s', String = '%s', Set = '%s'  WHERE ID = %d",
+                            SQLManager.schemaname,
+                            tablename,
+                            row_result[0],
+                            row_result[1],
+                            row_result[2],
+                            id
+                    );
+                    SQLManager.SQLQueryCreate(query);
                     break;
 
                 case 5:
