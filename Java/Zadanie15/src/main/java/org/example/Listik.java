@@ -10,7 +10,7 @@ public class Listik {
             while(true){
                 System.out.print("Введите любое значение ("+ NumbersList.size()+ "/50): ");
                 NumbersList.add(sc.next());
-                if (NumbersList.size() == 10){
+                if (NumbersList.size() == 50){
                     System.out.println("Список: " + NumbersList);
                     sc.nextLine();
                     return;

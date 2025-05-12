@@ -1,10 +1,7 @@
 package org.example;
 
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Locale;
+import java.util.*;
 
 public class Main {
     private static final Scanner sc = new Scanner(System.in);
@@ -86,18 +83,23 @@ public class Main {
                     }
                     String[] row_result = SQLManager.SQLQuerySelect("SELECT * FROM "+ SQLManager.schemaname +"." + tablename +
                             " WHERE ID = " + id);
-                    System.out.println("Введите элемент, который вы хотите удалить: ");
+                    if (row_result == null || row_result.length == 0) break;
+                    System.out.print("Введите элемент, который вы хотите удалить: ");
                     sc.nextLine();
                     String deleter = sc.nextLine();
-                    if (row_result == null || row_result.length == 0) break;
+                    ArrayList<String> row_temp;
+                    System.out.println("Результат: ");
                     for (int i = 0; i < row_result.length; i++) {
+                        if(i != 1){
+                            row_temp = new ArrayList<>(Arrays.asList(row_result[i].substring(1, row_result[i].length() - 1).split(", ")));
+                            row_temp.removeIf(tmp_text -> tmp_text.equals(deleter));
+                            row_result[i] = row_temp.toString();
+                        }
+                        else {
+                           row_result[i] = row_result[i].replace(deleter, "");
+                        }
 
-                        row_result[i] = row_result[i].replaceAll(deleter, "");
                         System.out.println(row_result[i]);
-                        /*if(row_result[i].startsWith("[") && row_result[i].endsWith("]")) {
-                            String[] row_temp = row_result[i].substring(1, row_result[i].length()-1).split(",");
-
-                        }*/
                     }
                     query = String.format(Locale.US,"UPDATE %s.%s SET List = '%s', String = '%s', Set = '%s'  WHERE ID = %d",
                             SQLManager.schemaname,
