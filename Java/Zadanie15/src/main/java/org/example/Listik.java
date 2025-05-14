@@ -8,7 +8,7 @@ public class Listik {
         try{
             Scanner sc = new Scanner(System.in);
             while(true){
-                System.out.print("Введите любое значение ("+ NumbersList.size()+ "/50): ");
+                System.out.print("Введите любое значение ("+ NumbersList.size() + 1 + "/50): ");
                 NumbersList.add(sc.next());
                 if (NumbersList.size() == 50){
                     System.out.println("Список: " + NumbersList);

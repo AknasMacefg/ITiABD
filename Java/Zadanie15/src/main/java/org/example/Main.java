@@ -94,6 +94,7 @@ public class Main {
                             row_temp = new ArrayList<>(Arrays.asList(row_result[i].substring(1, row_result[i].length() - 1).split(", ")));
                             row_temp.removeIf(tmp_text -> tmp_text.equals(deleter));
                             row_result[i] = row_temp.toString();
+
                         }
                         else {
                            row_result[i] = row_result[i].replace(deleter, "");
