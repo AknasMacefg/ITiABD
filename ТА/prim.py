@@ -1,8 +1,8 @@
 import heapq
 
 def prim(graph, start):
-    mst = []  # Список рёбер в минимальном остовном дереве
-    visited = set([start])  # Посещённые вершины
+    mst = []
+    visited = set([start])
     edges = [(weight, start, to) for to, weight in graph[start]]
     heapq.heapify(edges)
 

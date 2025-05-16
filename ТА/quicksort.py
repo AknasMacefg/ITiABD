@@ -19,4 +19,4 @@ def partition(arr, low, high):
 
 arr = [10, 7, 8, 9, 1, 5]
 quicksort(arr, 0, len(arr) - 1)
-print(arr)  # [1, 5, 7, 8, 9, 10]
+print(arr)
