@@ -1,48 +1,74 @@
 
-sudoku = [[1,9,3,4,5,6,7,8,9],
-          [2,1,2,3,4,5,6,7,8],
-          [3,3,1,2,3,4,5,6,7],
-          [4,4,4,1,2,3,4,5,6],
-          [5,5,5,5,1,2,3,4,5],
-          [6,6,6,6,6,1,2,3,4],
-          [7,7,7,7,7,7,1,2,3],
-          [8,8,8,8,8,8,8,1,2],
-          [9,9,9,9,9,9,9,9,1]]
+sudoku = [ 
+[5,3,'','',7,'','','',''],
+[6,'','',1,9,5,'','',''],
+['',9,8,'','','','',6,''],
+[8,'','','',6,'','','',3],
+[4,'','',8,'',3,'','',1],
+[7,'','','',2,'','','',6],
+['',6,'','','','',2,8,''],
+['','','',4,1,9,'','',5],
+['','','','',8,'','',7,9] ]
 
 
-def rows_check(sudoku):
-    for i in sudoku:
-        for j in i:
-            counter = 0
-            if (j == 0): continue
-            for k in i:
-                if (k == 0): continue
-                if (j == k):
-                    if (counter == 1):
+def valid_check(sudoku):
+    for row in range(9):
+        for col in range(9):
+            k = sudoku[row][col]
+            if k == '': continue
+
+            for j in range(9):
+                if j != col and sudoku[row][j] == k:
+                    return False
+
+            for i in range(9):
+                if i != row and sudoku[i][col] == k:
+                    return False
+
+            start_row = (row // 3) * 3
+            start_col = (col // 3) * 3
+            for i in range(3):
+                for j in range(3):
+                    r = start_row + i
+                    c = start_col + j
+                    if sudoku[r][c] == '': continue
+                    if (r != row or c != col) and sudoku[r][c] == k:
                         return False
-                    counter = counter + 1
+
     return True
 
-def columns_check(sudoku):
-    for i in range(0, len(sudoku[0])-1):
-        for j in range(0, len(sudoku[0])-1):
-            if (sudoku[j][i] == 0): continue
-            counter = 0
-            for k in range(0, len(sudoku[0])-1):
-                if (sudoku[k][i] == 0): continue
-                if (sudoku[j][i] == sudoku[k][i]):
-                    if (counter == 1):
-                        return False
-                    counter = counter + 1
-    return True
+if (valid_check(sudoku) == True):
+    print("Cудоку заполнена правильно!")
+else:
+    print("Судоку заполнена неправильно!")
 
-def three_x_three_check(sudoku):
-    for i in range(0, len(sudoku[0]) * len(sudoku) ):
-        print(i)
-    return True
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
 
-print(rows_check(sudoku))
-print(columns_check(sudoku))
-print(three_x_three_check(sudoku))
+def lcm(a, b):
+    return abs(a * b) // gcd(a, b)
 
-                
+print("НОК чисел 21 и 7: ", lcm(21, 7))   
+
+def lis(arr):
+    max_value = 0
+    max_arr = []
+    for i in range(0, len(arr)):
+        long_arr = []
+        long_arr.append(arr[i])
+        temp_i = i
+        for j in range(0, len(arr)):
+            if arr[temp_i] < arr[j] and j > temp_i:
+                temp_i = j
+                long_arr.append(arr[j])
+            else:
+                continue
+        if (len(long_arr) > max_value):
+            max_value = len(long_arr)
+            max_arr = long_arr
+    return max_value, max_arr
+
+print('Наибольшая возрастающая последовательности в массиве: ', lis([50, 3, 10, 7, 40, 80]))
+            
