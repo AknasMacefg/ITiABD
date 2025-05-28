@@ -1,5 +1,8 @@
 package org.example;
 
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.sql.SQLException;
 import java.util.*;
 
@@ -45,6 +48,7 @@ public class Main {
                             "(ID serial, 'Object ID' int, 'Код поста' int, 'Код параметра' int, 'Дата-время' datetime, 'Уровень воды' int, 'Описание' text, 'Температура воздуха' int, 'Атмосферное давление' int, 'Скорость ветра' int, 'Толщина снежного покрова' int, 'Количество осадков' int)");
                     break;
                 case 3:
+
 
                     break;
                 case 4:
