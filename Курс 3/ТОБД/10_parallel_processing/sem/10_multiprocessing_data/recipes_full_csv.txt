@@ -1,0 +1,2 @@
+Скачать файл можно по пути:
+TOBD21_for_students\datasets\recipes_full.csv
