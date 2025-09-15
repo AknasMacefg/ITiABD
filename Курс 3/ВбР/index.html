@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Оно тебе надо</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Raleway', sans-serif;
+      background: #FFFFFF;
+      color: #000;
+    }
+
+    /* HEADER */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 20px 40px;
+    }
+    .menu {
+      display: flex;
+      gap: 15px;
+      font-size: 18px;
+      text-transform: lowercase;
+    }
+    .menu a {
+      text-decoration: none;
+      color: black;
+    }
+    .logo img {
+      width: 140px;
+    }
+    .contacts {
+      text-align: right;
+      font-size: 14px;
+    }
+
+    /* COVER */
+    .cover {
+      position: relative;
+      height: 1200px;
+      background-image: url("oil-painting-beautiful-lotus-flower_1232-1978.jpg");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      text-transform: uppercase;
+      padding: 40px;
+    }
+    .cover .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+    }
+    .title {
+  font-size: 100px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+/* первая строка — без отступа */
+.title .ono {
+  margin-left: 0;
+}
+
+/* вторая строка — сдвигаем вправо */
+.title .tebe {
+  margin-left: 600px;
+}
+
+/* третья строка — ещё больше сдвигаем */
+.title .nado {
+  margin-left: 1200px;
+}
+    .cover .description {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+    }
+    .cover .subline {
+      font-size: 20px;
+      text-transform: none;
+    }
+    .cover .button {
+      padding: 15px 30px;
+      border: 1px solid white;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    /* LOTS */
+    .lots {
+  padding: 60px 40px;
+}
+
+.lots .title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+/* сетка для карточек */
+.lots-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* сами карточки */
+.lots .frame {
+  position: relative;
+  height: 450px;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.lots .frame .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.lots .frame h3,
+.lots .frame p {
+  position: relative;
+  z-index: 2;
+}
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      padding: 60px 40px;
+      align-items: start;
+    }
+    .about img {
+      width: 120px;
+    }
+    .about-column h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .about-column p {
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      padding: 40px;
+      border-top: 1px solid #ccc;
+      font-size: 14px;
+    }
+    .footer .contacts {
+      text-align: left;
+    }
+    .footer .socials {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .footer .socials div {
+      width: 30px;
+      height: 30px;
+      background: gray;
+    }
+    .footer .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+    }
+    .footer .menu a {
+      text-decoration: none;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- header -->
+  <header class="header">
+    <div class="menu">
+      <a href="#">главная</a>
+      <span class="list_marker"></span>
+      <a href="#">посмотреть лоты</a>
+      <span class="list_marker"></span>
+      <a href="#">об аукционе</a>
+    </div>
+    <div class="logo">
+      <img src="logo.png" alt="Оно тебе надо">
+    </div>
+    <div class="contacts">
+      <p>+9 999 555 5555</p>
+      <p>info@sobaka.ge</p>
+      <p>наб. Принсенграхт 263-265,<br>Амстердам</p>
+    </div>
+  </header>
+
+  <!-- cover -->
+  <section class="cover">
+    <div class="overlay"></div>
+    <div class="title">
+      <h2 class="ono">ОНО</h2>
+      <h2 class="tebe">ТЕБЕ</h2>
+      <h2 class="nado">НАДО</h2>
+    </div>
+    <div class="description">
+      <p class="subline">Аукцион вещей, в которые никто не верил</p>
+      <div class="button">Сделать ставку</div>
+    </div>
+  </section>
+
+  <!-- lots -->
+  <section class="lots">
+  <h2 class="title">ЛОТЫ</h2>
+
+  <div class="lots-container">
+    <div class="frame" style="background-image: url('539fb54b8ac24568a59b4e0bffa1.jpg');">
+      <div class="overlay"></div>
+      <h3>Фильм режиссёра, который бросил киношколу</h3>
+      <p>Не просто бросил, а ушёл с первой лекции...</p>
+    </div>
+
+    <div class="frame" style="background-image: url('136177-dzheyms-dzhoys-uliss.png');">
+      <div class="overlay"></div>
+      <h3>Книга, где описан один скучный день...</h3>
+      <p>Объёмом почти в тысячу страниц...</p>
+    </div>
+
+    <div class="frame" style="background-image: url('3ZAGLAVNOE.jpg');">
+      <div class="overlay"></div>
+      <h3>Картина, которую повторит даже 5-летний сын маминой подруги</h3>
+      <p>Ну действительно, там линия, тут кружочек...</p>
+    </div>
+  </div>
+
+  <a href="#" class="more">посмотреть больше</a>
+</section>
+
+  <!-- about -->
+  <section class="about">
+    <div class="logo-column">
+      <img src="logo.png" alt="Оно тебе надо">
+    </div>
+    <div class="about-column">
+      <h2>Об аукционе</h2>
+      <p>Здесь вы не встретите очередное пафосное собрание невероятно дорогого антиквариата. Наши лоты вообще не должны были попасть ни на один аукцион...</p>
+      <p>Слишком сложные или, наоборот, слишком простые. Опережающие своё время... И сейчас эти лоты стали культовыми.</p>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="footer">
+    <div class="contacts">
+      <p>+9 999 555 5555</p>
+      <p>info@sobaka.ge</p>
+      <p>наб. Принсенграхт 263-265,<br>Амстердам</p>
+    </div>
+    <div class="socials">
+      <div class="youtube"></div>
+      <div class="vk"></div>
+      <div class="pinterest"></div>
+    </div>
+    <div class="menu">
+      <a href="#">главная</a>
+      <a href="#">посмотреть лоты</a>
+      <a href="#">об аукционе</a>
+    </div>
+  </footer>
+
+</body>
+</html>
