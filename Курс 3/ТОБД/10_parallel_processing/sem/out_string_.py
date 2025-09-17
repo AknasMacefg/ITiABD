@@ -1,4 +1,4 @@
-
+#Подсчёт символов в тексте
 def counter(filename, output):
     with open(filename, 'r') as file:
         text = file.read().replace('\n', '').replace('\xa0', ' ')
