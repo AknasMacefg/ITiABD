@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e0f13e82-6bcc-46c0-94ca-77bc366db0c0" name="Changes" comment="">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources.local.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502/storage_v2/_src_/database/postgres.edMnLQ/schema/task11.Ze5-yw.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie11/.idea/workspace.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,8 +64,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.26775.15" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.26775.15" />
       </set>
     </attachedChunks>
   </component>
@@ -73,7 +79,12 @@
       <updated>1746805763258</updated>
       <workItem from="1746805764412" duration="3040000" />
       <workItem from="1746966859897" duration="11561000" />
+<<<<<<< Updated upstream
       <workItem from="1757666300903" duration="18000" />
+=======
+      <workItem from="1758105262064" duration="84000" />
+      <workItem from="1758105538012" duration="38000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

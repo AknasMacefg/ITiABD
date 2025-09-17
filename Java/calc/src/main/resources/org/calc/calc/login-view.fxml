@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="365.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.calc.calc.LoginController">
+   <children>
+      <Button fx:id="LoginButton" onAction="#onLoginButtonClick" layoutX="90.0" layoutY="247.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="86.0" text="Войти" />
+      <TextField fx:id="LoginField" layoutX="55.0" layoutY="122.0" promptText="Логин" />
+      <PasswordField fx:id="PassField" layoutX="55.0" layoutY="158.0" promptText="Пароль" />
+      <Hyperlink fx:id="RegLink" onAction="#onRegLinkClick" layoutX="52.0" layoutY="195.0" text="Регистрация" />
+      <Label layoutX="55.0" layoutY="45.0" text="КАЛЬКУЛЯТОР">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>
