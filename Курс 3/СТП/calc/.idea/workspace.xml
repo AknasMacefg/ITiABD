@@ -5,16 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39cd09dd-0135-42ab-a5f8-6e67734c9da2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie11/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502/storage_v2/_src_/database/postgres.edMnLQ/schema/task11.Ze5-yw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Zadanie11/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie11/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Zadanie15/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie15/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Zadanie15/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Zadanie15/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie15/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/src/main/java/org/calc/calc/CalcApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/src/main/java/org/calc/calc/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/src/main/java/org/calc/calc/MainController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/src/main/java/org/calc/calc/RegController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/src/main/java/org/calc/calc/SQLManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/src/main/resources/org/calc/calc/login-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/src/main/resources/org/calc/calc/main-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Java/calc/src/main/resources/org/calc/calc/reg-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/calc.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/login-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/reg-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/reg-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +47,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -57,6 +75,7 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="32p7HcyI7WXpiqIUOsxXba22vRd" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -68,13 +87,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/alexm/OneDrive/Рабочий стол/ИТиАБД/ITiABD/Java/calc/src/main/resources/org/calc/calc",
+    "last_opened_file_path": "C:/Users/alexm/OneDrive/Рабочий стол/ИТиАБД/ITiABD/Курс 3/СТП/calc",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -128,10 +147,17 @@
       <workItem from="1758126180218" duration="86000" />
       <workItem from="1758126312256" duration="8045000" />
       <workItem from="1758137056559" duration="12397000" />
+      <workItem from="1758149729499" duration="140000" />
+      <workItem from="1758149910059" duration="64000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../.." />
+    </ignored-roots>
   </component>
 </project>
