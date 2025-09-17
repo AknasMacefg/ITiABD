@@ -5,10 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="423219a4-292c-4d6c-9d49-bee365db09fe" name="Changes" comment="">
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/5092a775-97ff-4f71-82f2-98c8d6716502/storage_v2/_src_/database/postgres.edMnLQ/schema/task11.Ze5-yw.meta" beforeDir="false" />
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie15/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie15/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie15/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie15/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie15/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calc/src/main/java/org/calc/calc/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../calc/src/main/java/org/calc/calc/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calc/src/main/java/org/calc/calc/SQLManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../calc/src/main/java/org/calc/calc/SQLManager.java" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,12 +38,19 @@
     &quot;assignee&quot;: &quot;AknasMacefg&quot;
   }
 }</component>
+<<<<<<< Updated upstream
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/AknasMacefg/ITiABD.git",
     "accountId": "243931b2-10ec-49e1-9bbe-1ee0e24d5ba6"
+=======
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AknasMacefg/ITiABD.git&quot;,
+    &quot;accountId&quot;: &quot;0078c5a2-48c6-4a45-b30f-b9ae9bd2e45b&quot;
+>>>>>>> Stashed changes
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -38,6 +59,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
@@ -52,13 +74,28 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexm/OneDrive/Рабочий стол/ИТиАБД/ITiABD/Java/Zadanie15&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+>>>>>>> Stashed changes
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.26775.15" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.26775.15" />
       </set>
     </attachedChunks>
   </component>
@@ -72,7 +109,12 @@
       <updated>1744144505974</updated>
       <workItem from="1744144507344" duration="2325000" />
       <workItem from="1746805649304" duration="113000" />
+<<<<<<< Updated upstream
       <workItem from="1757665857797" duration="26000" />
+=======
+      <workItem from="1758132337374" duration="18000" />
+      <workItem from="1758137152070" duration="6000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

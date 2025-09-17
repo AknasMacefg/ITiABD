@@ -1,4 +1,4 @@
-module org.calc.calc {
+module org.calc.demo {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -10,11 +10,7 @@ module org.calc.calc {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
-    requires org.apache.poi.ooxml;
-    requires spring.security.crypto;
-    requires com.fasterxml.jackson.databind;
-    requires java.sql;
 
-    opens org.calc.calc to javafx.fxml;
-    exports org.calc.calc;
+    opens org.calc.demo to javafx.fxml;
+    exports org.calc.demo;
 }
