@@ -49,9 +49,9 @@ class SQLManager {
      
                         CONSTRAINT fk_operations_user
                             FOREIGN KEY (user_id)
-                            REFERENCES users(id)
+                            REFERENCES %s.users(id)
                             ON DELETE CASCADE
-                    );""", schemaname));
+                    );""", schemaname, schemaname));
 
         } catch (SQLException e) {
             System.out.println("Не удалось подключиться к базе данных! " + e);

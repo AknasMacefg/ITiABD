@@ -28,6 +28,7 @@ public class CalcApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.setTitle(titleName);
+        stage.centerOnScreen();
         stage.show();
     }
 

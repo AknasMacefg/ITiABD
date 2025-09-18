@@ -1,41 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1"
-           fx:controller="org.calc.calc.MainController">
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.calc.calc.MainController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="0.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="0.0" SplitPane.resizableWithParent="false">
          <children>
-            <Button layoutX="26.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="235.0" text="Калькулятор по закону Ома" />
-            <Button layoutX="26.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="235.0" text="Калькулятор делителя напряжения" />
-            <Button layoutX="26.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="235.0" text="История операций" />
-            <Button layoutX="26.0" fx:id="ExitButton" onAction="#onExitButtonClick" layoutY="487.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="73.0" text="Выход" />
+            <Button fx:id="OmaCalcButton" layoutX="26.0" layoutY="24.0" mnemonicParsing="false" onAction="#onOmaCalcButtonClick" prefHeight="25.0" prefWidth="235.0" text="Калькулятор по закону Ома" />
+            <Button fx:id="ResistorsCalcButton" layoutX="26.0" layoutY="56.0" mnemonicParsing="false" onAction="#onResistorsCalcButtonClick" prefHeight="25.0" prefWidth="235.0" text="Калькулятор делителя напряжения" />
+            <Button fx:id="OperationsHistoryButton" layoutX="26.0" layoutY="89.0" mnemonicParsing="false" onAction="#onOperationsHistoryButtonClick" prefHeight="25.0" prefWidth="235.0" text="История операций" />
+            <Button fx:id="ExitButton" layoutX="26.0" layoutY="487.0" mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="47.0" prefWidth="73.0" text="Выход" />
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="690.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="690.0" SplitPane.resizableWithParent="false">
          <children>
-            <AnchorPane disable="true" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane fx:id="OmaCalc" prefHeight="548.0" prefWidth="698.0" visible="false">
                <children>
-                  <TableView layoutY="45.0" prefHeight="503.0" prefWidth="698.0">
+                  <ChoiceBox fx:id="VChoice" layoutX="192.0" layoutY="56.0" prefHeight="26.0" prefWidth="74.0" />
+                  <TextField fx:id="VField" layoutX="30.0" layoutY="57.0" />
+                  <Label layoutX="30.0" layoutY="20.0" text="Напряжение">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="AChoice" layoutX="192.0" layoutY="135.0" prefHeight="26.0" prefWidth="74.0" />
+                  <TextField fx:id="AField" layoutX="29.0" layoutY="136.0" />
+                  <Label layoutX="29.0" layoutY="100.0" text="Ток">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="OMChoice" layoutX="192.0" layoutY="214.0" prefHeight="26.0" prefWidth="74.0" />
+                  <TextField fx:id="OMField" layoutX="29.0" layoutY="215.0" />
+                  <Label layoutX="29.0" layoutY="179.0" text="Сопротивление">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Button onAction="#onProcessButtonClick" layoutX="29.0" layoutY="263.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" text="Расчитать" />
+                  <Button onAction="#onClearButtonClick" layoutX="164.0" layoutY="263.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" text="Очистить" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ResistorsCalc" layoutY="1.0" prefHeight="548.0" prefWidth="698.0" visible="false">
+               <children>
+                  <TextField layoutX="44.0" layoutY="66.0" />
+                  <TextField layoutX="43.0" layoutY="135.0" />
+                  <TextField layoutX="43.0" layoutY="205.0" />
+                  <TextField layoutX="43.0" layoutY="346.0" prefHeight="26.0" prefWidth="150.0" promptText="минимум" />
+                  <Button layoutX="36.0" layoutY="425.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="83.0" text="Расчитать" />
+                  <Button layoutX="135.0" layoutY="425.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="83.0" text="Очистить" />
+                  <AnchorPane layoutX="235.0" layoutY="14.0" prefHeight="529.0" prefWidth="459.0" />
+                  <ProgressBar layoutX="29.0" layoutY="494.0" prefWidth="200.0" progress="0.0" />
+                  <Label layoutX="44.0" layoutY="30.0" text="Vin">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="43.0" layoutY="99.0" text="Vrequired">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="43.0" layoutY="169.0" text="Отклонение">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox layoutX="44.0" layoutY="278.0" prefWidth="150.0" />
+                  <Label layoutX="43.0" layoutY="243.0" text="Ряд резисторов">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="42.0" layoutY="311.0" prefHeight="35.0" prefWidth="200.0" text="Диапазон значений">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="44.0" layoutY="384.0" promptText="максимум" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="OperationsHistory" prefHeight="548.0" prefWidth="698.0" visible="false">
+               <children>
+                  <TableView layoutY="107.0" prefHeight="441.0" prefWidth="698.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="75.0" text="C2" />
                     </columns>
                   </TableView>
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="548.0" prefWidth="698.0" />
-            <AnchorPane prefHeight="548.0" prefWidth="698.0">
-               <children>
-                  <TextField layoutX="14.0" layoutY="70.0" />
-                  <TextField layoutX="14.0" layoutY="125.0" />
-                  <TextField layoutX="14.0" layoutY="181.0" />
-                  <TextField layoutX="332.0" layoutY="125.0" />
                </children>
             </AnchorPane>
          </children></AnchorPane>
