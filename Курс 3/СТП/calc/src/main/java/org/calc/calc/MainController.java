@@ -1,25 +1,17 @@
 package org.calc.calc;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.io.IOException;
-import javafx.scene.control.Button;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MainController {
    static public String userLogin;
@@ -27,15 +19,6 @@ public class MainController {
 
     @FXML
     private Button ExitButton;
-
-    @FXML
-    private Button OmaCalcButton;
-
-    @FXML
-    private Button ResistorsCalcButton;
-
-    @FXML
-    private Button OperationsHistoryButton;
 
     @FXML
      private AnchorPane OmaCalc;
@@ -63,6 +46,12 @@ public class MainController {
 
     @FXML
     private TextField OMField;
+
+    @FXML
+    private TableView<TableModel> HistoryTable;
+
+    @FXML TextField searchField;
+
 
 
 
@@ -119,8 +108,96 @@ public class MainController {
         OmaCalc.setVisible(false);
         ResistorsCalc.setVisible(false);
         OperationsHistory.setVisible(true);
+        ObservableList<TableModel> data;
+        data = FXCollections.observableArrayList();
+
+        data.clear();
+        HistoryTable.getColumns().clear();
+
+        // Создаем колонки
+        TableColumn<TableModel, String> loginColumn = new TableColumn<>("Логин");
+        loginColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
+
+        TableColumn<TableModel, String> operationColumn = new TableColumn<>("Операция");
+        operationColumn.setCellValueFactory(new PropertyValueFactory<>("operation"));
+
+        TableColumn<TableModel, String> inputColumn = new TableColumn<>("Входные данные");
+        inputColumn.setCellValueFactory(new PropertyValueFactory<>("input"));
+
+        TableColumn<TableModel, String> outputColumn = new TableColumn<>("Результат");
+        outputColumn.setCellValueFactory(new PropertyValueFactory<>("output"));
+
+        TableColumn<TableModel, String> datetimeColumn = new TableColumn<>("Время выполнения");
+        datetimeColumn.setCellValueFactory(new PropertyValueFactory<>("datetime"));
+
+        HistoryTable.getColumns().addAll(loginColumn, operationColumn, inputColumn, outputColumn, datetimeColumn);
+
+        // Загружаем данные
+        ResultSet rs;
+        if (SQLManager.SQLQuerySelectReturner("SELECT role FROM " + SQLManager.schemaname +".users WHERE login = '"+userLogin+"'") == "admin"){
+            rs = SQLManager.SQLQueryRowSelect(String.format("""
+                SELECT
+                    u.login as login,
+                    o.operation_type,
+                    o.input_data,
+                    o.result,
+                    o.created_at
+                FROM %s.operations o
+                INNER JOIN %s.users u ON o.user_id = u.id
+                WHERE u.login = '%s';
+                """, SQLManager.schemaname, SQLManager.schemaname, userLogin));
+            if (rs == null) return;
+        }
+        else {
+            rs = SQLManager.SQLQueryRowSelect(String.format("""
+                SELECT
+                    u.login as login,
+                    o.operation_type,
+                    o.input_data,
+                    o.result,
+                    o.created_at
+                FROM %s.operations o
+                INNER JOIN %s.users u ON o.user_id = u.id;
+                """, SQLManager.schemaname, SQLManager.schemaname));
+            if (rs == null) return;
+        }
+
+
+        try {
+            do {
+                String login = rs.getString("login");
+                String operation = rs.getString("operation_type");
+                String input = rs.getString("input_data");
+                String output = rs.getString("result");
+                String datetime = rs.getString("created_at");
+
+                data.add(new TableModel(login, operation, input, output, datetime));
+            } while (rs.next());
+
+            HistoryTable.setItems(data);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.getStatement().close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    private void onUpdateButtonClick() throws IOException {
+        onOperationsHistoryButtonClick();
+    }
+
+    @FXML void onSearchButtonClick() throws IOException {
 
     }
+
 
     @FXML
     private void onClearButtonClick() throws IOException {

@@ -38,8 +38,8 @@
                         <Font size="23.0" />
                      </font>
                   </Label>
-                  <Button onAction="#onProcessButtonClick" layoutX="29.0" layoutY="263.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" text="Расчитать" />
-                  <Button onAction="#onClearButtonClick" layoutX="164.0" layoutY="263.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" text="Очистить" />
+                  <Button layoutX="29.0" layoutY="263.0" mnemonicParsing="false" onAction="#onProcessButtonClick" prefHeight="47.0" prefWidth="99.0" text="Расчитать" />
+                  <Button layoutX="164.0" layoutY="263.0" mnemonicParsing="false" onAction="#onClearButtonClick" prefHeight="47.0" prefWidth="99.0" text="Очистить" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="ResistorsCalc" layoutY="1.0" prefHeight="548.0" prefWidth="698.0" visible="false">
@@ -81,14 +81,13 @@
                   <TextField layoutX="44.0" layoutY="384.0" promptText="максимум" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="OperationsHistory" prefHeight="548.0" prefWidth="698.0" visible="false">
+            <AnchorPane fx:id="OperationsHistory" prefHeight="548.0" prefWidth="698.0">
                <children>
-                  <TableView layoutY="107.0" prefHeight="441.0" prefWidth="698.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
+                  <TableView fx:id="HistoryTable" layoutY="60.0" prefHeight="488.0" prefWidth="698.0">
                   </TableView>
+                  <TextField fx:id="searchField" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="548.0" promptText="Строка поиска" />
+                  <Button onAction="#onUpdateButtonClick" layoutX="620.0" layoutY="14.0" mnemonicParsing="false" text="🗘" />
+                  <Button onAction="#onSearchButtonClick" layoutX="578.0" layoutY="14.0" mnemonicParsing="false" text="🔍" />
                </children>
             </AnchorPane>
          </children></AnchorPane>

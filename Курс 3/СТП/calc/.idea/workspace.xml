@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39cd09dd-0135-42ab-a5f8-6e67734c9da2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/TableModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/SQLManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/SQLManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/calc/calc/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/calc/calc/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/MainController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/SQLManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/SQLManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/main-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +132,9 @@
       <workItem from="1758150251537" duration="220000" />
       <workItem from="1758184862578" duration="759000" />
       <workItem from="1758185637711" duration="1082000" />
-      <workItem from="1758186737137" duration="11565000" />
+      <workItem from="1758186737137" duration="12217000" />
+      <workItem from="1758265841475" duration="340000" />
+      <workItem from="1758266195481" duration="4843000" />
     </task>
     <servers />
   </component>

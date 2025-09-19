@@ -7,6 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 class SQLManager {
     protected static Connection conn;
@@ -111,6 +112,23 @@ class SQLManager {
         }catch (SQLException e){
             System.out.println("Ошибка синтаксиса. " + e);
             return "";
+        }
+    }
+
+    protected static ResultSet SQLQueryRowSelect(String query) {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int rowindex = 1;
+            if (!rs.next()) {
+                System.out.println("Не найдено результатов с таким запросом");
+                return null;
+            }
+            return rs;
+        }catch (SQLException e){
+            System.out.println("Ошибка синтаксиса. " + e);
+            return null;
         }
     }
 
