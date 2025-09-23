@@ -2,6 +2,7 @@ package org.calc.calc;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -50,7 +51,11 @@ public class MainController {
     @FXML
     private TableView<TableModel> HistoryTable;
 
-    @FXML TextField searchField;
+    @FXML
+    private TextField searchField;
+
+    ObservableList<TableModel> data;
+
 
 
 
@@ -108,7 +113,7 @@ public class MainController {
         OmaCalc.setVisible(false);
         ResistorsCalc.setVisible(false);
         OperationsHistory.setVisible(true);
-        ObservableList<TableModel> data;
+
         data = FXCollections.observableArrayList();
 
         data.clear();
@@ -132,7 +137,6 @@ public class MainController {
 
         HistoryTable.getColumns().addAll(loginColumn, operationColumn, inputColumn, outputColumn, datetimeColumn);
 
-        // Загружаем данные
         ResultSet rs;
         if (SQLManager.SQLQuerySelectReturner("SELECT role FROM " + SQLManager.schemaname +".users WHERE login = '"+userLogin+"'") == "admin"){
             rs = SQLManager.SQLQueryRowSelect(String.format("""
@@ -192,9 +196,34 @@ public class MainController {
     @FXML
     private void onUpdateButtonClick() throws IOException {
         onOperationsHistoryButtonClick();
+        searchField.setText("");
     }
 
-    @FXML void onSearchButtonClick() throws IOException {
+    @FXML
+    private void onSearchButtonClick() throws IOException {
+        FilteredList<TableModel> filteredData = new FilteredList<>(data, p -> true);
+        filteredData.setPredicate(TableModel -> {
+            if (searchField == null || searchField.getText().isEmpty()) {
+                return true;
+            }
+
+            String lowerCaseFilter = searchField.getText().toLowerCase(); 
+
+            if (TableModel.getLogin().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            } else if (TableModel.getOperation().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            } else if (TableModel.getInput().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            } else if (TableModel.getOutput().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            } else if (TableModel.getDatetime().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            }
+
+            return false; // No match
+        });
+        HistoryTable.setItems(filteredData); // Or tableView.setItems(sortedData);
 
     }
 
@@ -209,6 +238,8 @@ public class MainController {
         OMChoice.setValue(OMChoice.getItems().getFirst());
 
     }
+
+
 
     @FXML
     private void onProcessButtonClick() throws IOException {
@@ -281,6 +312,9 @@ public class MainController {
         }
 
     }
+
+
+
 
 
 }
