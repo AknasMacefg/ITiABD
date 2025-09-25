@@ -5,18 +5,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="365.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.calc.calc.LoginController">
+<AnchorPane prefHeight="365.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.calc.calc.LoginController">
    <children>
-      <Button fx:id="LoginButton" onAction="#onLoginButtonClick" layoutX="90.0" layoutY="247.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="86.0" text="Войти" />
+      <Button fx:id="LoginButton" layoutX="90.0" layoutY="247.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="44.0" prefWidth="86.0" text="Войти" />
       <TextField fx:id="LoginField" layoutX="55.0" layoutY="122.0" promptText="Логин" />
       <PasswordField fx:id="PassField" layoutX="55.0" layoutY="158.0" promptText="Пароль" />
-      <Hyperlink fx:id="RegLink" onAction="#onRegLinkClick" layoutX="52.0" layoutY="195.0" text="Регистрация" />
+      <Hyperlink fx:id="RegLink" layoutX="52.0" layoutY="195.0" onAction="#onRegLinkClick" text="Регистрация" />
       <Label layoutX="55.0" layoutY="45.0" text="КАЛЬКУЛЯТОР">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
+      <Label fx:id="warningLabel" layoutX="37.0" layoutY="96.0" text="Не правильный логин или пароль!" textFill="RED" visible="false" />
    </children>
    <opaqueInsets>
       <Insets />

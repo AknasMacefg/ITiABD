@@ -14,6 +14,7 @@ module org.calc.calc {
     requires spring.security.crypto;
     requires com.fasterxml.jackson.databind;
     requires java.sql;
+    requires org.apache.commons.validator;
 
     opens org.calc.calc to javafx.fxml;
     exports org.calc.calc;

@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +14,7 @@ import java.io.IOException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 
 public class MainController {
@@ -55,6 +57,36 @@ public class MainController {
     @FXML
     private TextField searchField;
 
+    @FXML
+    private TextField VinField;
+
+    @FXML
+    private TextField VrequiredField;
+
+    @FXML
+    private TextField differenceField;
+
+    @FXML
+    private TextField minField;
+
+    @FXML
+    private TextField maxField;
+
+    @FXML
+    private ChoiceBox<String>  typesBox;
+
+    @FXML
+    private Canvas drawCanvas;
+
+    @FXML
+    private TableView<DividerCalculator.Result> resultsTable;
+
+    @FXML
+    private Label resWarningLabel;
+
+    @FXML
+    private Label omWarningLabel;
+
     ObservableList<TableModel> data;
 
 
@@ -65,6 +97,11 @@ public class MainController {
     private void onExitButtonClick() throws IOException {
         Window window = ExitButton.getScene().getWindow();
         if (window instanceof Stage) {
+            SQLManager.SQLQueryCreate(String.format("""
+                            UPDATE %s.users 
+                            SET last_logoff_time = CURRENT_TIMESTAMP
+                            WHERE login = '%s'
+                            """, SQLManager.schemaname, userLogin));
             CalcApplication.window_swap("login-view.fxml", (Stage) window, "Вход");
             userLogin = null;
         }
@@ -105,6 +142,27 @@ public class MainController {
         OmaCalc.setVisible(false);
         ResistorsCalc.setVisible(true);
         OperationsHistory.setVisible(false);
+        if (typesBox.getItems().size() == 0) {
+            typesBox.getItems().addAll("E6", "E12", "E24", "E96");
+            typesBox.setValue(typesBox.getItems().getFirst());
+        }
+
+        TableColumn<DividerCalculator.Result, String> schemeCol = new TableColumn<>("Схема");
+        schemeCol.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().scheme));
+
+        TableColumn<DividerCalculator.Result, String> resistorsCol = new TableColumn<>("Резисторы");
+        resistorsCol.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().resistors.toString()));
+
+        TableColumn<DividerCalculator.Result, String> voutCol = new TableColumn<>("Vout");
+        voutCol.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(String.format("%.3f", c.getValue().vout)));
+
+        TableColumn<DividerCalculator.Result, String> errCol = new TableColumn<>("Ошибка %");
+        errCol.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(String.format("%.3f", c.getValue().errorPercent)));
+
+        if (resultsTable.getColumns().size() == 0){
+            resultsTable.getColumns().addAll(schemeCol, resistorsCol, voutCol, errCol);
+        }
+
 
 
     }
@@ -120,7 +178,6 @@ public class MainController {
         data.clear();
         HistoryTable.getColumns().clear();
 
-        // Создаем колонки
         TableColumn<TableModel, String> loginColumn = new TableColumn<>("Логин");
         loginColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
 
@@ -240,6 +297,65 @@ public class MainController {
 
     }
 
+    @FXML
+    private void onClearButtonClick2() throws IOException {
+        VinField.clear();
+        VrequiredField.clear();
+        differenceField.clear();
+        minField.clear();
+        maxField.clear();
+    }
+
+    @FXML
+    private void onProcessButtonClick2() throws IOException {
+
+        try {
+            double vin = Double.parseDouble(VinField.getText());
+            double vreq = Double.parseDouble(VrequiredField.getText());
+            double tol = Double.parseDouble(differenceField.getText());
+            double rmin = Double.parseDouble(minField.getText());
+            double rmax = Double.parseDouble(maxField.getText());
+            String series = typesBox.getValue();
+
+            List<DividerCalculator.Result> results = DividerCalculator.findSolutions(
+                    vin, vreq, tol, series, rmin, rmax
+            );
+            resWarningLabel.setVisible(false);
+            resultsTable.getItems().setAll(results);
+
+        } catch (Exception ex) {
+            resWarningLabel.setVisible(true);
+            resWarningLabel.setText("Введены неправильные данные!");
+        }
+    }
+
+    @FXML
+    private void resultsDrawOnClick() throws IOException {
+
+
+
+        DividerCalculator.Result res = resultsTable.getSelectionModel().getSelectedItem();
+        if (res != null) {
+            DividerDrawer.draw(drawCanvas, res);
+            SQLManager.SQLQueryCreate(String.format("""
+                    INSERT INTO %s.operations (user_id, operation_type, input_data, result)
+                    SELECT
+                        u.id,
+                        '%s',
+                        '%s',
+                        '%s'
+                    FROM %s.users u
+                    WHERE u.login = '%s';
+                    """,
+                    SQLManager.schemaname,
+                    "Калькулятор делителя напряжения",
+                    "{Vin: " + VinField.getText() + ", Vrequired: " + VrequiredField.getText() + ", err: " + differenceField.getText() + " %, min: " + minField.getText() + ", max: " + maxField.getText() + "}",
+                    "{scheme: " + res.scheme + ", resistors_numbers: " + res.resistors + ", Vout: "+ res.vout +", actual_err: "+ res.errorPercent + " %}",
+                    SQLManager.schemaname,
+                    userLogin));
+        }
+    }
+
 
 
     @FXML
@@ -248,7 +364,20 @@ public class MainController {
         String Atext = AField.getText();
         String OMtext = OMField.getText();
 
+
         if (Vtext.isEmpty() && !Atext.isEmpty() && !OMtext.isEmpty()) {
+
+            try {
+                Double.parseDouble(Atext);
+                Double.parseDouble(OMtext);
+            }
+            catch (NumberFormatException e) {
+                omWarningLabel.setVisible(true);
+                omWarningLabel.setText("Неправильный ввод данных!");
+                return;
+            }
+
+
             Vtext = CalcProcesses.VCalc(OMtext, Atext, OMChoice.getValue(), AChoice.getValue(), VChoice.getValue());
             VField.setText(Vtext);
             SQLManager.SQLQueryCreate(String.format("""
@@ -267,8 +396,23 @@ public class MainController {
                     "{U: " + Vtext + " " + VChoice.getValue()+"}",
                     SQLManager.schemaname,
                     userLogin));
+            omWarningLabel.setVisible(false);
 
-        } else if (!Vtext.isEmpty() && Atext.isEmpty() && !OMtext.isEmpty() && Double.parseDouble(OMtext) != 0) {
+        } else if (!Vtext.isEmpty() && Atext.isEmpty() && !OMtext.isEmpty()) {
+
+            try {
+                Double.parseDouble(Vtext);
+                Double.parseDouble(OMtext);
+                if (Double.parseDouble(OMtext) == 0) {
+                    throw new NumberFormatException("Делить на 0 нельзя!");
+                }
+            }
+            catch (NumberFormatException e) {
+                omWarningLabel.setVisible(true);
+                omWarningLabel.setText("Неправильный ввод данных!");
+                return;
+            }
+
             Atext = CalcProcesses.ACalc(Vtext, OMtext, OMChoice.getValue(), AChoice.getValue(), VChoice.getValue());
             AField.setText(Atext);
             SQLManager.SQLQueryCreate(String.format("""
@@ -287,8 +431,23 @@ public class MainController {
                     "{I: " + Atext + " " + AChoice.getValue() + "}",
                     SQLManager.schemaname,
                     userLogin));
+            omWarningLabel.setVisible(false);
 
-        } else if (!Vtext.isEmpty() && !Atext.isEmpty() && OMtext.isEmpty() && Double.parseDouble(Atext) != 0) {
+        } else if (!Vtext.isEmpty() && !Atext.isEmpty() && OMtext.isEmpty()) {
+
+            try {
+                Double.parseDouble(Vtext);
+                Double.parseDouble(Atext);
+                if (Double.parseDouble(Atext) == 0) {
+                    throw new NumberFormatException("Делить на 0 нельзя!");
+                }
+            }
+            catch (NumberFormatException e) {
+                omWarningLabel.setVisible(true);
+                omWarningLabel.setText("Неправильный ввод данных!");
+                return;
+            }
+
             OMtext = CalcProcesses.OMCalc(Vtext, Atext, OMChoice.getValue(), AChoice.getValue(), VChoice.getValue());
             OMField.setText(OMtext);
             SQLManager.SQLQueryCreate(String.format("""
@@ -307,8 +466,12 @@ public class MainController {
                     "{R: " + OMtext + " " + OMChoice.getValue()+"}",
                     SQLManager.schemaname,
                     userLogin));
+            omWarningLabel.setVisible(false);
         }
         else {
+
+            omWarningLabel.setVisible(true);
+            omWarningLabel.setText("Нужно заполнить не более и не менее двух полей!");
 
         }
 

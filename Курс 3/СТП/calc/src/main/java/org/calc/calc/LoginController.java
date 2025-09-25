@@ -2,6 +2,7 @@ package org.calc.calc;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -24,6 +25,9 @@ public class LoginController {
     private Button LoginButton;
 
     @FXML
+    private Label warningLabel;
+
+    @FXML
     protected void onLoginButtonClick() throws IOException {
 
         if (!LoginField.getText().isEmpty() && !PassField.getText().isEmpty()){
@@ -33,11 +37,26 @@ public class LoginController {
             if (!login.isEmpty() && passEncoder.matches(PassField.getText(), hashedPass)) {
                 Window window = LoginButton.getScene().getWindow();
                 if (window instanceof Stage) {
+                    SQLManager.SQLQueryCreate(String.format("""
+                            UPDATE %s.users 
+                            SET last_login_time = CURRENT_TIMESTAMP
+                            WHERE login = '%s'
+                     
+                            """, SQLManager.schemaname, login));
                     CalcApplication.window_swap("main-view.fxml", (Stage) window, "Калькулятор");
                     MainController.userLogin = login;
+                    warningLabel.setVisible(false);
                 }
 
             }
+            else {
+                warningLabel.setText("Неправильный логин или пароль!");
+                warningLabel.setVisible(true);
+            }
+        }
+        else {
+            warningLabel.setText("Введите логин и пароль!");
+            warningLabel.setVisible(true);
         }
     }
     @FXML

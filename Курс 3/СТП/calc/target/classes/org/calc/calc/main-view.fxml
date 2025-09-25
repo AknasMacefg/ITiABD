@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -40,18 +41,16 @@
                   </Label>
                   <Button layoutX="29.0" layoutY="263.0" mnemonicParsing="false" onAction="#onProcessButtonClick" prefHeight="47.0" prefWidth="99.0" text="Расчитать" />
                   <Button layoutX="164.0" layoutY="263.0" mnemonicParsing="false" onAction="#onClearButtonClick" prefHeight="47.0" prefWidth="99.0" text="Очистить" />
+                  <Label fx:id="omWarningLabel" layoutX="29.0" layoutY="328.0" prefHeight="70.0" prefWidth="235.0" textFill="RED" visible="false" wrapText="true" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="ResistorsCalc" layoutY="1.0" prefHeight="548.0" prefWidth="698.0">
+            <AnchorPane fx:id="ResistorsCalc" layoutY="1.0" prefHeight="548.0" prefWidth="698.0" visible="false">
                <children>
-                  <TextField layoutX="44.0" layoutY="66.0" />
-                  <TextField layoutX="43.0" layoutY="135.0" />
-                  <TextField layoutX="43.0" layoutY="205.0" />
-                  <TextField layoutX="43.0" layoutY="346.0" prefHeight="26.0" prefWidth="150.0" promptText="минимум" />
-                  <Button layoutX="36.0" layoutY="425.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="83.0" text="Расчитать" />
-                  <AnchorPane layoutX="235.0" layoutY="14.0" prefHeight="448.0" prefWidth="459.0" />
-                  <Button layoutX="558.0" layoutY="488.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="48.0" text="&lt;-" />
-                  <ProgressBar layoutX="29.0" layoutY="487.0" prefWidth="200.0" progress="0.0" />
+                  <TextField fx:id="VinField" layoutX="44.0" layoutY="66.0" />
+                  <TextField fx:id="VrequiredField" layoutX="43.0" layoutY="135.0" />
+                  <TextField fx:id="differenceField" layoutX="43.0" layoutY="205.0" />
+                  <TextField fx:id="minField" layoutX="43.0" layoutY="346.0" prefHeight="26.0" prefWidth="150.0" promptText="минимум" />
+                  <Button layoutX="36.0" layoutY="425.0" mnemonicParsing="false" onAction="#onProcessButtonClick2" prefHeight="47.0" prefWidth="83.0" text="Расчитать" />
                   <Label layoutX="44.0" layoutY="30.0" text="Vin">
                      <font>
                         <Font size="24.0" />
@@ -67,7 +66,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ChoiceBox layoutX="44.0" layoutY="278.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="typesBox" layoutX="44.0" layoutY="278.0" prefWidth="150.0" />
                   <Label layoutX="43.0" layoutY="243.0" text="Ряд резисторов">
                      <font>
                         <Font size="24.0" />
@@ -78,20 +77,16 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="44.0" layoutY="384.0" promptText="максимум" />
-                  <Button layoutX="614.0" layoutY="488.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="48.0" text="-&gt;" />
-                  <Label layoutX="259.0" layoutY="481.0" text="Vin: ">
+                  <TextField fx:id="maxField" layoutX="44.0" layoutY="384.0" promptText="максимум" />
+                  <Button layoutX="129.0" layoutY="425.0" mnemonicParsing="false" onAction="#onClearButtonClick2" prefHeight="47.0" prefWidth="83.0" text="Очистить" />
+                  <TableView fx:id="resultsTable" layoutX="236.0" layoutY="359.0" onMouseClicked="#resultsDrawOnClick" prefHeight="187.0" prefWidth="452.0" />
+                  <Canvas fx:id="drawCanvas" height="343.0" layoutX="236.0" layoutY="8.0" width="452.0" />
+                  <Label fx:id="resWarningLabel" layoutX="36.0" layoutY="480.0" prefHeight="53.0" prefWidth="186.0" textFill="RED" visible="false" wrapText="true" />
+                  <Label layoutX="194.0" layoutY="203.0" text="\%">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="259.0" layoutY="511.0" text="Погрешность:">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="605.0" layoutY="463.0" text="0/0" />
-                  <Button layoutX="129.0" layoutY="425.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="83.0" text="Очистить" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="OperationsHistory" prefHeight="548.0" prefWidth="698.0" visible="false">

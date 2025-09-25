@@ -32,6 +32,16 @@ public class CalcApplication extends Application {
         stage.show();
     }
 
+    @Override
+    public void stop() throws Exception {
+        if (SQLManager.conn != null && !SQLManager.conn.isClosed()) {
+            SQLManager.conn.close();
+            System.out.println("Подключение закрыто.");
+        }
+        super.stop();
+    }
+
+
     public static void main(String[] args) {
         launch();
     }
