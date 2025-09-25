@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class MainController {
    static public String userLogin;
@@ -76,23 +77,23 @@ public class MainController {
         OperationsHistory.setVisible(false);
         ObservableList<String> items = VChoice.getItems();
         if (items.size() == 0) {
-            items.add("В");
-            items.add("мВ");
+            items.add("В"); // 1
+            items.add("мВ"); // 0.001
             VChoice.setItems(items);
             VChoice.setValue(items.getFirst());
         }
         items = AChoice.getItems();
         if (items.size() == 0) {
-            items.add("А");
-            items.add("мА");
+            items.add("А"); // 1
+            items.add("мА"); // 0.001
             AChoice.setItems(items);
             AChoice.setValue(items.getFirst());
             items = OMChoice.getItems();
         }
         if (items.size() == 0) {
-            items.add("Ом");
-            items.add("кОм");
-            items.add("МОм");
+            items.add("Ом"); // 1
+            items.add("кОм"); // 1000
+            items.add("МОм"); // 1000000
             OMChoice.setItems(items);
             OMChoice.setValue(items.getFirst());
         }
@@ -138,7 +139,7 @@ public class MainController {
         HistoryTable.getColumns().addAll(loginColumn, operationColumn, inputColumn, outputColumn, datetimeColumn);
 
         ResultSet rs;
-        if (SQLManager.SQLQuerySelectReturner("SELECT role FROM " + SQLManager.schemaname +".users WHERE login = '"+userLogin+"'") == "admin"){
+        if (Objects.equals(SQLManager.SQLQuerySelectReturner("SELECT role FROM " + SQLManager.schemaname + ".users WHERE login = '" + userLogin + "'"), "user")){
             rs = SQLManager.SQLQueryRowSelect(String.format("""
                 SELECT
                     u.login as login,
@@ -248,7 +249,7 @@ public class MainController {
         String OMtext = OMField.getText();
 
         if (Vtext.isEmpty() && !Atext.isEmpty() && !OMtext.isEmpty()) {
-            Vtext = CalcProcesses.VCalc(OMtext, Atext);
+            Vtext = CalcProcesses.VCalc(OMtext, Atext, OMChoice.getValue(), AChoice.getValue(), VChoice.getValue());
             VField.setText(Vtext);
             SQLManager.SQLQueryCreate(String.format("""
                     INSERT INTO %s.operations (user_id, operation_type, input_data, result)
@@ -262,13 +263,13 @@ public class MainController {
                     """,
                     SQLManager.schemaname,
                     "Калькулятор по закону Ома",
-                    "{R: " + OMtext +", I: " + Atext + "}",
-                    "{U: " + Vtext + "}",
+                    "{R: " + OMtext +" "+OMChoice.getValue()+", I: " + Atext + " " + AChoice.getValue() + "}",
+                    "{U: " + Vtext + " " + VChoice.getValue()+"}",
                     SQLManager.schemaname,
                     userLogin));
 
         } else if (!Vtext.isEmpty() && Atext.isEmpty() && !OMtext.isEmpty() && Double.parseDouble(OMtext) != 0) {
-            Atext = CalcProcesses.ACalc(Vtext, OMtext);
+            Atext = CalcProcesses.ACalc(Vtext, OMtext, OMChoice.getValue(), AChoice.getValue(), VChoice.getValue());
             AField.setText(Atext);
             SQLManager.SQLQueryCreate(String.format("""
                     INSERT INTO %s.operations (user_id, operation_type, input_data, result)
@@ -282,13 +283,13 @@ public class MainController {
                     """,
                     SQLManager.schemaname,
                     "Калькулятор по закону Ома",
-                    "{U: " + Vtext +", R: " + OMtext + "}",
-                    "{I: " + Atext + "}",
+                    "{U: " + Vtext + " " + VChoice.getValue() + ", R: " + OMtext + " " + OMChoice.getValue() + "}",
+                    "{I: " + Atext + " " + AChoice.getValue() + "}",
                     SQLManager.schemaname,
                     userLogin));
 
         } else if (!Vtext.isEmpty() && !Atext.isEmpty() && OMtext.isEmpty() && Double.parseDouble(Atext) != 0) {
-            OMtext = CalcProcesses.OMCalc(Vtext, Atext);
+            OMtext = CalcProcesses.OMCalc(Vtext, Atext, OMChoice.getValue(), AChoice.getValue(), VChoice.getValue());
             OMField.setText(OMtext);
             SQLManager.SQLQueryCreate(String.format("""
                     INSERT INTO %s.operations (user_id, operation_type, input_data, result)
@@ -302,8 +303,8 @@ public class MainController {
                     """,
                     SQLManager.schemaname,
                     "Калькулятор по закону Ома",
-                    "{U: " + Vtext +", I: " + Atext + "}",
-                    "{R: " + OMtext + "}",
+                    "{U: " + Vtext + " " + VChoice.getValue() +", I: " + Atext + " " + AChoice.getValue() + "}",
+                    "{R: " + OMtext + " " + OMChoice.getValue()+"}",
                     SQLManager.schemaname,
                     userLogin));
         }
