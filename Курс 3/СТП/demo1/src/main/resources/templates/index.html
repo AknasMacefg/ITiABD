@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Today</title>
+</head>
+<body>
+<p>My First Spring boot Application</p>
+<h2>ИД23-1 Маслов АН</h2>
+<p> Today is: <span th:text="${today}"> </span></p>
+<table>
+    <thead>
+    <th>Name</th>
+    <th>Surname</th>
+    </thead>
+    <tr th:each="student:${students}">
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.surname}"></td>
+    </tr>
+</table>
+</body>
+</html>

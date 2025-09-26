@@ -5,26 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39cd09dd-0135-42ab-a5f8-6e67734c9da2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ИП/Источники ИП.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ИП/Источники ИП.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/RegController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/RegController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/VoltageDividerApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/calc/calc/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/calc/calc/login-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/calc/calc/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/calc/calc/main-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/calc/calc/reg-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/calc/calc/reg-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/CalcApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/CalcApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/RegController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/RegController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/login-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/main-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/reg-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/reg-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/DividerCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/DividerCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/DividerDrawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/DividerDrawer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/target/classes/module-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/target/classes/org/project/demo/HelloApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/target/classes/org/project/demo/HelloController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/target/classes/org/project/demo/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +41,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/AknasMacefg/ITiABD.git&quot;,
-    &quot;accountId&quot;: &quot;0078c5a2-48c6-4a45-b30f-b9ae9bd2e45b&quot;
+    &quot;accountId&quot;: &quot;243931b2-10ec-49e1-9bbe-1ee0e24d5ba6&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -174,6 +165,8 @@
       <workItem from="1758817776046" duration="15000" />
       <workItem from="1758817798123" duration="13936000" />
       <workItem from="1758838660782" duration="25000" />
+      <workItem from="1758869829786" duration="3145000" />
+      <workItem from="1758877252594" duration="15000" />
     </task>
     <servers />
   </component>

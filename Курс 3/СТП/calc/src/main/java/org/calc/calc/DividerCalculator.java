@@ -87,21 +87,17 @@ public class DividerCalculator {
             for (double r2 : values) {
                 for (double r3 : values) {
                     for (double r4 : values) {
-                        // series + series
                         checkAndAdd(results, "4R series top+bottom", List.of(r1, r2, r3, r4),
                                 vin, r1 + r2, r3 + r4, vRequired, tolerancePercent);
 
-                        // parallel top, series bottom
                         double rTopPar = 1.0 / (1.0 / r1 + 1.0 / r2);
                         checkAndAdd(results, "4R parallel top, series bottom", List.of(r1, r2, r3, r4),
                                 vin, rTopPar, r3 + r4, vRequired, tolerancePercent);
 
-                        // series top, parallel bottom
                         double rBotPar = 1.0 / (1.0 / r3 + 1.0 / r4);
                         checkAndAdd(results, "4R series top, parallel bottom", List.of(r1, r2, r3, r4),
                                 vin, r1 + r2, rBotPar, vRequired, tolerancePercent);
 
-                        // parallel + parallel
                         checkAndAdd(results, "4R parallel top+bottom", List.of(r1, r2, r3, r4),
                                 vin, rTopPar, rBotPar, vRequired, tolerancePercent);
                     }
