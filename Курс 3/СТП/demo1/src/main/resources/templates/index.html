@@ -9,12 +9,18 @@
 <p> Today is: <span th:text="${today}"> </span></p>
 <table>
     <thead>
-    <th>Name</th>
-    <th>Surname</th>
+    <th>Id</th>
+    <th>Owner_name</th>
+    <th>Petname</th>
+    <th>Species</th>
     </thead>
-    <tr th:each="student:${students}">
-        <td th:text="${student.name}"></td>
-        <td th:text="${student.surname}"></td>
+    <tr th:each="pet:${pets}">
+        <td th:text="${pet.id}"></td>
+        <td th:text="${pet.owner_name}"></td>
+        <td th:text="${pet.petname}"></td>
+        <td th:text="${pet.species}"></td>
+        <td> <button>ttt</button></td>
+        <td> <button>ttt</button></td>
     </tr>
 </table>
 </body>

@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.time.LocalDateTime;
 
 @Controller
-public class StudentController {
+public class PetController {
     @Autowired
-    private StudentService studentService;
+    private PetService petService;
 
     @GetMapping("/")
     String index(Model model){
         model.addAttribute("today", LocalDateTime.now().getDayOfWeek());
-        model.addAttribute("students", studentService.getAllStudents());
+        model.addAttribute("pets", petService.getAllPets());
         return "index";
     }
 }

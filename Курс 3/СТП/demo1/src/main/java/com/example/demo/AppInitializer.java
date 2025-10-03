@@ -7,16 +7,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppInitializer {
     @Autowired
-    private StudentService studentService;
+    private PetService petService;
 
     @PostConstruct
     void init() {
-        if (studentService.isEmpty())
+        if (petService.isEmpty())
         {
-            Student student = new Student();
-            student.setName("Alex");
-            student.setSurname("Mas");
-            studentService.addStudent(student);
+            Pet pet = new Pet();
+            pet.setOwner_name("Alex");
+            pet.setPetname("Murzik");
+            pet.setSpecies("Siberian cat");
+            petService.addPet(pet);
         }
     }
 }
