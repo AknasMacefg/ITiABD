@@ -1,0 +1,79 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: inherit;
+    position: relative;
+    display: flex;
+    min-width: 800px;
+    margin: 0;
+}
+
+.body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.30);
+}
+
+.video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.title {
+    width: 739px;
+    height: 408px;
+    margin: 60px auto 0;
+    z-index: 1;
+    font-family: Raleway, serif;
+    font-size: 116px;
+    font-weight: 800;
+    letter-spacing: 4.06px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.title:after {
+    content: "*";
+    position: relative;
+}
+
+.title:hover {
+    color: #4C4C4C;
+    cursor: default;
+}
+
+.title:hover::before {
+    content: "На самом деле нет.\AВажнеe - научиться ошибаться.";
+    position: absolute;
+    top: 180px;
+    right: 20px;
+    max-width: 760px;
+    border: 2px solid #000;
+    border-radius: 20px;
+    padding: 36px 44px;
+    box-shadow: 0 12px 0 #000;
+    color: #000;
+    font-family: Raleway, sans-serif;
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: normal;
+    white-space: pre;
+    background-color: #FFF;
+    text-align: left;
+    text-transform: initial;
+}
