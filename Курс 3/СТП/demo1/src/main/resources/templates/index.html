@@ -6,7 +6,7 @@
 <body>
 <p>My First Spring boot Application</p>
 <h2>ИД23-1 Маслов АН</h2>
-<p> Today is: <span th:text="${today}"> </span></p>
+<p> Today is: <span th:text="${pets}"> </span></p>
 <table>
     <thead>
     <th>Id</th>
@@ -15,13 +15,14 @@
     <th>Species</th>
     </thead>
     <tr th:each="pet:${pets}">
-        <td th:text="${pet.id}"></td>
-        <td th:text="${pet.owner_name}"></td>
-        <td th:text="${pet.petname}"></td>
-        <td th:text="${pet.species}"></td>
-        <td> <button>ttt</button></td>
-        <td> <button>ttt</button></td>
+        <td><fieldset><input type="number" th:value="${pet.id}"></fieldset></td>
+        <td><fieldset><input type="text" th:value="${pet.owner_name}"></fieldset></td>
+        <td><fieldset><input type="text" th:value="${pet.petname}"></fieldset></td>
+        <td><fieldset><input type="text" th:value="${pet.species}"></fieldset></td>
+        <td> <a th:href="@{/update/{id}(id=${pet.id}, owner_name=${pet.owner_name}, petname=${pet.petname}, species=${pet.species})}">Change</a></td>
+        <td> <a th:href="@{/delete/{id}(id=${pet.id})}">Delete</a></td>
     </tr>
 </table>
+<a th:href="@{/add}">New pet</a>
 </body>
 </html>

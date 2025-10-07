@@ -11,13 +11,26 @@ public class PetService {
     private PetRepository petRepository;
     List<Pet> getAllPets()
     {
+
         return petRepository.findAll();
     }
     boolean isEmpty(){
         return petRepository.count() == 0;
     }
 
-    public void addPet(Pet student) {
-        petRepository.save(student);
+    public void deletePet(Long petId) {
+        petRepository.delete(petRepository.findById(petId).get());
+    }
+
+    public void addPet(Pet pet) {
+        petRepository.save(pet);
+    }
+
+    public void updatePet(long petId, String owner_name, String petname, String species) {
+        Pet pet = petRepository.findById(petId).get();
+        pet.setOwner_name(owner_name);
+        pet.setPetname(petname);
+        pet.setSpecies(species);
+        petRepository.save(pet);
     }
 }
