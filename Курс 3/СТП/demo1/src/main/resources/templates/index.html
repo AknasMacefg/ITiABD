@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Today</title>
+    <title>My First Spring boot Application</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/style.css" th:href="@{/styles/style.css}">
 </head>
 <body>
-<p>My First Spring boot Application</p>
-<h2>ИД23-1 Маслов АН</h2>
-<p> Today is: <span th:text="${pets}"> </span></p>
-<table>
-    <thead>
+<div class="header">
+    <h1>My First Spring boot Application</h1>
+</div>
+<div class="header">
+    <h2>ИД23-1 Маслов АН</h2>
+</div>
+<table class="database-table">
+    <thead class="database-table-headers">
     <th>Id</th>
-    <th>Owner_name</th>
-    <th>Petname</th>
-    <th>Species</th>
+    <th>Имя владельца</th>
+    <th>Имя питомца</th>
+    <th>Вид питомца</th>
     </thead>
-    <tr th:each="pet:${pets}">
+    <tr th:each="pet:${pets}" class="database-table-rows">
         <th:block th:if="${pet.id == updatingId}">
-            <td colspan="4">
-                <form th:action="@{/save}" th:object="${pet}" method="post">
+            <td colspan="6" class="database-table-td_edit">
+                <form th:action="@{/save}" th:object="${pet}" method="post" class="database-table-edit_form">
                     <input type="number" readonly placeholder="Id" th:field="*{id}">
                     <input type="text" required placeholder="Имя владельца" th:field="*{owner_name}">
                     <input type="text" required placeholder="Имя питомца" th:field="*{petname}">
                     <input type="text" required placeholder="Вид питомца" th:field="*{species}">
-                    <button type="submit" onclick="return confirm('Вы уверены?')">Save</button>
-                    <a th:href="@{/}">Cancel</a>
+                    <button type="submit" onclick="return confirm('Вы уверены?')" class="database-table-button">Сохранить</button>
+                    <a th:href="@{/}" >
+                        <div class="database-table-button">
+                            Отмена
+                        </div>
+                    </a>
                 </form>
             </td>
         </th:block>
@@ -32,12 +40,29 @@
             <td><fieldset><input type="text" readonly placeholder="Имя владельца" th:value="${pet.owner_name}"></fieldset></td>
             <td><fieldset><input type="text" readonly placeholder="Имя питомца" th:value="${pet.petname}"></fieldset></td>
             <td><fieldset><input type="text" readonly placeholder="Вид питомца" th:value="${pet.species}"></fieldset></td>
-            <td><a th:href="@{/edit/{id}(id=${pet.id})}">Edit</a></td>
-            <td><a th:href="@{/delete/{id}(id=${pet.id})}" onclick="return confirm('Вы уверены?')">Delete</a></td>
+            <td>
+                <a th:href="@{/edit/{id}(id=${pet.id})}" class="database-table-button">
+                    <div >
+                        Изменить
+                    </div>
+                </a>
+
+            </td>
+            <td>
+                <a th:href="@{/delete/{id}(id=${pet.id})}" onclick="return confirm('Вы уверены?')" class="database-table-button">
+                    <div >
+                        Удалить
+                    </div>
+                </a>
+            </td>
         </th:block>
 
     </tr>
 </table>
-<a th:href="@{/add}">New pet</a>
+<a th:href="@{/add}" class="database-table-new_row">
+    <div >
+        Новая строка
+    </div>
+</a>
 </body>
 </html>
