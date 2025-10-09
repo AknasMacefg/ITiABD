@@ -15,12 +15,27 @@
     <th>Species</th>
     </thead>
     <tr th:each="pet:${pets}">
-        <td><fieldset><input type="number" th:value="${pet.id}"></fieldset></td>
-        <td><fieldset><input type="text" th:value="${pet.owner_name}"></fieldset></td>
-        <td><fieldset><input type="text" th:value="${pet.petname}"></fieldset></td>
-        <td><fieldset><input type="text" th:value="${pet.species}"></fieldset></td>
-        <td> <a th:href="@{/update/{id}(id=${pet.id}, owner_name=${pet.owner_name}, petname=${pet.petname}, species=${pet.species})}">Change</a></td>
-        <td> <a th:href="@{/delete/{id}(id=${pet.id})}">Delete</a></td>
+        <th:block th:if="${pet.id == updatingId}">
+            <td colspan="4">
+                <form th:action="@{/save}" th:object="${pet}" method="post">
+                    <input type="number" readonly placeholder="Id" th:field="*{id}">
+                    <input type="text" required placeholder="Имя владельца" th:field="*{owner_name}">
+                    <input type="text" required placeholder="Имя питомца" th:field="*{petname}">
+                    <input type="text" required placeholder="Вид питомца" th:field="*{species}">
+                    <button type="submit" onclick="return confirm('Вы уверены?')">Save</button>
+                    <a th:href="@{/}">Cancel</a>
+                </form>
+            </td>
+        </th:block>
+        <th:block th:if="${pet.id != updatingId}">
+            <td><fieldset><input type="number" readonly placeholder="Id" th:value="${pet.id}"></fieldset></td>
+            <td><fieldset><input type="text" readonly placeholder="Имя владельца" th:value="${pet.owner_name}"></fieldset></td>
+            <td><fieldset><input type="text" readonly placeholder="Имя питомца" th:value="${pet.petname}"></fieldset></td>
+            <td><fieldset><input type="text" readonly placeholder="Вид питомца" th:value="${pet.species}"></fieldset></td>
+            <td><a th:href="@{/edit/{id}(id=${pet.id})}">Edit</a></td>
+            <td><a th:href="@{/delete/{id}(id=${pet.id})}" onclick="return confirm('Вы уверены?')">Delete</a></td>
+        </th:block>
+
     </tr>
 </table>
 <a th:href="@{/add}">New pet</a>

@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.time.LocalDateTime;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PetController {
@@ -14,10 +14,9 @@ public class PetController {
     private PetService petService;
 
     @GetMapping("/")
-    String index(Model model){
-        model.addAttribute("today", LocalDateTime.now().getDayOfWeek());
+    String index(Model model) {
         model.addAttribute("pets", petService.getAllPets());
-        model.addAttribute("changePet", new Pet());
+        model.addAttribute("pet", new Pet());
         return "index";
     }
 
@@ -28,19 +27,29 @@ public class PetController {
     }
 
     @GetMapping("/add")
-    public String addPet() {
+    public String addPet(Model model) {
         Pet pet = new Pet();
         pet.setOwner_name("Alex");
         pet.setPetname("Murzik");
-        pet.setSpecies("Siberian cat");
+        pet.setSpecies("Cat");
+        petService.addPet(pet);
+        model.addAttribute("pets", petService.getAllPets());
+        model.addAttribute("pet", petService.getPetById(pet.getId()));
+        model.addAttribute("updatingId", pet.getId());
+        return "index";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPet(@PathVariable long id, Model model) {
+        model.addAttribute("pets", petService.getAllPets());
+        model.addAttribute("pet", petService.getPetById(id));
+        model.addAttribute("updatingId", id);
+        return "index";
+    }
+
+    @PostMapping("/save")
+    public String savePet(@ModelAttribute Pet pet) {
         petService.addPet(pet);
         return "redirect:/";
     }
-
-    @GetMapping("/update/{id}")
-    public String addPet(@PathVariable long id, String owner_name, String petname, String species) {
-        petService.updatePet(id, owner_name, petname, species);
-        return "redirect:/";
-    }
-
 }

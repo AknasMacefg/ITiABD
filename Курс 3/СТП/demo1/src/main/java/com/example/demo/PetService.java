@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +9,7 @@ import java.util.*;
 
 @Service
 public class PetService {
+    private static final Logger log = LoggerFactory.getLogger(PetService.class);
     @Autowired
     private PetRepository petRepository;
     List<Pet> getAllPets()
@@ -14,23 +17,21 @@ public class PetService {
 
         return petRepository.findAll();
     }
+
+    public Pet getPetById(long id) {
+        return petRepository.findById(id).get();
+    }
     boolean isEmpty(){
         return petRepository.count() == 0;
     }
+
 
     public void deletePet(Long petId) {
         petRepository.delete(petRepository.findById(petId).get());
     }
 
     public void addPet(Pet pet) {
-        petRepository.save(pet);
-    }
-
-    public void updatePet(long petId, String owner_name, String petname, String species) {
-        Pet pet = petRepository.findById(petId).get();
-        pet.setOwner_name(owner_name);
-        pet.setPetname(petname);
-        pet.setSpecies(species);
+        System.out.println(pet.getId() + " " + pet.getOwner_name());
         petRepository.save(pet);
     }
 }
