@@ -34,6 +34,7 @@ h1, h2 {
     max-height: 500px;
     background-color: darkblue;
     overflow-y: scroll;
+    table-layout: fixed
 
 }
 
@@ -50,9 +51,9 @@ h1, h2 {
     background-color: cornflowerblue;
     color: white;
     height: 50px;
-    width: 200px;
-}
+    max-width: 100%;
 
+}
 input {
     background-color: darkblue;
     color: white;
@@ -75,7 +76,7 @@ input {
 th {
     margin: 0;
     padding: 0;
-    min-width: 211px;
+    width: 205px;
 }
 
 .database-table-new_row {
@@ -92,8 +93,8 @@ th {
 
 .database-table-edit_form {
     display: grid;
-    width: 1062px;
-    grid-template-columns: 20% 20% 20% 20% 10% 10%;
+    width: 100%;
+    grid-template-columns: 205px 205px 205px 205px 133px 133px;
     margin: 0;
     padding: 0;
     align-items: center;
@@ -103,5 +104,17 @@ th {
 
 .database-table-td_edit {
     background-color: lightblue;
+}
+
+td {
+    width: 211px;
+}
+
+.database-table-button:hover {
+    text-decoration: underline;
+}
+
+.database-table-button:active {
+    background-color: blue;
 }
 
