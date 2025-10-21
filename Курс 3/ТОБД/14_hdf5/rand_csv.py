@@ -1,7 +1,8 @@
 import random
 import time
 
-def rand_csv(length, pos, time_start, time_end, output): #генератор случайно даты и числа
+#генератор случайной даты и числа
+def rand_csv(length, pos, time_start, time_end, output): 
     csv_rows = []
     for i in range(length):
         stime = time.mktime(time.strptime(time_start, '%m/%d/%Y %I:%M %p'))
