@@ -13,7 +13,7 @@ public class UserService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserRepository userRepository;
-    public List<User> getAllPets()
+    public List<User> getAllUsers()
     {
         return userRepository.findAll();
     }
@@ -21,16 +21,17 @@ public class UserService {
     public User getUserById(long id) {
         return userRepository.findById(id).get();
     }
+    public boolean existsUserByEmail (String email) { return userRepository.existsByEmail(email); }
     public boolean isEmpty(){
         return userRepository.count() == 0;
     }
 
 
-    public void deletePet(Long petId) {
+    public void deleteUser(Long petId) {
         userRepository.delete(userRepository.findById(petId).get());
     }
 
-    public void addPet(User user) {
+    public void addUser(User user) {
         System.out.println(user.getId());
         userRepository.save(user);
     }

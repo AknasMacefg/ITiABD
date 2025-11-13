@@ -2,11 +2,13 @@ package com.example.demo.config;
 
 import jakarta.annotation.PostConstruct;
 import com.example.demo.models.Pet;
+import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.example.demo.services.PetService;
 import com.example.demo.services.UserService;
+import com.example.demo.models.Role;
 
 
 @Component
@@ -17,7 +19,7 @@ public class AppInitializer {
 
     /** Репозиторий пользователей. */
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     /** Кодировщик паролей, используемый для безопасного хранения паролей. */
     @Autowired
@@ -34,7 +36,7 @@ public class AppInitializer {
         createUserIfNotExists("superadmin@example.com", "password", Role.SUPER_ADMIN);
         createUserIfNotExists("admin@example.com", "password", Role.ADMIN);
         createUserIfNotExists("user@example.com", "password", Role.USER);
-        createStudentsIfEmpty();
+        createPetsIfEmpty();
     }
 
     /**
@@ -48,18 +50,17 @@ public class AppInitializer {
      * @param role        роль пользователя (например, {@link Role#ADMIN})
      */
     private void createUserIfNotExists(String email, String rawPassword, Role role) {
-        if (!userRepository.existsByEmail(email)) {
+        if (!userService.existsUserByEmail(email)) {
             User user = new User();
             user.setEmail(email);
             user.setPassword(passwordEncoder.encode(rawPassword));
             user.setRole(role);
-            userRepository.save(user);
+            userService.addUser(user);
             System.out.println("Создан пользователь " + role + ": " + email);
         }
     }
 
-    @PostConstruct
-    void init() {
+    private  void createPetsIfEmpty() {
         if (petService.isEmpty())
         {
             Pet pet = new Pet();
@@ -69,4 +70,5 @@ public class AppInitializer {
             petService.addPet(pet);
         }
     }
+
 }
