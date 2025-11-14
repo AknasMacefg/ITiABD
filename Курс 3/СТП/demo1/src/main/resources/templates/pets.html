@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="ru">
 <head>
     <title>My First Spring boot Application</title>
     <link rel="stylesheet" type="text/css" media="all" href="../static/styles/style.css" th:href="@{/styles/style.css}">
@@ -11,6 +13,7 @@
 <div class="header">
     <h2>ИД23-1 Маслов АН</h2>
 </div>
+
 <table class="database-table">
     <thead class="database-table-headers">
     <th>Id</th>
@@ -41,7 +44,7 @@
             <td><fieldset><input type="text" readonly placeholder="Имя питомца" th:value="${pet.petname}"></fieldset></td>
             <td><fieldset><input type="text" readonly placeholder="Вид питомца" th:value="${pet.species}"></fieldset></td>
             <td>
-                <a th:href="@{/edit/{id}(id=${pet.id})}" class="database-table-button">
+                <a sec:authorize="hasAnyRole('ADMIN', 'SUPER_ADMIN')" th:href="@{/edit/{id}(id=${pet.id})}" class="database-table-button">
                     <div >
                         Изменить
                     </div>
@@ -49,7 +52,7 @@
 
             </td>
             <td>
-                <a th:href="@{/delete/{id}(id=${pet.id})}" onclick="return confirm('Вы уверены?')" class="database-table-button">
+                <a sec:authorize="hasAnyRole('ADMIN', 'SUPER_ADMIN')" th:href="@{/delete/{id}(id=${pet.id})}" onclick="return confirm('Вы уверены?')" class="database-table-button">
                     <div >
                         Удалить
                     </div>
@@ -59,10 +62,12 @@
 
     </tr>
 </table>
-<a th:href="@{/add}" class="database-table-new_row database-table-button">
+<a sec:authorize="hasAnyRole('ADMIN', 'SUPER_ADMIN')" th:href="@{/add}" class="database-table-new_row database-table-button">
     <div >
         Новая строка
     </div>
 </a>
+
+<a th:href="@{/logout}">Выйти</a>
 </body>
 </html>

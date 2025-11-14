@@ -48,7 +48,7 @@ public class AuthController {
             return "redirect:/login";
         } else {
             model.addAttribute("error", "Пользователь с таким адресом уже существует");
-            return "register";
+            return "redirect:/register?error";
         }
     }
 

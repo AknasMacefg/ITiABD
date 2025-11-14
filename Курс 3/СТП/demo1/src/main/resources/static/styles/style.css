@@ -118,3 +118,14 @@ td {
     background-color: blue;
 }
 
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.alert {
+    color: red;
+    font-size: 20px;
+    padding: 5px;
+}

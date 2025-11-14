@@ -68,6 +68,7 @@ public class AppInitializer {
             pet.setPetname("Murzik");
             pet.setSpecies("Siberian cat");
             petService.addPet(pet);
+            System.out.println("Созданы тестовые записи питомцев.");
         }
     }
 

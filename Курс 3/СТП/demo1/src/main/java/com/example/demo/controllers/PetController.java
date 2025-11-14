@@ -15,17 +15,17 @@ public class PetController {
     @Autowired
     private PetService petService;
 
-    @GetMapping("/")
+    @GetMapping("/pets")
     String index(Model model) {
         model.addAttribute("pets", petService.getAllPets());
         model.addAttribute("pet", new Pet());
-        return "index";
+        return "pets";
     }
 
     @GetMapping("/delete/{id}")
     public String deletePet(@PathVariable long id) {
         petService.deletePet(id);
-        return "redirect:/";
+        return "redirect:/pets";
     }
 
     @GetMapping("/add")
@@ -38,7 +38,7 @@ public class PetController {
         model.addAttribute("pets", petService.getAllPets());
         model.addAttribute("pet", petService.getPetById(pet.getId()));
         model.addAttribute("updatingId", pet.getId());
-        return "index";
+        return "pets";
     }
 
     @GetMapping("/edit/{id}")
@@ -46,12 +46,12 @@ public class PetController {
         model.addAttribute("pets", petService.getAllPets());
         model.addAttribute("pet", petService.getPetById(id));
         model.addAttribute("updatingId", id);
-        return "index";
+        return "pets";
     }
 
     @PostMapping("/save")
     public String savePet(@ModelAttribute Pet pet) {
         petService.addPet(pet);
-        return "redirect:/";
+        return "redirect:/pets";
     }
 }
