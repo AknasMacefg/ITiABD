@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.demo1fx.PetController"
+      spacing="10" style="-fx-padding: 10;">
+
+    <Label text="Управление питомцами" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10" style="-fx-padding: 10 0 10 0;">
+        <VBox spacing="5">
+            <Label text="Владелец:"/>
+            <TextField fx:id="ownerNameField" promptText="Введите имя владельца"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Имя питомца:"/>
+            <TextField fx:id="petNameField" promptText="Введите имя питомца"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Вид:"/>
+            <TextField fx:id="speciesField" promptText="Введите вид питомца"/>
+        </VBox>
+
+        <VBox spacing="5" style="-fx-padding: 15 0 0 0;">
+            <Button text="Добавить" onAction="#handleAddPet" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+            <Button text="Обновить" onAction="#handleUpdatePet" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+            <Button text="Удалить" onAction="#handleDeletePet" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+            <Button text="Обновить" onAction="#handleRefresh" style="-fx-background-color: #FF9800; -fx-text-fill: white;"/>
+            <Button text="Очистить" onAction="#handleClear" style="-fx-background-color: #9E9E9E; -fx-text-fill: white;"/>
+        </VBox>
+    </HBox>
+
+    <TableView fx:id="petTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" fx:id="idColumn" prefWidth="50"/>
+            <TableColumn text="Владелец" fx:id="ownerNameColumn" prefWidth="150"/>
+            <TableColumn text="Имя питомца" fx:id="petNameColumn" prefWidth="150"/>
+            <TableColumn text="Вид" fx:id="speciesColumn" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <Label fx:id="statusLabel" text="Готово"/>
+</VBox>

@@ -16,7 +16,6 @@ public class PetService {
     private PetRepository petRepository;
     public List<Pet> getAllPets()
     {
-
         return petRepository.findAll();
     }
 
@@ -32,8 +31,9 @@ public class PetService {
         petRepository.delete(petRepository.findById(petId).get());
     }
 
-    public void addPet(Pet pet) {
+    public Pet addPet(Pet pet) {
         System.out.println(pet.getId() + " " + pet.getOwner_name());
         petRepository.save(pet);
+        return pet;
     }
 }

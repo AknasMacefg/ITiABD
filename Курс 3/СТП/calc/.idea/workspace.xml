@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39cd09dd-0135-42ab-a5f8-6e67734c9da2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../demo1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../demo1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo1/src/main/java/com/example/demo/config/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../demo1/src/main/java/com/example/demo/config/AppInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo1/src/main/java/com/example/demo/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../demo1/src/main/java/com/example/demo/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo1/src/main/java/com/example/demo/services/PetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../demo1/src/main/java/com/example/demo/services/PetService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,12 +28,12 @@
     &quot;assignee&quot;: &quot;AknasMacefg&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/AknasMacefg/ITiABD.git",
-    "accountId": "243931b2-10ec-49e1-9bbe-1ee0e24d5ba6"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AknasMacefg/ITiABD.git&quot;,
+    &quot;accountId&quot;: &quot;243931b2-10ec-49e1-9bbe-1ee0e24d5ba6&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/target/classes/org/calc/calc/SQLManager.class" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -162,6 +160,7 @@
       <workItem from="1759475268866" duration="3453000" />
       <workItem from="1760031364870" duration="751000" />
       <workItem from="1763104736535" duration="237000" />
+      <workItem from="1763713885382" duration="464000" />
     </task>
     <servers />
   </component>

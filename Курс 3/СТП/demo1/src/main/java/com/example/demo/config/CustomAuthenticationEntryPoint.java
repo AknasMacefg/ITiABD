@@ -43,12 +43,12 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
                          AuthenticationException authException)
             throws IOException {
 
-        if (request.getRequestURI().startsWith("/api/")) {
+        /* if (request.getRequestURI().startsWith("/api/")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.getWriter().write("{\"error\": \"Unauthorized\"}");
         } else {
             response.sendRedirect("/login");
-        }
+        } */
     }
 }
