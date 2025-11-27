@@ -3,23 +3,21 @@ package mas.curs.infsys.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "series")
-public class Series {
-
+@Table(name = "genres")
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, unique = true)
+    @Column (nullable = false, unique = true)
     private String name;
 
     @Column
     private String description;
 
-    public Series() {}
+    public Genre() {}
 
-    public Series(String name, String description) {
-
+    public Genre(String name, String description) {
         this.name = name;
         this.description = description;
     }
