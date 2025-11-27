@@ -61,11 +61,6 @@ public class PetController implements Initializable {
             if (pets != null) {
                 petData.addAll(pets);
                 statusLabel.setText("Загружено " + petData.size() + " питомцев");
-
-                // Проверяем ID у загруженных питомцев
-                for (Pet pet : pets) {
-                    System.out.println("Loaded pet - ID: " + pet.getId() + ", Name: " + pet.getPetName());
-                }
             }
         } catch (Exception e) {
             statusLabel.setText("Ошибка загрузки данных");
@@ -92,20 +87,14 @@ public class PetController implements Initializable {
     @FXML
     private void handleAddPet() {
         if (isInputValid()) {
-            // Создаем нового питомца (без ID - он будет сгенерирован на сервере)
             Pet newPet = new Pet(
                     ownerNameField.getText().trim(),
                     petNameField.getText().trim(),
                     speciesField.getText().trim()
             );
-
-            System.out.println("Adding new pet - Before API call - ID: " + newPet.getId());
-
-            // Отправляем на сервер и получаем обратно объект с ID
             Pet createdPet = petService.createPet(newPet);
 
             if (createdPet != null && createdPet.getId() != null) {
-                System.out.println("Added new pet - After API call - ID: " + createdPet.getId());
                 petData.add(createdPet);
                 statusLabel.setText("Питомец успешно добавлен (ID: " + createdPet.getId() + ")");
                 clearFields();

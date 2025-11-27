@@ -4,6 +4,7 @@ import com.example.demo.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -56,17 +58,30 @@ public class SecurityConfig {
      * @return настроенная цепочка {@link SecurityFilterChain}
      * @throws Exception если произошла ошибка конфигурации
      */
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Order(1)
+    public SecurityFilterChain apiSecurity(HttpSecurity http) throws Exception {
         http
-                .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint(authEntryPoint)
-                        .accessDeniedHandler(accessDeniedHandler)
-                )
+                .securityMatcher("/api/**")   // применяется только к API
+                .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/register", "/api/auth/**", "/h2-console/**", "/styles/style.css").permitAll()
-                        .requestMatchers("/api/pets").hasAnyRole("USER", "ADMIN", "SUPER_ADMIN")
-                        .requestMatchers("/api/pets/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
+                        .anyRequest().permitAll()  // ВСЁ API открыто
+                );
+
+        return http.build();
+    }
+
+    @Bean
+    @Order(2)
+    public SecurityFilterChain webSecurity(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login", "/register", "/styles/**", "/h2-console/**")
+                        .permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -83,6 +98,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 
     /**
      * Регистрирует кодировщик паролей, использующий алгоритм BCrypt.

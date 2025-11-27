@@ -12,7 +12,7 @@ public class PetFXApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(PetFXApplication.class.getResource("pet-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        primaryStage.setTitle("Pet Management Client");
+        primaryStage.setTitle("Управление питомцами");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

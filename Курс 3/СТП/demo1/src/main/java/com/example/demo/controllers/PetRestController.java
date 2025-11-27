@@ -32,8 +32,8 @@ public class PetRestController {
      *
      * @return список студентов
      */
-    @Operation(summary = "Получить всех студентов")
-    @ApiResponse(responseCode = "200", description = "Список студентов успешно получен")
+    @Operation(summary = "Получить всех питомцев")
+    @ApiResponse(responseCode = "200", description = "Список питомцев успешно получен")
     @GetMapping
     //@PreAuthorize("hasRole('ADMIN')")
     public List<Pet> getAllPets() {
@@ -46,9 +46,9 @@ public class PetRestController {
      * @param id идентификатор студента
      * @return объект {@link Pet}, если найден, или статус 404, если не найден
      */
-    @Operation(summary = "Получить студента по ID")
-    @ApiResponse(responseCode = "200", description = "Студент найден")
-    @ApiResponse(responseCode = "404", description = "Студент не найден")
+    @Operation(summary = "Получить питомца по ID")
+    @ApiResponse(responseCode = "200", description = "Питомец найден")
+    @ApiResponse(responseCode = "404", description = "Питомец не найден")
     @GetMapping("/{id}")
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Pet> getPetById(@PathVariable long id) {
@@ -64,7 +64,7 @@ public class PetRestController {
      * @param pet объект {@link Pet}, переданный в теле запроса
      * @return созданный студент с присвоенным идентификатором
      */
-    @Operation(summary = "Добавить нового студента")
+    @Operation(summary = "Добавить нового питомца")
     @ApiResponse(responseCode = "201", description = "Студент успешно создан")
     @PostMapping
     //@PreAuthorize("hasRole('ADMIN')")
@@ -80,9 +80,9 @@ public class PetRestController {
      * @param pet обновлённые данные студента
      * @return обновлённый объект {@link Pet} или статус 404, если студент не найден
      */
-    @Operation(summary = "Обновить данные студента")
-    @ApiResponse(responseCode = "200", description = "Студент успешно обновлён")
-    @ApiResponse(responseCode = "404", description = "Студент не найден")
+    @Operation(summary = "Обновить данные питомца")
+    @ApiResponse(responseCode = "200", description = "Питомец успешно обновлён")
+    @ApiResponse(responseCode = "404", description = "Питомец не найден")
     @PutMapping("/{id}")
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Pet> updatePet(@PathVariable long id, @RequestBody Pet pet) {
@@ -100,9 +100,9 @@ public class PetRestController {
      * @param id идентификатор студента
      * @return HTTP-ответ: 204 — если успешно удалён, 404 — если студент не найден
      */
-    @Operation(summary = "Удалить студента")
-    @ApiResponse(responseCode = "204", description = "Студент успешно удалён")
-    @ApiResponse(responseCode = "404", description = "Студент не найден")
+    @Operation(summary = "Удалить питомца")
+    @ApiResponse(responseCode = "204", description = "Питомец успешно удалён")
+    @ApiResponse(responseCode = "404", description = "Питомец не найден")
     @DeleteMapping("/{id}")
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletePet(@PathVariable long id) {

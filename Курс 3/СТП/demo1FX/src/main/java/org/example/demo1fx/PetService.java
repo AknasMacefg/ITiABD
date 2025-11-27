@@ -22,16 +22,9 @@ public class PetService {
 
     public List<Pet> getAllPets() {
         try {
-            System.out.println("Fetching pets from: " + API_URL);
-
-            // Получаем как массив
             ResponseEntity<Pet[]> response = restTemplate.getForEntity(API_URL, Pet[].class);
-            System.out.println("Response Status: " + response.getStatusCode());
-            System.out.println("Response Body: " + response.getBody());
             if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
-
                 List<Pet> pets = Arrays.asList(response.getBody());
-                System.out.println("Successfully retrieved " + pets.size() + " pets");
                 return pets;
             }
             return Collections.emptyList();
@@ -45,8 +38,6 @@ public class PetService {
 
     public Pet createPet(Pet pet) {
         try {
-            System.out.println("Creating pet: " + pet);
-
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<Pet> request = new HttpEntity<>(pet, headers);
@@ -54,11 +45,8 @@ public class PetService {
             // Отправляем POST запрос и получаем ответ с созданным объектом (включая ID)
             ResponseEntity<Pet> response = restTemplate.postForEntity(API_URL, request, Pet.class);
 
-            System.out.println("Create response status: " + response.getStatusCode());
-
             if (response.getStatusCode() == HttpStatus.CREATED || response.getStatusCode() == HttpStatus.OK) {
                 Pet createdPet = response.getBody();
-                System.out.println("Created pet with ID: " + (createdPet != null ? createdPet.getId() : "null"));
                 return createdPet;
             } else {
                 System.err.println("Unexpected response status: " + response.getStatusCode());
@@ -74,8 +62,6 @@ public class PetService {
 
     public boolean updatePet(Pet pet) {
         try {
-            System.out.println("Updating pet with ID: " + pet.getId());
-
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<Pet> request = new HttpEntity<>(pet, headers);
@@ -92,7 +78,6 @@ public class PetService {
 
     public boolean deletePet(Long id) {
         try {
-            System.out.println("Deleting pet with ID: " + id);
             restTemplate.delete(API_URL + "/" + id);
             return true;
         } catch (Exception e) {

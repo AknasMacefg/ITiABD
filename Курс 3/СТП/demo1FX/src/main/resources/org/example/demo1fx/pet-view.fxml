@@ -1,48 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.demo1fx.PetController"
-      spacing="10" style="-fx-padding: 10;">
+<VBox spacing="10" style="-fx-padding: 10;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo1fx.PetController">
 
-    <Label text="Управление питомцами" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+    <Label style="-fx-font-size: 20; -fx-font-weight: bold;" text="Управление питомцами" />
 
-    <HBox spacing="10" style="-fx-padding: 10 0 10 0;">
-        <VBox spacing="5">
-            <Label text="Владелец:"/>
-            <TextField fx:id="ownerNameField" promptText="Введите имя владельца"/>
+    <HBox alignment="CENTER" prefHeight="61.0" prefWidth="551.0" spacing="10" style="-fx-padding: 10 0 10 0;">
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Владелец:" />
+            <TextField fx:id="ownerNameField" promptText="Введите имя владельца" />
         </VBox>
 
-        <VBox spacing="5">
-            <Label text="Имя питомца:"/>
-            <TextField fx:id="petNameField" promptText="Введите имя питомца"/>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Имя питомца:" />
+            <TextField fx:id="petNameField" promptText="Введите имя питомца" />
         </VBox>
 
-        <VBox spacing="5">
-            <Label text="Вид:"/>
-            <TextField fx:id="speciesField" promptText="Введите вид питомца"/>
+        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="150.0" spacing="5">
+            <Label text="Вид:" />
+            <TextField fx:id="speciesField" promptText="Введите вид питомца" />
         </VBox>
 
-        <VBox spacing="5" style="-fx-padding: 15 0 0 0;">
-            <Button text="Добавить" onAction="#handleAddPet" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
-            <Button text="Обновить" onAction="#handleUpdatePet" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
-            <Button text="Удалить" onAction="#handleDeletePet" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
-            <Button text="Обновить" onAction="#handleRefresh" style="-fx-background-color: #FF9800; -fx-text-fill: white;"/>
-            <Button text="Очистить" onAction="#handleClear" style="-fx-background-color: #9E9E9E; -fx-text-fill: white;"/>
-        </VBox>
+        <VBox spacing="5" style="-fx-padding: 15 0 0 0;" />
     </HBox>
+   <HBox alignment="CENTER" prefHeight="12.0" prefWidth="551.0" spacing="40">
+      <children>
+            <Button onAction="#handleAddPet" text="Добавить" />
+            <Button onAction="#handleUpdatePet" text="Изменить" />
+            <Button onAction="#handleDeletePet" text="Удалить" />
+            <Button onAction="#handleRefresh" text="Обновить" />
+            <Button onAction="#handleClear" text="Очистить" />
+      </children></HBox>
 
     <TableView fx:id="petTable" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn text="ID" fx:id="idColumn" prefWidth="50"/>
-            <TableColumn text="Владелец" fx:id="ownerNameColumn" prefWidth="150"/>
-            <TableColumn text="Имя питомца" fx:id="petNameColumn" prefWidth="150"/>
-            <TableColumn text="Вид" fx:id="speciesColumn" prefWidth="150"/>
+            <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
+            <TableColumn fx:id="ownerNameColumn" prefWidth="150" text="Владелец" />
+            <TableColumn fx:id="petNameColumn" prefWidth="150" text="Имя питомца" />
+            <TableColumn fx:id="speciesColumn" prefWidth="197.39999389648438" text="Вид" />
         </columns>
     </TableView>
 
-    <Label fx:id="statusLabel" text="Готово"/>
+    <Label fx:id="statusLabel" text="Готово" />
 </VBox>
