@@ -2,20 +2,22 @@ package mas.curs.infsys.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table (name = "user_wishlist")
 public class UserWishlist {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private UserWishlistId id;
 
     @ManyToOne
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @MapsId("bookId")
     @JoinColumn(name = "book_id")
     private Book book;
 
@@ -28,14 +30,6 @@ public class UserWishlist {
         this.user = user;
         this.book = book;
         this.added_at = added_at;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public User getUser() {
@@ -60,5 +54,34 @@ public class UserWishlist {
 
     public void setAdded_at(LocalDate added_at) {
         this.added_at = added_at;
+    }
+}
+
+@Embeddable
+class UserWishlistId implements Serializable {
+    private Long userId;
+    private Long bookId;
+
+    public UserWishlistId() {}
+
+    public UserWishlistId(Long userId, Long bookId) {
+        this.userId = userId;
+        this.bookId = bookId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 }

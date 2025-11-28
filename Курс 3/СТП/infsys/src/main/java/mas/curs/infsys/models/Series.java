@@ -1,6 +1,7 @@
 package mas.curs.infsys.models;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "series")
@@ -8,13 +9,16 @@ public class Series {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String name;
 
     @Column
     private String description;
+
+    @OneToMany(mappedBy = "series")
+    private List<BookSeries> books;
 
     public Series() {}
 
@@ -24,11 +28,13 @@ public class Series {
         this.description = description;
     }
 
-    public int getId() {
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

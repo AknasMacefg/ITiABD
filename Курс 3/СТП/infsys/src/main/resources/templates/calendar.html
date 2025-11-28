@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Календарь релизов ИД "Инженерия Данных"</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/style.css" th:href="@{/styles/style.css}">
+    <script src="../static/scripts/script.js" th:src="@{/scripts/script.js}"></script>
+</head>
+</head>
+<body>
+<header>
+    <a href="login">
+        Вход
+    </a>
+    <a href="register">
+        Регистрацияq
+    </a>
+</header>
+
+
+<div class="calendar-container">
+    <div class="calendar-controls">
+        <button id="prev-year">« Год</button>
+        <div class="year-selector">
+            <button id="prev-month">‹</button>
+            <select id="month-select"></select>
+            <select id="year-select"></select>
+            <button id="next-month">›</button>
+        </div>
+        <button id="next-year">Год »</button>
+    </div>
+
+    <div class="calendar" id="calendar">
+        <!-- Заголовки дней недели -->
+        <div class="header">
+            <div class="day-name">Пн</div>
+            <div class="day-name">Вт</div>
+            <div class="day-name">Ср</div>
+            <div class="day-name">Чт</div>
+            <div class="day-name">Пт</div>
+            <div class="day-name">Сб</div>
+            <div class="day-name">Вс</div>
+        </div>
+        <!-- Сетка дней будет генерироваться JavaScript -->
+    </div>
+</div>
+</body>
+</html>

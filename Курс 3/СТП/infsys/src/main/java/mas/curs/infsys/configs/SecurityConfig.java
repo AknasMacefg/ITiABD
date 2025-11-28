@@ -1,6 +1,7 @@
-package com.example.demo.config;
+package mas.curs.infsys.configs;
 
-import com.example.demo.services.CustomUserDetailsService;
+import jakarta.servlet.http.HttpServletRequest;
+import mas.curs.infsys.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +13,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * Конфигурационный класс безопасности Spring Security.
@@ -72,21 +71,25 @@ public class SecurityConfig {
                         .anyRequest().permitAll()  // ВСЁ API открыто
                 );
 
+
+
         return http.build();
     }
+
+
 
     @Bean
     @Order(2)
     public SecurityFilterChain webSecurity(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/login", "/register", "/styles/**", "/h2-console/**")
+                        .requestMatchers("/","/login", "/register", "/styles/**", "/scripts/**", "/h2-console/**")
                         .permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/pets", true)
+                        .defaultSuccessUrl("/profle", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

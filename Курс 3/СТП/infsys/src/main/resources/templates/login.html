@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>My First Spring boot Application</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/style.css" th:href="@{/styles/style.css}">
+</head>
+<body>
+<div class="header">
+    <h1>My First Spring Boot Application</h1>
+</div>
+<div class="header">
+    <h2>ИД23-1 Маслов АН</h2>
+</div>
+
+<div th:if="${param.error}" class="header alert">
+    Неправильный email или пароль.
+</div>
+
+<!-- Сообщение после выхода из системы -->
+<div th:if="${param.logout}" class="header alert">
+    Вы успешно вышли.
+</div>
+
+<div>
+    <form th:action="@{/login}" method="post" class="database-table-edit_form auth-form">
+        <input type="email" id="username" name="username" required placeholder="example@mail.com">
+        <input type="password" id="password" name="password" required placeholder="password">
+        <a th:href="@{/register}">Регистрация</a>
+        <button type="submit" class="database-table-button">Вход</button>
+    </form>
+</div>
+</body>
+</html>

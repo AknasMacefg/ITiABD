@@ -3,6 +3,8 @@ package mas.curs.infsys.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "books")
@@ -12,6 +14,20 @@ public class Book {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserWishlist> UserWishlist = new HashSet<>();
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<BookAuthor> BookAuthor = new HashSet<>();
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<BookGenre> BookGenre = new HashSet<>();
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<BookSeries> BookSeries = new HashSet<>();
+
+
 
     @Column (nullable = false, unique = true)
     private String title;

@@ -1,13 +1,15 @@
 package mas.curs.infsys.models;
 
 import jakarta.persistence.*;
+import java.util.List;
+
 @Entity
 @Table (name = "authors")
 public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String firstname;
@@ -24,6 +26,9 @@ public class Author {
     @Column
     private String photo_url;
 
+    @OneToMany(mappedBy = "author")
+    private List<BookAuthor> books;
+
     public Author() {}
 
     public Author(String firstname, String middlename, String lastname, String biography, String photo_url) {
@@ -34,11 +39,11 @@ public class Author {
         this.photo_url = photo_url;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
