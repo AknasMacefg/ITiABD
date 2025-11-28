@@ -8,12 +8,52 @@
 </head>
 <body>
 <header>
-    <a href="login">
-        Вход
-    </a>
-    <a href="register">
-        Регистрацияq
-    </a>
+    <nav class="nav__list">
+        <ul class="header__list">
+            <li>
+                <a href="/">
+                    Главная
+                </a>
+            </li>
+            <li>
+                <a href="/authors">
+                    Авторы
+                </a>
+            </li>
+            <li>
+                <a href="/series">
+                    Серии
+                </a>
+            </li>
+            <li>
+                <a href="/genres">
+                    Жанры
+                </a>
+            </li>
+            <li>
+                <a href="/about">
+                    О создателе
+                </a>
+            </li>
+        </ul>
+        <form class="search__form">
+            <label for="search">Поиск: </label>
+            <input class="search_input" type="text" id="search" name="search">
+            <input class="search_submit" type="submit" value="Найти">
+        </form>
+        <ul class="login__form">
+            <li>
+                <a href="/login">
+                    Вход
+                </a>
+            </li>
+            <li>
+                <a href="/register">
+                    Регистрация
+                </a>
+            </li>
+        </ul>
+    </nav>
 </header>
 
 
