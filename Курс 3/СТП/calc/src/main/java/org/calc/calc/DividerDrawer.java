@@ -6,8 +6,29 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
+/**
+ * Класс для отрисовки схем делителя напряжения на Canvas.
+ * 
+ * <p>Поддерживает отрисовку различных схем подключения резисторов:
+ * <ul>
+ *   <li>2 резистора: простой делитель</li>
+ *   <li>3 резистора: последовательное и параллельное подключение</li>
+ *   <li>4 резистора: комбинированные схемы</li>
+ * </ul>
+ * 
+ * <p>Схема отображается с подписями узлов (Vin, Vout, GND) и номиналами резисторов.
+ * 
+ * @author calc
+ * @version 1.0
+ */
 public class DividerDrawer {
 
+    /**
+     * Отрисовывает схему делителя напряжения на указанном Canvas.
+     * 
+     * @param canvas Canvas для отрисовки схемы
+     * @param result результат расчета делителя напряжения с информацией о схеме и резисторах
+     */
     public static void draw(Canvas canvas, DividerCalculator.Result result) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());

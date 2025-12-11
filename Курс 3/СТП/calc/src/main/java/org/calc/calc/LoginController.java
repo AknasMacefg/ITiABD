@@ -11,6 +11,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 
+/**
+ * Контроллер окна входа в систему.
+ * 
+ * <p>Обеспечивает аутентификацию пользователей с использованием
+ * BCrypt для проверки паролей. При успешном входе открывает
+ * главное окно приложения.
+ * 
+ * @author calc
+ * @version 1.0
+ */
 public class LoginController {
     @FXML
     private TextField LoginField;

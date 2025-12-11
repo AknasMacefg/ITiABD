@@ -11,6 +11,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Locale;
 import org.apache.commons.validator.routines.EmailValidator;
 
+/**
+ * Контроллер окна регистрации нового пользователя.
+ * 
+ * <p>Обеспечивает регистрацию новых пользователей с валидацией:
+ * <ul>
+ *   <li>Проверка уникальности логина и email</li>
+ *   <li>Валидация формата email</li>
+ *   <li>Проверка минимальной длины пароля (более 6 символов)</li>
+ *   <li>Проверка совпадения паролей</li>
+ * </ul>
+ * 
+ * <p>Пароли хешируются с использованием BCrypt перед сохранением в базу данных.
+ * 
+ * @author calc
+ * @version 1.0
+ */
 public class RegController {
 
 
