@@ -5,30 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39cd09dd-0135-42ab-a5f8-6e67734c9da2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcProcesses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcProcesses.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/DividerCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/DividerCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/DividerDrawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/DividerDrawer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/RegController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/RegController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/CalcApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/CalcApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/RegController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/RegController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/SQLManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/SQLManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ТОБД/t20/pyy1118.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../ТОБД/t20/pyy1118.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ТОБД/t20/qyy1114.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ТОБД/t20/qyy1115.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ТОБД/t20/qyy1116.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ТОБД/t20/qyy1117.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ТОБД/t20/qyy1118.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ТОБД/t20/qyy1119.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ТОБД/t20/t-20_МасловАН.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../ТОБД/t20/t-20_МасловАН.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,6 +170,7 @@
       <workItem from="1765454643749" duration="738000" />
       <workItem from="1765456118342" duration="297000" />
       <workItem from="1765459724038" duration="6000" />
+      <workItem from="1765966591884" duration="164000" />
     </task>
     <servers />
   </component>

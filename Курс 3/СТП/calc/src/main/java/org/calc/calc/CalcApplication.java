@@ -63,12 +63,6 @@ public class CalcApplication extends Application {
         stage.show();
     }
 
-    /**
-     * Вызывается при завершении работы приложения.
-     * Закрывает подключение к базе данных.
-     * 
-     * @throws Exception если произошла ошибка при закрытии подключения
-     */
     @Override
     public void stop() throws Exception {
         if (SQLManager.conn != null && !SQLManager.conn.isClosed()) {
