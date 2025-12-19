@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="39cd09dd-0135-42ab-a5f8-6e67734c9da2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/CalcApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/SQLManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/SQLManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/calc/calc/TableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/calc/calc/TableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/calc/calc/CalcProcessesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/calc/calc/CalcProcessesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/CalcApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/CalcApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/RegController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/RegController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/calc/calc/SQLManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/calc/calc/SQLManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ИД23-1_Маслов_АН_ЗКР.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/../ИД23-1_Маслов_АН_ЗКР.pptx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,6 +180,9 @@
       <workItem from="1765456118342" duration="297000" />
       <workItem from="1765459724038" duration="6000" />
       <workItem from="1765966591884" duration="164000" />
+      <workItem from="1766050406565" duration="431000" />
+      <workItem from="1766051173441" duration="2000" />
+      <workItem from="1766127564606" duration="3911000" />
     </task>
     <servers />
   </component>

@@ -9,8 +9,21 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Вспомогательный класс для работы с базой данных PostgreSQL.
+ *
+ * <p>Отвечает за:</p>
+ * <ul>
+ *     <li>Установку и хранение соединения с БД</li>
+ *     <li>Создание служебных таблиц пользователей и операций при первом запуске</li>
+ *     <li>Выполнение типовых SQL‑запросов (INSERT/UPDATE/SELECT)</li>
+ *     <li>Экспорт данных всех таблиц схемы в Excel‑файлы формата XLSX</li>
+ * </ul>
+ */
 class SQLManager {
+    /** Общий коннект к базе данных PostgreSQL. */
     protected static Connection conn;
+    /** Имя схемы, в которой создаются служебные таблицы приложения. */
     protected static final String schemaname = "calc_db";
     static {
         try {
@@ -60,6 +73,11 @@ class SQLManager {
         }
     }
 
+    /**
+     * Выполняет SQL‑запрос на изменение данных (CREATE, INSERT, UPDATE, DELETE).
+     *
+     * @param query SQL‑запрос для выполнения
+     */
     protected static void SQLQueryCreate(String query) {
         try {
             Statement stmt = conn.createStatement();
@@ -71,6 +89,11 @@ class SQLManager {
         }
     }
 
+    /**
+     * Возвращает список таблиц в текущей схеме.
+     *
+     * @return {@link ResultSet} c именами таблиц или {@code null} в случае ошибки
+     */
     private static ResultSet SQLSelectAllTable(){
         try {
             Statement stmt = conn.createStatement();
@@ -80,6 +103,11 @@ class SQLManager {
         }
     }
 
+    /**
+     * Выводит в консоль список всех таблиц в схеме.
+     *
+     * @return {@code true}, если таблицы найдены и выведены; {@code false} при ошибке или отсутствии таблиц
+     */
     protected static boolean SQLQuerySelectTable(){
         try {
             if (!SQLSelectAllTable().next() || SQLSelectAllTable() == null) {
@@ -98,6 +126,12 @@ class SQLManager {
         }
     }
 
+    /**
+     * Выполняет SELECT‑запрос и возвращает значение первого столбца первой строки результата.
+     *
+     * @param query SQL‑запрос SELECT
+     * @return строковое значение первой ячейки результата или пустая строка, если данных нет либо произошла ошибка
+     */
     protected static String SQLQuerySelectReturner(String query){
         try {
             Statement stmt = conn.createStatement();
@@ -115,6 +149,13 @@ class SQLManager {
         }
     }
 
+    /**
+     * Выполняет SELECT‑запрос и возвращает {@link ResultSet} с первой найденной строкой.
+     * <p>Курсор уже смещён на первую строку результата.</p>
+     *
+     * @param query SQL‑запрос SELECT
+     * @return {@link ResultSet} с первой записью или {@code null}, если ничего не найдено либо произошла ошибка
+     */
     protected static ResultSet SQLQueryRowSelect(String query) {
         try {
             Statement stmt = conn.createStatement();
@@ -132,6 +173,12 @@ class SQLManager {
         }
     }
 
+    /**
+     * Выполняет SELECT‑запрос и построчно выводит результат в консоль.
+     *
+     * @param query SQL‑запрос SELECT
+     * @return {@code false} (метод предназначен только для вывода, а не для логического результата)
+     */
     protected static boolean SQLQuerySelect(String query) {
         try {
             Statement stmt = conn.createStatement();
@@ -168,6 +215,10 @@ class SQLManager {
     }
 
 
+    /**
+     * Экспортирует данные всех таблиц текущей схемы в отдельные Excel‑файлы формата XLSX.
+     * <p>Каждая таблица сохраняется в файл с именем, совпадающим с именем таблицы.</p>
+     */
     protected static void ExcelWriter() {
         try {
             Statement stmt = conn.createStatement();
@@ -226,6 +277,17 @@ class SQLManager {
     }
 
 
+   /**
+    * Считывает значение из {@link ResultSet} в зависимости от типа столбца и
+    * одновременно выводит его в консоль. При наличии объекта {@link Row} также
+    * записывает значение в соответствующую ячейку Excel‑файла.
+    *
+    * @param row       строка Excel‑файла или {@code null}, если экспорт в Excel не требуется
+    * @param rs        результат SQL‑запроса
+    * @param x         индекс столбца (нумерация начинается с 1)
+    * @param classname имя класса Java‑типа столбца (из {@link java.sql.ResultSetMetaData})
+    * @throws SQLException при ошибке доступа к данным результата
+    */
    private static void TypeExtractor(Row row, ResultSet rs, int x , String classname) throws SQLException {
        if (classname.equals("java.lang.Integer") || classname.equals("java.lang.Short") || classname.equals("java.lang.Long")) {
            if (row != null) {

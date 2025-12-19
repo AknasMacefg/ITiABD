@@ -145,7 +145,7 @@
         <dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
-            <version>1.10.0</version>
+            <version>1.10.1</version>
         </dependency>
     </dependencies>
 
@@ -185,8 +185,8 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.6.3</version>
                 <configuration>
-                    <source>23</source>
-                    <target>23</target>
+                    <sourcepath>src/main/java</sourcepath>
+                    <source>25</source>
                     <encoding>UTF-8</encoding>
                     <charset>UTF-8</charset>
                     <docencoding>UTF-8</docencoding>

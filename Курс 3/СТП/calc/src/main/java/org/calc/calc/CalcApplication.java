@@ -28,7 +28,7 @@ public class CalcApplication extends Application {
     /**
      * Инициализирует и отображает главное окно приложения.
      * Создает подключение к базе данных и загружает форму входа.
-     * 
+     *
      * @param stage главное окно приложения
      * @throws IOException если не удалось загрузить FXML файл
      */
@@ -63,6 +63,13 @@ public class CalcApplication extends Application {
         stage.show();
     }
 
+    /**
+     * Завершает работу приложения и освобождает ресурсы.
+     * <p>При завершении корректно закрывает соединение с базой данных,
+     * если оно было установлено.</p>
+     *
+     * @throws Exception если произошла ошибка при закрытии соединения
+     */
     @Override
     public void stop() throws Exception {
         if (SQLManager.conn != null && !SQLManager.conn.isClosed()) {
@@ -73,6 +80,11 @@ public class CalcApplication extends Application {
     }
 
 
+    /**
+     * Точка входа в приложение.
+     *
+     * @param args аргументы командной строки (не используются)
+     */
     public static void main(String[] args) {
         launch();
     }

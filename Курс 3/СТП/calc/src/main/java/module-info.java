@@ -1,3 +1,8 @@
+/**
+ * Модуль приложения калькулятора по закону Ома и делителю напряжения.
+ *
+ * <p>Содержит JavaFX‑клиент, логику расчётов, работу с базой данных PostgreSQL</p>
+ */
 module org.calc.calc {
     requires javafx.controls;
     requires javafx.fxml;
@@ -14,7 +19,7 @@ module org.calc.calc {
     requires spring.security.crypto;
     requires com.fasterxml.jackson.databind;
     requires java.sql;
-    requires commons.validator;
+    requires org.apache.commons.validator;
 
     opens org.calc.calc to javafx.fxml;
     exports org.calc.calc;
