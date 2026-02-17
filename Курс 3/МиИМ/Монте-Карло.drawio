@@ -1,0 +1,398 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.1.1">
+  <diagram name="Страница-1" id="dMMTBKyh4xawTT9XAuWw">
+    <mxGraphModel dx="2316" dy="1538" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Y=a0+a1*X" vertex="1">
+          <mxGeometry height="80" width="120" x="20" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-2" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-1" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="360" as="sourcePoint" />
+            <mxPoint x="220" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-15" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Задаем значения a0 и a1" vertex="1">
+          <mxGeometry height="60" width="120" x="220" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-7" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-10" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-9" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="410" as="sourcePoint" />
+            <mxPoint x="280" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-16" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Используем функцию ЛИНЕЙН" vertex="1">
+          <mxGeometry height="60" width="120" x="220" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Находим значения для Y1-Y100 (используя X1-X100)" vertex="1">
+          <mxGeometry height="60" width="120" x="220" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-13" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Получаем оценку параметров линейной регрессии" vertex="1">
+          <mxGeometry height="80" width="140" x="210" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-17" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Y=a0+a1*X + (ui *&amp;nbsp;&lt;span style=&quot;color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ&lt;/span&gt;&lt;span style=&quot;font-weight: 700; color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="120" x="390" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-18" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-17" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="650" y="360" as="sourcePoint" />
+            <mxPoint x="590" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-19" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-24" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Задаем значения a0, a1 и&amp;nbsp;&lt;span style=&quot;color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ (ui - норм.стд.расп)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="590" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-21" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-24" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-23" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="650" y="410" as="sourcePoint" />
+            <mxPoint x="650" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-22" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-25" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Используем функцию ЛИНЕЙН&lt;div&gt;&amp;nbsp;для каждого испытания&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="590" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-24" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Имитируем данные&lt;div&gt;(ищем Y)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="590" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-25" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Получаем оценку параметров линейной регрессии" vertex="1">
+          <mxGeometry height="80" width="140" x="580" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-26" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-10" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=8 8;" target="V6VWaLyoHrIAcD3FmFuZ-24" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="490" y="390" as="sourcePoint" />
+            <mxPoint x="540" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-27" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-25" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="490" y="330" as="sourcePoint" />
+            <mxPoint x="650" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-28" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Находим среднее и разброс оценок нескольких испытаний" vertex="1">
+          <mxGeometry height="60" width="120" x="590" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-29" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Y=a0+a1*X + (ui *&amp;nbsp;&lt;span style=&quot;color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ + m&lt;/span&gt;&lt;span style=&quot;font-weight: 700; color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="120" x="730" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-30" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="850" y="180" as="sourcePoint" />
+            <mxPoint x="930" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-31" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-36" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-32" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Задаем значения a0, a1 и&amp;nbsp;&lt;span style=&quot;font-weight: 700; color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ и m&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;(ui - норм.стд.расп)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="930" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-33" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-36" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-35" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="990" y="410" as="sourcePoint" />
+            <mxPoint x="990" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-34" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-37" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-35" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Используем функцию ЛИНЕЙН&lt;div&gt;&amp;nbsp;для каждого испытания&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="930" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-36" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Имитируем данные&lt;/span&gt;&lt;/div&gt;&lt;div&gt;(ищем Y)&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="930" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-37" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Получаем оценку параметров линейной регрессии" vertex="1">
+          <mxGeometry height="80" width="140" x="920" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-38" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-37" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="830" y="330" as="sourcePoint" />
+            <mxPoint x="990" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-39" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Находим среднее и разброс оценок нескольких испытаний" vertex="1">
+          <mxGeometry height="60" width="120" x="930" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-40" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Y=a0+a1*X + (ui *&amp;nbsp;&lt;span style=&quot;font-weight: 700; color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ * i)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="120" x="1070" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-41" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-40" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1330" y="360" as="sourcePoint" />
+            <mxPoint x="1270" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-42" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-47" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-43" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Задаем значения a0, a1 и&amp;nbsp;&lt;span style=&quot;font-weight: 700; color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ (i = 1-100)&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;(ui - норм.стд.расп)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="130" x="1265" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-44" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-47" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-46" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1330" y="410" as="sourcePoint" />
+            <mxPoint x="1330" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-45" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-48" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-46" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Используем функцию ЛИНЕЙН&lt;div&gt;&amp;nbsp;для каждого испытания&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1270" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-47" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Имитируем данные&lt;div&gt;(ищем Y)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1270" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-48" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Получаем оценку параметров линейной регрессии" vertex="1">
+          <mxGeometry height="80" width="140" x="1260" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-49" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-48" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1170" y="330" as="sourcePoint" />
+            <mxPoint x="1330" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-50" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Находим среднее и разброс оценок нескольких испытаний" vertex="1">
+          <mxGeometry height="60" width="120" x="1270" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-51" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Y=a0+a1*X + (ui *&amp;nbsp;&lt;span style=&quot;font-weight: 700; color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ)&lt;/span&gt;&lt;div&gt;&lt;b style=&quot;font-size: 14.7px; color: light-dark(rgb(32, 33, 34), rgb(208, 209, 210)); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; text-align: start;&quot;&gt;при i = 1&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b style=&quot;font-size: 14.7px; color: light-dark(rgb(32, 33, 34), rgb(208, 209, 210)); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; text-align: start;&quot;&gt;Y=a0 + a1*X + (d*Ui-1 + c * ui)&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b style=&quot;font-size: 14.7px; color: light-dark(rgb(32, 33, 34), rgb(208, 209, 210)); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; text-align: start;&quot;&gt;при i = 2,3,...&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="160" x="1410" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-52" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-51" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1680" y="360" as="sourcePoint" />
+            <mxPoint x="1620" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-53" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-58" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-54" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Задаем значения a0, a1 и&amp;nbsp;&lt;span style=&quot;font-weight: 700; color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ, d, c&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;(ui - норм.стд.расп)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1620" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-55" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-58" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-57" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1680" y="410" as="sourcePoint" />
+            <mxPoint x="1680" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-56" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-59" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-57" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Используем функцию ЛИНЕЙН&lt;div&gt;&amp;nbsp;для каждого испытания&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1620" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-58" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Имитируем данные&lt;div&gt;(ищем Y)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1620" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-59" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Получаем оценку параметров линейной регрессии" vertex="1">
+          <mxGeometry height="80" width="140" x="1610" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-60" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-59" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1520" y="330" as="sourcePoint" />
+            <mxPoint x="1680" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-61" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Находим среднее и разброс оценок нескольких испытаний" vertex="1">
+          <mxGeometry height="60" width="120" x="1620" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-62" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Y=a0+a1*(X*ui)&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;+ (ui *&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-weight: 700; color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="120" x="1790" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-63" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-62" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="2050" y="360" as="sourcePoint" />
+            <mxPoint x="1990" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-64" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-69" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-65" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Задаем значения a0, a1 и&amp;nbsp;&lt;span style=&quot;font-weight: 700; color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;σ&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(32, 33, 34); font-family: &amp;quot;palatino linotype&amp;quot;, &amp;quot;new athena unicode&amp;quot;, athena, gentium, code2000, serif; font-size: 14.7px; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;(ui - норм.стд.расп)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1990" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-66" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-69" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-68" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="2050" y="410" as="sourcePoint" />
+            <mxPoint x="2050" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-67" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-70" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-68" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Используем функцию ЛИНЕЙН&lt;div&gt;&amp;nbsp;для каждого испытания&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1990" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-69" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Имитируем данные&lt;div&gt;(ищем Y)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1990" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-70" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Получаем оценку параметров линейной регрессии" vertex="1">
+          <mxGeometry height="80" width="140" x="1980" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-71" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-70" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1890" y="330" as="sourcePoint" />
+            <mxPoint x="2050" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-72" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Находим среднее и разброс оценок нескольких испытаний" vertex="1">
+          <mxGeometry height="60" width="120" x="1990" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-74" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-24" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=8 8;" target="V6VWaLyoHrIAcD3FmFuZ-36" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="670" y="289.38" as="sourcePoint" />
+            <mxPoint x="920" y="289.38" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-75" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=8 8;" target="V6VWaLyoHrIAcD3FmFuZ-47" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1050" y="300.62" as="sourcePoint" />
+            <mxPoint x="1260" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-76" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=8 8;" target="V6VWaLyoHrIAcD3FmFuZ-58" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1390" y="300.62" as="sourcePoint" />
+            <mxPoint x="1600" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-77" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=8 8;" target="V6VWaLyoHrIAcD3FmFuZ-69" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1740" y="300.62" as="sourcePoint" />
+            <mxPoint x="1950" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-101" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-100" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-103" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6VWaLyoHrIAcD3FmFuZ-100" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-78" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=26;" value="Сравниваем результаты" vertex="1">
+          <mxGeometry height="120" width="630" x="1050" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-79" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-28" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.168;entryY=0.006;entryDx=0;entryDy=0;entryPerimeter=0;" target="V6VWaLyoHrIAcD3FmFuZ-78" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="760" />
+              <mxPoint x="1156" y="760" />
+            </Array>
+            <mxPoint x="710" y="730" as="sourcePoint" />
+            <mxPoint x="760" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-80" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-39" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.275;entryY=0.031;entryDx=0;entryDy=0;entryPerimeter=0;" target="V6VWaLyoHrIAcD3FmFuZ-78" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="990" y="720" />
+              <mxPoint x="1223" y="720" />
+            </Array>
+            <mxPoint x="1260" y="910" as="sourcePoint" />
+            <mxPoint x="1310" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-81" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-50" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.445;entryY=0.027;entryDx=0;entryDy=0;entryPerimeter=0;" target="V6VWaLyoHrIAcD3FmFuZ-78" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1290" y="820" as="sourcePoint" />
+            <mxPoint x="1330" y="830" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-82" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-61" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.699;entryY=-0.017;entryDx=0;entryDy=0;entryPerimeter=0;" target="V6VWaLyoHrIAcD3FmFuZ-78" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="1680" y="720" />
+              <mxPoint x="1490" y="720" />
+            </Array>
+            <mxPoint x="1760" y="910" as="sourcePoint" />
+            <mxPoint x="1810" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-83" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-72" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.89;entryY=-0.011;entryDx=0;entryDy=0;entryPerimeter=0;" target="V6VWaLyoHrIAcD3FmFuZ-78" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="2050" y="760" />
+              <mxPoint x="1610" y="760" />
+            </Array>
+            <mxPoint x="1920" y="970" as="sourcePoint" />
+            <mxPoint x="1610" y="830" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-87" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Выполнение всех предпосылок теоремы Гаусса-Маркова" vertex="1">
+          <mxGeometry height="80" width="150" x="375" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-88" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-17" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-87" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="430" y="150" as="sourcePoint" />
+            <mxPoint x="480" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-89" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Нарушение предпосылки о нулевом математическом ожидании остатков" vertex="1">
+          <mxGeometry height="80" width="200" x="690" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-90" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Нарушение предпосылки о гомоскедастичности остатков" vertex="1">
+          <mxGeometry height="80" width="175" x="1042.5" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-91" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Нарушение предпосылки о некоррелированности остатков" vertex="1">
+          <mxGeometry height="80" width="195" x="1392.5" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-92" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Нарушение предпосылки о некоррелированности значений экзогенной переменной и остатков" vertex="1">
+          <mxGeometry height="80" width="235" x="1732.5" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-93" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-29" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-89" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="680" y="250" as="sourcePoint" />
+            <mxPoint x="730" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-94" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-40" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-90" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1000" y="280" as="sourcePoint" />
+            <mxPoint x="1050" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-95" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-51" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-91" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1520" y="180" as="sourcePoint" />
+            <mxPoint x="1570" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-96" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="V6VWaLyoHrIAcD3FmFuZ-92" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1850" y="140" as="sourcePoint" />
+            <mxPoint x="1890" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-98" edge="1" parent="1" source="V6VWaLyoHrIAcD3FmFuZ-13" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=-0.003;entryY=0.589;entryDx=0;entryDy=0;entryPerimeter=0;" target="V6VWaLyoHrIAcD3FmFuZ-78" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="911" />
+            </Array>
+            <mxPoint x="370" y="870" as="sourcePoint" />
+            <mxPoint x="420" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-100" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=19;" value="Делаем вывод" vertex="1">
+          <mxGeometry height="80" width="190" x="1270" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="V6VWaLyoHrIAcD3FmFuZ-102" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=29;" value="Метод Монте-Карло" vertex="1">
+          <mxGeometry height="30" width="350" x="2020" y="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
