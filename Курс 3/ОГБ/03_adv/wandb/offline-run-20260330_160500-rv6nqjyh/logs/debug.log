@@ -1,0 +1,6 @@
+2026-03-30 16:05:00,879 INFO    MainThread:18688 [wandb_init.py:setup_run_log_directory():717] Logging user logs to c:\Users\alexm\Desktop\Рабочая папка\ITiABD\Курс 3\ОГБ\03_adv\wandb\offline-run-20260330_160500-rv6nqjyh\logs\debug.log
+2026-03-30 16:05:00,880 INFO    MainThread:18688 [wandb_init.py:setup_run_log_directory():718] Logging internal logs to c:\Users\alexm\Desktop\Рабочая папка\ITiABD\Курс 3\ОГБ\03_adv\wandb\offline-run-20260330_160500-rv6nqjyh\logs\debug-internal.log
+2026-03-30 16:05:00,880 INFO    MainThread:18688 [wandb_init.py:init():844] calling init triggers
+2026-03-30 16:05:00,880 INFO    MainThread:18688 [wandb_init.py:init():849] wandb.init called with sweep_config: {}
+config: {'input_dim': 1, 'hidden_dim': 16, 'lr': 0.01, 'epochs': 50, '_wandb': {}}
+2026-03-30 16:05:00,914 INFO    MainThread:18688 [wandb_init.py:init():892] starting backend
