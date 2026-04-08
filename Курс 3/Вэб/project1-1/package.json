@@ -1,0 +1,19 @@
+{
+  "name": "rx",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "npm run build && npm run dev",
+    "dev": "webpack serve --mode=development --port=3000 --open",
+    "build": "webpack --mode=production"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}

@@ -1,0 +1,49 @@
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  
+.progress {
+  width: auto;
+  accent-color: blue;
+}
+
+.controlls {
+  display: flex;
+  column-gap: 5px;
+}
+  
+.input {
+  border-color: rgba(165, 177, 202, 0.3);
+  padding: 9px 19px;
+  border-radius: 14px;
+  background: none;
+  text-align: center;
+  width: 70px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.button {
+  height: 42px;
+  padding: 0 20px;
+  background-color: rgba(165, 177, 202, 0.2);
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 20px;
+}
+
+.button:hover {
+  background-color: rgba(165, 177, 202, 0.3);
+}
