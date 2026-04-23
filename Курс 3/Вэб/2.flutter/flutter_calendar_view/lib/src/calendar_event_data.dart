@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 
 import '../calendar_view.dart';
+import 'package:intl/intl.dart';
 
 @immutable
 
@@ -59,6 +60,15 @@ class CalendarEventData<T extends Object?> {
   })  : _endDate = endDate?.withoutTime,
         date = date.withoutTime;
 
+  factory CalendarEventData.fromJson(Map<String, dynamic> json) {
+    return CalendarEventData(
+        title: (json['lecturer'] as String?) ?? '',
+        description: (json['kindOfWork'] as String?) ?? '',
+        date: DateFormat('y.MM.dd').parse(json['date'] as String),
+        startTime:DateFormat('y.MM.dd H:mm').parse(json['date'] +' '+ json['beginLesson']),
+        endTime: DateFormat('y.MM.dd H:mm').parse(json['date'] +' '+ json['endLesson']),
+    );
+  }
   DateTime get endDate => _endDate ?? date;
 
   /// If this flag returns true that means event is occurring on multiple
@@ -208,3 +218,4 @@ class CalendarEventData<T extends Object?> {
 /// [AssertionError] in debug mode and will be ignored in release mode
 /// in [DayView] and [WeekView].
 /// {@endtemplate}
+
