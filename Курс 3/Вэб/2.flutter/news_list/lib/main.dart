@@ -41,7 +41,7 @@ class _MainState extends State<Main> {
 
   Future<void> _fetchData() async {
     final response = await http.get(
-      Uri.parse('https://ruz.fa.ru/api/schedule/group/222690?start=2024.11.18&finish=2024.11.24'),
+      Uri.parse('https://ruz.fa.ru/api/search?term=Андропов&type=person'),
     );
 
      if (response.statusCode == 200) {
