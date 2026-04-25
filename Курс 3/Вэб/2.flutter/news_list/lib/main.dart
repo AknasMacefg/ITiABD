@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 import 'post.dart';
+import 'package:dio/dio.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,12 +40,11 @@ class _MainState extends State<Main> {
   }
 
   Future<void> _fetchData() async {
-    final response = await http.get(
-      Uri.parse('https://67190fb57fc4c5ff8f4c4767.mockapi.io/habr'),
+    final response = await Dio().get('https://ruz.fa.ru/api/search?term=Андропов&type=person'
     );
 
     if (response.statusCode == 200) {
-      String decodedBody = utf8.decode(response.bodyBytes);
+      String decodedBody = utf8.decode(response.data);
       setState(() {
         items = json.decode(decodedBody);
       });

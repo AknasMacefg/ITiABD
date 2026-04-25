@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
             // Here we take the value from the MyHomePage object that was created by
             // the App.build method, and use it to set our appbar title.
-            title: Text('netBloc'),
+            title: Text('Cycle'),
             centerTitle: true,
           ),
           body: Center(
