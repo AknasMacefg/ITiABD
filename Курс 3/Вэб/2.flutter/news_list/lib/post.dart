@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Post extends StatelessWidget {
   final String title;
@@ -18,6 +19,19 @@ class Post extends StatelessWidget {
     required this.url,
     required this.onImageTap,
   });
+
+factory Post.fromJson(Map<String, dynamic> json) { 
+      return Post(
+        title: (json['discipline'] as String?) ?? '',
+        text: (json['kindOfWork'] as String?) ?? '',
+        image: (json['lecturer'] as String?) ?? '',
+        imageUrl: (json['parentschedule'] as String?) ?? '',
+        url: (json['author'] as String?) ?? '',
+        date: (json['beginLesson'] as String?) ?? '',
+        // date: DateFormat('y.MM.dd').parse(json['date']) as String,// Переваем в строку
+        onImageTap: (((DateFormat('H:mm').parse(json['beginLesson']).hour)/2.4+(DateFormat('H:mm').parse(json['beginLesson']).minute)/60)*1.6).toString,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,3 +114,4 @@ class Post extends StatelessWidget {
     );
   }
 }
+

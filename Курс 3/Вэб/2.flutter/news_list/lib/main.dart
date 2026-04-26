@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
 import 'post.dart';
 import 'package:dio/dio.dart';
 
@@ -40,19 +41,25 @@ class _MainState extends State<Main> {
   }
 
   Future<void> _fetchData() async {
-    final response = await Dio().get('https://ruz.fa.ru/api/search?term=Андропов&type=person'
+
+    final response = await http.get(
+      Uri.parse('https://ruz.fa.ru/api/search?term=Андропов&type=person'),
     );
 
-    if (response.statusCode == 200) {
-      String decodedBody = utf8.decode(response.data);
-      setState(() {
-        items = json.decode(decodedBody);
+     if (response.statusCode == 200) {
+    final List<dynamic> jsonResponse = json.decode(response.body);
+    items = List<Post>.from(
+          jsonResponse.map<Post>((dynamic e) => Post.fromJson(e))); 
+
+  } else {
+    String jsonString = await rootBundle.loadString('assets/andropov.json');
+    List<dynamic> jsonResponse = json.decode(jsonString);
+    items = List<Post>.from(
+          jsonResponse.map<Post>((dynamic e) => Post.fromJson(e))); 
+  }
+    setState(() {
+      items = items;   
       });
-    } else {
-      if (kDebugMode) {
-        print('Error downloading data');
-      }
-    }
   }
 
   Future<void> _launchURL(String url) async {
@@ -63,6 +70,9 @@ class _MainState extends State<Main> {
       throw 'Unable to open link: $url';
     }
   }
+
+  
+
 
   @override
   Widget build(BuildContext context) {
