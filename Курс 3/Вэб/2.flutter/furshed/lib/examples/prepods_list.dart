@@ -6,6 +6,7 @@ import 'package:furshed/examples/sheduling_calendar.dart';
 
 import 'package:intl/date_symbol_data_local.dart';
 import 'group_list_body.dart';
+import 'package:group_button/group_button.dart';
 
 class Prepods {
   String id;
@@ -41,6 +42,8 @@ class Prepods {
     }
   }
 }
+
+
 
 class PrepodsList extends StatelessWidget {
   const PrepodsList({
@@ -89,6 +92,8 @@ bool calendar = true;
     super.initState();
         initializeDateFormatting('ru', null);
   }
+
+
 
   @override
   Widget build(BuildContext context) => Scaffold(

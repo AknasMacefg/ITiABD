@@ -58,7 +58,7 @@ class Post {
       group: (json['group']) as String,
       beginLesson: (json['beginLesson']) as String,
       endLesson: (json['endLesson']) as String,
-      date: DateFormat.yMMMMEEEEd('ru').format(DateFormat('y.MM.dd').parse(json['date'])) ,
+      date: DateFormat.yMMMMEEEEd('ru').format(DateFormat('yyyy-MM-dd').parse(json['date'])) ,
       // onImageTap: (((DateFormat('H:mm').parse(json['beginLesson']).hour)/2.4+(DateFormat('H:mm').parse(json['beginLesson']).minute)/60)*1.6).toString,
     );
   }
