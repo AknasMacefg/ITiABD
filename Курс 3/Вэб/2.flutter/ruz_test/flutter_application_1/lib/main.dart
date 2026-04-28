@@ -1,121 +1,690 @@
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 
+import 'models/search_result.dart';
+import 'models/schedule_entry.dart';
+import 'services/schedule_api.dart';
+
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  initializeDateFormatting('ru', null).then((_) {
+    runApp(const ScheduleApp());
+  });
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ScheduleApp extends StatelessWidget {
+  const ScheduleApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Расписание',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.lightBlue),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Расписание'),
+      home: const SchedulePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+enum SearchScope { group, teacher, room }
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+enum ResultView { list, grid, calendar }
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class SchedulePage extends StatefulWidget {
+  const SchedulePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SchedulePage> createState() => _SchedulePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _SchedulePageState extends State<SchedulePage> {
+  final TextEditingController _searchController = TextEditingController();
+  final ScheduleApi _scheduleApi = ScheduleApi();
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+  SearchScope _searchScope = SearchScope.group;
+  ResultView _resultView = ResultView.list;
+  late DateTime _weekStart;
+  String _query = '';
+  final Set<SearchResult> _selectedTargets = <SearchResult>{};
+  List<SearchResult> _searchResults = <SearchResult>[];
+  List<Post> _schedule = <Post>[];
+  bool _isLoadingSearch = false;
+  bool _isLoadingSchedule = false;
+  String? _errorMessage;
+  int _searchRequestToken = 0;
+  int _scheduleRequestToken = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _weekStart = _mondayOf(DateTime.now());
+    _searchController.addListener(() {
+      setState(() {
+        _query = _searchController.text.trim();
+      });
+      _refreshSearchResults();
     });
   }
 
   @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  DateTime _mondayOf(DateTime date) {
+    return DateTime(date.year, date.month, date.day)
+        .subtract(Duration(days: date.weekday - DateTime.monday));
+  }
+
+  String _formatDate(DateTime date) {
+    final String day = date.day.toString().padLeft(2, '0');
+    final String month = date.month.toString().padLeft(2, '0');
+    return '$day.$month.${date.year}';
+  }
+
+  String _scopeLabel(SearchScope scope) {
+    switch (scope) {
+      case SearchScope.group:
+        return 'Группа';
+      case SearchScope.teacher:
+        return 'Преподаватель';
+      case SearchScope.room:
+        return 'Аудитория';
+    }
+  }
+
+  String _viewLabel(ResultView view) {
+    switch (view) {
+      case ResultView.list:
+        return 'Список';
+      case ResultView.grid:
+        return 'Сетка';
+      case ResultView.calendar:
+        return 'Календарь';
+    }
+  }
+
+  void _selectScope(SearchScope scope) {
+    setState(() {
+      _searchScope = scope;
+      _selectedTargets.clear();
+      _searchResults = <SearchResult>[];
+      _schedule = <Post>[];
+      _errorMessage = null;
+    });
+    _refreshSearchResults();
+  }
+
+  void _selectView(ResultView view) {
+    setState(() {
+      _resultView = view;
+    });
+  }
+
+  void _previousWeek() {
+    setState(() {
+      _weekStart = _weekStart.subtract(const Duration(days: 7));
+    });
+    _refreshSchedule();
+  }
+
+  void _nextWeek() {
+    setState(() {
+      _weekStart = _weekStart.add(const Duration(days: 7));
+    });
+    _refreshSchedule();
+  }
+
+  Future<void> _pickWeek() async {
+    final DateTime now = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _weekStart,
+      firstDate: DateTime(now.year - 1),
+      lastDate: DateTime(now.year + 1),
+      helpText: 'Выбор недели',
+    );
+
+    if (picked == null) {
+      return;
+    }
+
+    setState(() {
+      _weekStart = _mondayOf(picked);
+    });
+    _refreshSchedule();
+  }
+
+  void _resetFilters() {
+    setState(() {
+      _searchController.clear();
+      _searchScope = SearchScope.group;
+      _resultView = ResultView.list;
+      _weekStart = _mondayOf(DateTime.now());
+      _query = '';
+      _selectedTargets.clear();
+      _searchResults = <SearchResult>[];
+      _schedule = <Post>[];
+      _errorMessage = null;
+    });
+    _refreshSchedule();
+  }
+
+  Future<void> _refreshSearchResults() async {
+    final String query = _query;
+    final int requestToken = ++_searchRequestToken;
+
+    if (query.isEmpty) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _searchResults = <SearchResult>[];
+        _isLoadingSearch = false;
+        _errorMessage = null;
+      });
+      return;
+    }
+
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _isLoadingSearch = true;
+      _errorMessage = null;
+    });
+
+    try {
+      final List<SearchResult> results;
+      switch (_searchScope) {
+        case SearchScope.group:
+          results = await _scheduleApi.searchGroups(query);
+          break;
+        case SearchScope.teacher:
+          results = await _scheduleApi.searchTeachers(query);
+          break;
+        case SearchScope.room:
+          results = await _scheduleApi.searchRooms(query);
+          break;
+      }
+
+      if (!mounted || requestToken != _searchRequestToken) {
+        return;
+      }
+      setState(() {
+        _searchResults = results;
+        _isLoadingSearch = false;
+      });
+    } catch (e) {
+      print('Search error: $e');
+      if (!mounted || requestToken != _searchRequestToken) {
+        return;
+      }
+      setState(() {
+        _searchResults = <SearchResult>[];
+        _isLoadingSearch = false;
+        _errorMessage = 'Не удалось загрузить результаты поиска';
+      });
+    }
+  }
+
+  Future<void> _refreshSchedule() async {
+    if (_selectedTargets.isEmpty) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _schedule = <Post>[];
+        _isLoadingSchedule = false;
+        _errorMessage = null;
+      });
+      return;
+    }
+
+    final int requestToken = ++_scheduleRequestToken;
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _isLoadingSchedule = true;
+      _errorMessage = null;
+    });
+
+    try {
+      final List<Post> schedule;
+      final List<SearchResult> selectedTargets = _selectedTargets.toList();
+      switch (_searchScope) {
+        case SearchScope.group:
+          schedule = await _scheduleApi.getScheduleForGroup(
+            selected: selectedTargets,
+            weekStart: _weekStart,
+          );
+          break;
+        case SearchScope.teacher:
+          schedule = await _scheduleApi.getScheduleForPerson(
+            selected: selectedTargets,
+            weekStart: _weekStart,
+          );
+          break;
+        case SearchScope.room:
+          schedule = await _scheduleApi.getScheduleForAuditorium(
+            selected: selectedTargets,
+            weekStart: _weekStart,
+          );
+          break;
+      }
+
+      if (!mounted || requestToken != _scheduleRequestToken) {
+        return;
+      }
+      setState(() {
+        _schedule = schedule;
+        _isLoadingSchedule = false;
+      });
+    } catch (e) {
+      print('Schedule error: $e');
+      if (!mounted || requestToken != _scheduleRequestToken) {
+        return;
+      }
+      setState(() {
+        _schedule = <Post>[];
+        _isLoadingSchedule = false;
+        _errorMessage = 'Не удалось загрузить расписание';
+      });
+    }
+  }
+
+  Widget _buildSearchResults() {
+    if (_query.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    if (_isLoadingSearch) {
+      return const Padding(
+        padding: EdgeInsets.only(top: 8),
+        child: LinearProgressIndicator(),
+      );
+    }
+
+    if (_searchResults.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Text(
+          'Ничего не найдено',
+          style: TextStyle(color: Theme.of(context).colorScheme.outline),
+        ),
+      );
+    }
+
+    return Container(
+      margin: const EdgeInsets.only(top: 8),
+      constraints: const BoxConstraints(maxHeight: 200),
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).dividerColor),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: _searchResults.length,
+        separatorBuilder: (_, __) => const Divider(height: 1),
+        itemBuilder: (BuildContext context, int index) {
+          final SearchResult result = _searchResults[index];
+          final bool selected = _selectedTargets.contains(result);
+          return CheckboxListTile(
+            value: selected,
+            title: Text(result.label),
+            subtitle: Text(
+              result.description,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.outline),
+            ),
+            controlAffinity: ListTileControlAffinity.leading,
+            onChanged: (_) {
+              setState(() {
+                if (selected) {
+                  _selectedTargets.remove(result);
+                } else {
+                  _selectedTargets.add(result);
+                }
+              });
+              _refreshSchedule();
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildSelectedChips() {
+    if (_selectedTargets.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 4,
+        children: _selectedTargets.map((SearchResult target) {
+          return Chip(
+            label: Text(target.label),
+            onDeleted: () {
+              setState(() {
+                _selectedTargets.remove(target);
+              });
+              _refreshSchedule();
+            },
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildListBody() {
+    return ListView.separated(
+      itemCount: _schedule.length,
+      separatorBuilder: (_, __) => const SizedBox(height: 8),
+      itemBuilder: (BuildContext context, int index) {
+        final Post lesson = _schedule[index];
+        return Card(
+          child: ListTile(
+            title: Text(lesson.discipline),
+            subtitle: Text(
+              '${lesson.beginLesson} - ${lesson.endLesson}\n${lesson.lecturer} • ${lesson.auditorium} • ${lesson.date}',
+            ),
+            isThreeLine: true,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildGridBody() {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        childAspectRatio: 1.15,
+      ),
+      itemCount: _schedule.length,
+      itemBuilder: (BuildContext context, int index) {
+        final Post lesson = _schedule[index];
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  lesson.discipline,
+                  style: Theme.of(context).textTheme.titleSmall,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 8),
+                Text('${lesson.beginLesson} - ${lesson.endLesson}'),
+                const SizedBox(height: 8),
+                Text(
+                  lesson.lecturer,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const Spacer(),
+                Text(
+                  '${lesson.auditorium} • ${lesson.date}',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  DateTime _dateOnly(DateTime date) => DateTime(date.year, date.month, date.day);
+
+  Widget _buildCalendarBody() {
+    final DateTime monthStart = DateTime(_weekStart.year, _weekStart.month, 1);
+    final DateTime monthEnd = DateTime(_weekStart.year, _weekStart.month + 1, 0);
+    final int leadingEmptyDays = monthStart.weekday - DateTime.monday;
+    final int totalCells = ((leadingEmptyDays + monthEnd.day) / 7).ceil() * 7;
+    final DateTime selectedWeekEnd = _weekStart.add(const Duration(days: 6));
+
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 7,
+        mainAxisSpacing: 6,
+        crossAxisSpacing: 6,
+        childAspectRatio: 0.95,
+      ),
+      itemCount: totalCells,
+      itemBuilder: (BuildContext context, int index) {
+        final int dayNumber = index - leadingEmptyDays + 1;
+        if (dayNumber < 1 || dayNumber > monthEnd.day) {
+          return const SizedBox.shrink();
+        }
+
+        final DateTime day = DateTime(monthStart.year, monthStart.month, dayNumber);
+        final bool inCurrentWeek = !day.isBefore(_weekStart) && !day.isAfter(selectedWeekEnd);
+        final List<Post> lessonsForDay = _schedule
+            .where((Post lesson) => lesson.dateValue != null && _dateOnly(lesson.dateValue!) == day)
+            .toList();
+
+        return Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: inCurrentWeek
+                ? Theme.of(context).colorScheme.primaryContainer
+                : Theme.of(context).colorScheme.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: inCurrentWeek
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).dividerColor,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '$dayNumber',
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
+              const SizedBox(height: 4),
+              if (lessonsForDay.isEmpty)
+                Text(
+                  'Нет пар',
+                  style: Theme.of(context).textTheme.bodySmall,
+                )
+              else
+                ...lessonsForDay.take(2).map((Post lesson) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Text(
+                      lesson.discipline,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  );
+                }),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildBody() {
+    if (_selectedTargets.isEmpty) {
+      return Center(
+        child: Text(
+          'Выберите значение',
+          style: TextStyle(color: Theme.of(context).colorScheme.outline),
+        ),
+      );
+    }
+
+    if (_isLoadingSchedule) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (_schedule.isEmpty) {
+      return Center(
+        child: Text(
+          'Нет данных',
+          style: TextStyle(color: Theme.of(context).colorScheme.outline),
+        ),
+      );
+    }
+
+    switch (_resultView) {
+      case ResultView.list:
+        return _buildListBody();
+      case ResultView.grid:
+        return _buildGridBody();
+      case ResultView.calendar:
+        return _buildCalendarBody();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    final DateTime weekEnd = _weekStart.add(const Duration(days: 6));
+
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text('Расписание'),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Scope Selection
+              Text(
+                'Тип поиска:',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    for (final SearchScope scope in SearchScope.values)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: FilterChip(
+                          label: Text(_scopeLabel(scope)),
+                          selected: _searchScope == scope,
+                          onSelected: (_) => _selectScope(scope),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Search Input
+              TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  labelText: 'Поиск',
+                  prefixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+              ),
+
+              // Search Results Dropdown
+              _buildSearchResults(),
+              _buildSelectedChips(),
+
+              const SizedBox(height: 16),
+
+              // Result View Selection
+              Text(
+                'Вид результатов:',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    for (final ResultView view in ResultView.values)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: FilterChip(
+                          label: Text(_viewLabel(view)),
+                          selected: _resultView == view,
+                          onSelected: (_) => _selectView(view),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Week Controls
+              Text(
+                'Выбор недели: ${_formatDate(_weekStart)} - ${_formatDate(weekEnd)}',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: _previousWeek,
+                    tooltip: 'Предыдущая неделя',
+                  ),
+                  TextButton.icon(
+                    icon: const Icon(Icons.calendar_today),
+                    label: const Text('Выбрать'),
+                    onPressed: _pickWeek,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_forward),
+                    onPressed: _nextWeek,
+                    tooltip: 'Следующая неделя',
+                  ),
+                  TextButton.icon(
+                    icon: const Icon(Icons.restart_alt),
+                    label: const Text('Сброс'),
+                    onPressed: _resetFilters,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Error Message
+              if (_errorMessage != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    _errorMessage!,
+                    style: TextStyle(color: Theme.of(context).colorScheme.error),
+                  ),
+                ),
+
+              // Results Body
+              SizedBox(
+                height: 400,
+                child: _buildBody(),
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
