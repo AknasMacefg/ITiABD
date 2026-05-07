@@ -1,0 +1,22 @@
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=reaction_game.settings
+      - UPDATE_GUARD_SECRET=dev-secret
+    volumes:
+      - .:/app
+
+  guard:
+    build: .
+    command: python security/guard_server.py
+    ports:
+      - "9000:9000"
+    environment:
+      - UPDATE_GUARD_SECRET=dev-secret
+      - MANIFEST_PATH=/app/security/update_manifest.json
+    volumes:
+      - .:/app
