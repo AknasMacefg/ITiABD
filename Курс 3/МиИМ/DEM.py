@@ -130,8 +130,8 @@ def plot_results(supplychain, timelimit):
 def main():
 
     #Дискретно-событийное
-    shiptime = 5
-    ordertime = 1
+    shiptime = 2
+    ordertime = 2
     inventory = 12
     demand = 4
     clientmode = "hill"   # "fixed", "hill", "random"
@@ -144,12 +144,10 @@ def main():
     client_randmode_timer_flag = True
 
     #Агентное
-    store_mode = "random"
-    wholesaler_mode = "random"
-    distributor_mode = "random"
-    factroy_mode = "random"
-
-    #Системная динамика
+    store_mode = "none"
+    wholesaler_mode = "none"
+    distributor_mode = "none"
+    factroy_mode = "none"
     store_target = 10
     wholesaler_target = 10
     distributor_target = 10

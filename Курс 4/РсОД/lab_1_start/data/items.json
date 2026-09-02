@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "name": "Item1",
+    "category": "Category A",
+    "value": 100.5,
+    "updated_at": "2023-01-15 10:30:00",
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": null,
+    "category": "Category B",
+    "value": 200.0,
+    "updated_at": "2023-02-20 14:15:00",
+    "active": false
+  },
+  {
+    "id": 3,
+    "name": "Item3",
+    "category": "Category C",
+    "value": null,
+    "updated_at": "2023-03-10 09:00:00",
+    "active": true
+  },
+  {
+    "id": 1,
+    "name": "Item1_dup",
+    "category": "Category A",
+    "value": 150.0,
+    "updated_at": "2023-04-01 12:00:00",
+    "active": false
+  },
+  {
+    "id": 4,
+    "name": "Item4",
+    "category": "category a",
+    "value": 300.5,
+    "updated_at": "2023-05-05 08:30:00",
+    "active": true
+  },
+  {
+    "id": 5,
+    "name": "Item5",
+    "category": "cat A",
+    "value": 400.0,
+    "updated_at": "2023-06-10 17:45:00",
+    "active": false
+  },
+  {
+    "id": 6,
+    "name": "Item6",
+    "category": "Category B",
+    "value": "250.75",
+    "updated_at": "2023-07-20 11:20:00",
+    "active": true
+  },
+  {
+    "id": 7,
+    "name": "Item7",
+    "category": "Category C",
+    "value": 350.0,
+    "updated_at": "15/08/2023 13:00:00",
+    "active": false
+  },
+  {
+    "id": 8,
+    "name": "Item8",
+    "category": "Category A",
+    "value": 450.0,
+    "updated_at": "08-15-2023 09:30:00",
+    "active": true
+  },
+  {
+    "id": 9,
+    "name": "Item9",
+    "category": "Category B",
+    "value": 550.0,
+    "updated_at": "2023/09/01 16:40:00",
+    "active": false
+  },
+  {
+    "id": 10,
+    "name": "Item10",
+    "category": " Category C ",
+    "value": 600.0,
+    "updated_at": "2023-10-10 20:00:00",
+    "active": "TRUE"
+  },
+  {
+    "id": 11,
+    "name": "Item11",
+    "category": "Category A",
+    "value": 700.0,
+    "updated_at": "2023-11-11 22:22:22",
+    "active": "FALSE"
+  },
+  {
+    "id": 12,
+    "name": "Item12",
+    "category": "Category B",
+    "value": 800.0,
+    "updated_at": "2023-12-12 23:59:59",
+    "active": 1
+  },
+  {
+    "id": 13,
+    "name": "Item13",
+    "category": "Category C",
+    "value": 900.0,
+    "updated_at": "2024-01-01 00:00:00",
+    "active": 0
+  }
+]
