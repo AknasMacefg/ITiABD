@@ -1,0 +1,124 @@
+[
+  {
+    "method": "POST",
+    "url": "http://127.0.0.1:8000/api/items",
+    "params_or_body": {
+      "name": "Course 2 item",
+      "category": "Category A",
+      "value": 123.45,
+      "updated_at": "2026-09-08 12:00:00",
+      "active": true
+    },
+    "status_code": 201,
+    "content_type": "application/json",
+    "elapsed_ms": 5.05,
+    "response": {
+      "id": 14,
+      "name": "Course 2 item",
+      "category": "Category A",
+      "value": 123.45,
+      "updated_at": "2026-09-08 12:00:00",
+      "active": true
+    }
+  },
+  {
+    "method": "PUT",
+    "url": "http://127.0.0.1:8000/api/items/14",
+    "params_or_body": {
+      "name": "Course 2 item replaced",
+      "category": "Category B",
+      "value": 456.78,
+      "updated_at": "2026-09-08 13:00:00",
+      "active": false
+    },
+    "status_code": 200,
+    "content_type": "application/json",
+    "elapsed_ms": 17.9,
+    "response": {
+      "id": 14,
+      "name": "Course 2 item replaced",
+      "category": "Category B",
+      "value": 456.78,
+      "updated_at": "2026-09-08 13:00:00",
+      "active": false
+    }
+  },
+  {
+    "method": "PATCH",
+    "url": "http://127.0.0.1:8000/api/items/14",
+    "params_or_body": {
+      "name": "Course 2 item patched"
+    },
+    "status_code": 200,
+    "content_type": "application/json",
+    "elapsed_ms": 6.36,
+    "response": {
+      "id": 14,
+      "name": "Course 2 item patched",
+      "category": "Category B",
+      "value": 456.78,
+      "updated_at": "2026-09-08 13:00:00",
+      "active": false
+    }
+  },
+  {
+    "method": "GET",
+    "url": "http://127.0.0.1:8000/api/items/14",
+    "params_or_body": null,
+    "status_code": 200,
+    "content_type": "application/json",
+    "elapsed_ms": 5.05,
+    "response": {
+      "id": 14,
+      "name": "Course 2 item patched",
+      "category": "Category B",
+      "value": 456.78,
+      "updated_at": "2026-09-08 13:00:00",
+      "active": false
+    }
+  },
+  {
+    "method": "DELETE",
+    "url": "http://127.0.0.1:8000/api/items/14",
+    "params_or_body": null,
+    "status_code": 204,
+    "content_type": null,
+    "elapsed_ms": 5.07,
+    "response": ""
+  },
+  {
+    "method": "GET",
+    "url": "http://127.0.0.1:8000/api/items/14",
+    "params_or_body": null,
+    "status_code": 404,
+    "content_type": "application/json",
+    "elapsed_ms": 4.92,
+    "response": {
+      "detail": "Item not found"
+    },
+    "error_type": "HTTPError",
+    "error": "404 Client Error: Not Found for url: http://127.0.0.1:8000/api/items/14"
+  },
+  {
+    "method": "GET",
+    "url": "http://127.0.0.1:59676/api/items",
+    "params_or_body": null,
+    "status_code": null,
+    "content_type": null,
+    "elapsed_ms": 2043.6,
+    "response": null,
+    "error_type": "ConnectionError",
+    "error": "HTTPConnectionPool(host='127.0.0.1', port=59676): Max retries exceeded with url: /api/items (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=59676): Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение\"))"
+  },
+  {
+    "method": "GET",
+    "url": "http://127.0.0.1:55527/api/items",
+    "params_or_body": null,
+    "status_code": null,
+    "content_type": null,
+    "elapsed_ms": 75.12,
+    "response": null,
+    "error_type": "ReadTimeout",
+    "error": "HTTPConnectionPool(host='127.0.0.1', port=55527): Read timed out. (read timeout=0.05)"
+  }
+]

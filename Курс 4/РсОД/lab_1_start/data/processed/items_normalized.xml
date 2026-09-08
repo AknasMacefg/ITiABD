@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='utf-8'?>
+<data>
+  <row>
+    <id>1</id>
+    <name>Item1_dup</name>
+    <category>Category A</category>
+    <value>150.0</value>
+    <updated_at>2023-04-01 12:00:00</updated_at>
+    <active>False</active>
+  </row>
+  <row>
+    <id>2</id>
+    <name/>
+    <category>Category B</category>
+    <value>200.0</value>
+    <updated_at>2023-02-20 14:15:00</updated_at>
+    <active>False</active>
+  </row>
+  <row>
+    <id>3</id>
+    <name>Item3</name>
+    <category>Category C</category>
+    <value/>
+    <updated_at>2023-03-10 09:00:00</updated_at>
+    <active>True</active>
+  </row>
+  <row>
+    <id>4</id>
+    <name>Item4</name>
+    <category>Category A</category>
+    <value>300.5</value>
+    <updated_at>2023-05-05 08:30:00</updated_at>
+    <active>True</active>
+  </row>
+  <row>
+    <id>5</id>
+    <name>Item5</name>
+    <category>Category A</category>
+    <value>400.0</value>
+    <updated_at>2023-06-10 17:45:00</updated_at>
+    <active>False</active>
+  </row>
+  <row>
+    <id>6</id>
+    <name>Item6</name>
+    <category>Category B</category>
+    <value>250.75</value>
+    <updated_at>2023-07-20 11:20:00</updated_at>
+    <active>True</active>
+  </row>
+  <row>
+    <id>7</id>
+    <name>Item7</name>
+    <category>Category C</category>
+    <value>350.0</value>
+    <updated_at>2023-08-15 13:00:00</updated_at>
+    <active>False</active>
+  </row>
+  <row>
+    <id>8</id>
+    <name>Item8</name>
+    <category>Category A</category>
+    <value>450.0</value>
+    <updated_at>2023-08-15 09:30:00</updated_at>
+    <active>True</active>
+  </row>
+  <row>
+    <id>9</id>
+    <name>Item9</name>
+    <category>Category B</category>
+    <value>550.0</value>
+    <updated_at>2023-09-01 16:40:00</updated_at>
+    <active>False</active>
+  </row>
+  <row>
+    <id>10</id>
+    <name>Item10</name>
+    <category>Category C</category>
+    <value>600.0</value>
+    <updated_at>2023-10-10 20:00:00</updated_at>
+    <active>True</active>
+  </row>
+  <row>
+    <id>11</id>
+    <name>Item11</name>
+    <category>Category A</category>
+    <value>700.0</value>
+    <updated_at>2023-11-11 22:22:22</updated_at>
+    <active>False</active>
+  </row>
+  <row>
+    <id>12</id>
+    <name>Item12</name>
+    <category>Category B</category>
+    <value>800.0</value>
+    <updated_at>2023-12-12 23:59:59</updated_at>
+    <active>True</active>
+  </row>
+  <row>
+    <id>13</id>
+    <name>Item13</name>
+    <category>Category C</category>
+    <value>900.0</value>
+    <updated_at>2024-01-01 00:00:00</updated_at>
+    <active>False</active>
+  </row>
+</data>
