@@ -21,11 +21,28 @@ BASE_DIR = Path(__file__).resolve().parent
 RAW_DIR = BASE_DIR / "data" / "raw"
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
 ITEM_COLUMNS = ["id", "name", "category", "value", "updated_at", "active"]
+STATISTICS_PATH = PROCESSED_DIR / "course_4_report.csv"
+STATISTICS_MARKDOWN_PATH = PROCESSED_DIR / "course_4_report.md"
 
 
-def read_items_csv(path):
-    """Read CSV with pandas; delimiter and header are part of the format contract."""
-    return pd.read_csv(path)
+def select_csv_separator():
+    separators = {"1": (",", "запятая"), "2": (";", "точка с запятой"), "3": ("\t", "табуляция")}
+    while True:
+        print("Выберите разделитель CSV-файла:")
+        print("1. Запятая (,)")
+        print("2. Точка с запятой (;)")
+        print("3. Табуляция")
+        choice = input("Введите номер разделителя: ").strip()
+        if choice in separators:
+            separator, name = separators[choice]
+            print(f"Выбран разделитель: {name}")
+            return separator
+        print("Неверный выбор. Введите 1, 2 или 3.")
+
+
+def read_items_csv(path, separator=","):
+    """Read CSV with the separator selected by the user."""
+    return pd.read_csv(path, sep=separator)
 
 
 def read_items_json(path):
@@ -96,9 +113,9 @@ def save_as_xml(df, path):
     export.to_xml(path, index=False, root_name="data", row_name="row")
 
 
-def process_items():
+def process_items(csv_separator):
     sources = {
-        "CSV": read_items_csv(RAW_DIR / "items.csv"),
+        "CSV": read_items_csv(RAW_DIR / "items.csv", csv_separator),
         "JSON": read_items_json(RAW_DIR / "items.json"),
         "XML": read_items_xml(RAW_DIR / "items.xml"),
     }
@@ -134,7 +151,59 @@ def process_items():
 
 
 def course_1():
-    return process_items()
+    started = time.perf_counter()
+    csv_separator = select_csv_separator()
+    result = process_items(csv_separator)
+    save_statistics(
+        {
+            "Способ": "CSV/XML/JSON",
+            "Количество записей": len(result),
+            "Уникальных id": result["id"].nunique(),
+            "Время, с": round(time.perf_counter() - started, 4),
+            "Есть ошибки": "Нет",
+        }
+    )
+    return result
+
+
+def save_statistics(statistic):
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+    statistics = []
+    if STATISTICS_PATH.exists():
+        statistics = pd.read_csv(STATISTICS_PATH).to_dict(orient="records")
+        statistics = [
+            row
+            for row in statistics
+            if row.get("Способ") not in {statistic["Способ"], "CSV/XMSL/JSON"}
+        ]
+    statistics.append(statistic)
+    report = pd.DataFrame(statistics)
+    report.to_csv(STATISTICS_PATH, index=False)
+
+    markdown_rows = [
+        "| Способ | Количество записей | Уникальных id | Время, с | Есть ошибки |",
+        "|---|---:|---:|---:|---|",
+    ]
+    for row in statistics:
+        markdown_rows.append(
+            f"| {row['Способ']} | {row['Количество записей']} | "
+            f"{row['Уникальных id']} | {row['Время, с']} | {row['Есть ошибки']} |"
+        )
+    markdown_rows.extend(
+        [
+            "",
+            "### Вывод",
+            "",
+            "Если существует официальный API, для структурированных данных предпочтительнее "
+            "использовать его, а не браузерную автоматизацию. API возвращает данные в "
+            "машиночитаемом формате, имеет стабильный контракт и позволяет обращаться к "
+            "нужным ресурсам напрямую. Это обычно быстрее, проще для обработки и надежнее "
+            "при обновлении верстки. Selenium зависит от DOM, JavaScript, браузера и "
+            "явных ожиданий, поэтому он нужен прежде всего для сценариев, где данные "
+            "доступны только через пользовательский интерфейс.",
+        ]
+    )
+    STATISTICS_MARKDOWN_PATH.write_text("\n".join(markdown_rows), encoding="utf-8")
 
 
 def _response_body(response):
@@ -312,10 +381,22 @@ def course_2():
         except subprocess.TimeoutExpired:
             backend_process.kill()
         print(f"Результаты запросов сохранены: {output_path}")
+    items_path = PROCESSED_DIR / "items_normalized.json"
+    items_count = len(json.loads(items_path.read_text(encoding="utf-8"))) if items_path.exists() else 0
+    save_statistics(
+        {
+            "Способ": "REST API",
+            "Количество записей": items_count,
+            "Уникальных id": items_count,
+            "Время, с": round(sum(item["elapsed_ms"] for item in results) / 1000, 4),
+            "Есть ошибки": "Да" if any("error" in item for item in results) else "Нет",
+        }
+    )
     return results
 
 def course_3():
     """Load the dynamic page with Selenium and save its filtered table."""
+    started = time.perf_counter()
     host = "127.0.0.1"
     port = 8000
     base_url = f"http://{host}:{port}"
@@ -397,6 +478,15 @@ def course_3():
         result.to_csv(output_path, index=False)
         print(f"Строк после фильтра Category B: {len(result)}")
         print(f"Результаты Selenium сохранены: {output_path}")
+        save_statistics(
+            {
+                "Способ": "Selenium",
+                "Количество записей": len(result),
+                "Уникальных id": result["id"].nunique(),
+                "Время, с": round(time.perf_counter() - started, 4),
+                "Есть ошибки": "Нет",
+            }
+        )
         return result
     finally:
         if driver is not None:
@@ -408,172 +498,30 @@ def course_3():
             backend_process.kill()
 
 def course_4():
-    """Compare local files, REST API, and Selenium for the same item dataset."""
-    statistics = []
+    """Show statistics already saved by scenarios 1, 2 and 3."""
+    required_results = {
+        "пункта 1": PROCESSED_DIR / "items_normalized.json",
+        "пункта 2": PROCESSED_DIR / "course_2_requests.json",
+        "пункта 3": PROCESSED_DIR / "selenium_items.csv",
+    }
+    missing = [name for name, path in required_results.items() if not path.exists()]
+    if missing:
+        print("Сначала выполните: " + ", ".join(missing) + ".")
+        return None
+    if not STATISTICS_PATH.exists():
+        print("Статистика еще не сохранена. Выполните пункты 1, 2 и 3.")
+        return None
 
-    started = time.perf_counter()
-    source_frames = []
-    source_errors = []
-    sources = (
-        ("CSV", read_items_csv, RAW_DIR / "items.csv"),
-        ("JSON", read_items_json, RAW_DIR / "items.json"),
-        ("XML", read_items_xml, RAW_DIR / "items.xml"),
-    )
-    for source_name, reader, path in sources:
-        try:
-            source_frames.append(reader(path))
-        except (OSError, ValueError, ET.ParseError) as error:
-            source_errors.append(f"{source_name}: {type(error).__name__}")
+    report = pd.read_csv(STATISTICS_PATH)
+    expected_methods = {"CSV/XML/JSON", "REST API", "Selenium"}
+    completed_methods = set(report["Способ"])
+    missing_methods = expected_methods - completed_methods
+    if missing_methods:
+        print("Статистика неполная. Выполните сценарии: " + ", ".join(sorted(missing_methods)))
+        return None
 
-    if source_frames:
-        combined = pd.concat(source_frames, ignore_index=True)
-        local_items = normalize_items(combined).drop_duplicates(subset="id")
-    else:
-        local_items = pd.DataFrame()
-    statistics.append(
-        {
-            "Способ": "CSV/XMSL/JSON",
-            "Количество записей": len(local_items),
-            "Уникальных id": local_items["id"].nunique() if not local_items.empty else 0,
-            "Время, с": round(time.perf_counter() - started, 4),
-            "Есть ошибки": "Да: " + ", ".join(source_errors) if source_errors else "Нет",
-        }
-    )
-
-    host = "127.0.0.1"
-    port = 8000
-    base_url = f"http://{host}:{port}"
-    api_url = f"{base_url}/api/items"
-    backend_process = subprocess.Popen(
-        [
-            sys.executable,
-            "-m",
-            "uvicorn",
-            "backend.main:app",
-            "--host",
-            host,
-            "--port",
-            str(port),
-        ],
-        cwd=BASE_DIR,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.STDOUT,
-    )
-    driver = None
-
-    try:
-        for _ in range(20):
-            if backend_process.poll() is not None:
-                raise RuntimeError("Локальный backend завершился до запуска")
-            try:
-                response = requests.get(api_url, timeout=10)
-                response.raise_for_status()
-                break
-            except requests.RequestException:
-                time.sleep(0.25)
-        else:
-            raise RuntimeError("Не удалось дождаться запуска локального backend")
-
-        started = time.perf_counter()
-        api_errors = []
-        api_items = []
-        try:
-            response = requests.get(
-                api_url,
-                params={"format": "json"},
-                timeout=10,
-            )
-            response.raise_for_status()
-            api_items = response.json()
-        except (requests.RequestException, ValueError) as error:
-            api_errors.append(type(error).__name__)
-        statistics.append(
-            {
-                "Способ": "REST API",
-                "Количество записей": len(api_items),
-                "Уникальных id": len({item["id"] for item in api_items}),
-                "Время, с": round(time.perf_counter() - started, 4),
-                "Есть ошибки": "Да: " + ", ".join(api_errors) if api_errors else "Нет",
-            }
-        )
-
-        started = time.perf_counter()
-        selenium_errors = []
-        selenium_items = []
-        try:
-            driver = webdriver.Chrome()
-            wait = WebDriverWait(driver, 10)
-            driver.get(f"{base_url}/dynamic")
-            load_button = wait.until(
-                EC.element_to_be_clickable((By.ID, "load-button"))
-            )
-            load_button.click()
-            rows = wait.until(
-                lambda browser: browser.find_elements(By.CSS_SELECTOR, "#items-body tr")
-            )
-            for row in rows:
-                cells = [cell.text for cell in row.find_elements(By.TAG_NAME, "td")]
-                selenium_items.append(
-                    {
-                        "id": int(cells[0]),
-                        "name": cells[1],
-                        "category": cells[2],
-                        "value": float(cells[3]) if cells[3] else None,
-                        "active": cells[4],
-                    }
-                )
-        except Exception as error:
-            selenium_errors.append(type(error).__name__)
-        statistics.append(
-            {
-                "Способ": "Selenium",
-                "Количество записей": len(selenium_items),
-                "Уникальных id": len({item["id"] for item in selenium_items}),
-                "Время, с": round(time.perf_counter() - started, 4),
-                "Есть ошибки": "Да: " + ", ".join(selenium_errors) if selenium_errors else "Нет",
-            }
-        )
-    finally:
-        if driver is not None:
-            driver.quit()
-        backend_process.terminate()
-        try:
-            backend_process.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            backend_process.kill()
-
-    report = pd.DataFrame(statistics)
-    report_path = PROCESSED_DIR / "course_4_report.csv"
-    markdown_path = PROCESSED_DIR / "course_4_report.md"
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    report.to_csv(report_path, index=False)
-
-    markdown_rows = [
-        "| Способ | Количество записей | Уникальных id | Время, с | Есть ошибки |",
-        "|---|---:|---:|---:|---|",
-    ]
-    for row in statistics:
-        markdown_rows.append(
-            f"| {row['Способ']} | {row['Количество записей']} | "
-            f"{row['Уникальных id']} | {row['Время, с']} | {row['Есть ошибки']} |"
-        )
-    markdown_rows.extend(
-        [
-            "",
-            "### Вывод",
-            "",
-            "Если существует официальный API, для структурированных данных предпочтительнее "
-            "использовать его, а не браузерную автоматизацию. API возвращает данные в "
-            "машиночитаемом формате, имеет стабильный контракт и позволяет обращаться к "
-            "нужным ресурсам напрямую. Это обычно быстрее, проще для обработки и надежнее "
-            "при обновлении верстки. Selenium зависит от DOM, JavaScript, браузера и "
-            "явных ожиданий, поэтому он нужен прежде всего для сценариев, где данные "
-            "доступны только через пользовательский интерфейс.",
-        ]
-    )
-    markdown_path.write_text("\n".join(markdown_rows), encoding="utf-8")
     print(report.to_string(index=False))
-    print(f"Отчет сохранен: {markdown_path}")
+    print(f"Отчет сохранен: {STATISTICS_MARKDOWN_PATH}")
     return report
 
 def console_clear():
@@ -584,9 +532,10 @@ def console_clear():
 def main():
     while True:
         print("Выберите действие:")
-        print("1. Действие 1")
-        print("2. Действие 2")
-        print("3. Действие 3")
+        print("1. Нормализовать данные из CSV, JSON и XML")
+        print("2. Выполнить сценарий CRUD через REST API")
+        print("3. Выполнить сценарий с Selenium и сохранить таблицу")
+        print("4. Вывести статистику")
         print("0. Выход")
         switch = input("Введите номер действия: ")
         match switch:

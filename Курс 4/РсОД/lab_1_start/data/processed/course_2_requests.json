@@ -11,7 +11,7 @@
     },
     "status_code": 201,
     "content_type": "application/json",
-    "elapsed_ms": 5.05,
+    "elapsed_ms": 2.17,
     "response": {
       "id": 14,
       "name": "Course 2 item",
@@ -33,7 +33,7 @@
     },
     "status_code": 200,
     "content_type": "application/json",
-    "elapsed_ms": 17.9,
+    "elapsed_ms": 1.78,
     "response": {
       "id": 14,
       "name": "Course 2 item replaced",
@@ -51,7 +51,7 @@
     },
     "status_code": 200,
     "content_type": "application/json",
-    "elapsed_ms": 6.36,
+    "elapsed_ms": 1.63,
     "response": {
       "id": 14,
       "name": "Course 2 item patched",
@@ -67,7 +67,7 @@
     "params_or_body": null,
     "status_code": 200,
     "content_type": "application/json",
-    "elapsed_ms": 5.05,
+    "elapsed_ms": 1.56,
     "response": {
       "id": 14,
       "name": "Course 2 item patched",
@@ -83,7 +83,7 @@
     "params_or_body": null,
     "status_code": 204,
     "content_type": null,
-    "elapsed_ms": 5.07,
+    "elapsed_ms": 19.04,
     "response": ""
   },
   {
@@ -92,7 +92,7 @@
     "params_or_body": null,
     "status_code": 404,
     "content_type": "application/json",
-    "elapsed_ms": 4.92,
+    "elapsed_ms": 2.04,
     "response": {
       "detail": "Item not found"
     },
@@ -101,24 +101,24 @@
   },
   {
     "method": "GET",
-    "url": "http://127.0.0.1:59676/api/items",
+    "url": "http://127.0.0.1:64959/api/items",
     "params_or_body": null,
     "status_code": null,
     "content_type": null,
-    "elapsed_ms": 2043.6,
+    "elapsed_ms": 2051.03,
     "response": null,
     "error_type": "ConnectionError",
-    "error": "HTTPConnectionPool(host='127.0.0.1', port=59676): Max retries exceeded with url: /api/items (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=59676): Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение\"))"
+    "error": "HTTPConnectionPool(host='127.0.0.1', port=64959): Max retries exceeded with url: /api/items (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=64959): Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение\"))"
   },
   {
     "method": "GET",
-    "url": "http://127.0.0.1:55527/api/items",
+    "url": "http://127.0.0.1:64961/api/items",
     "params_or_body": null,
     "status_code": null,
     "content_type": null,
-    "elapsed_ms": 75.12,
+    "elapsed_ms": 62.95,
     "response": null,
     "error_type": "ReadTimeout",
-    "error": "HTTPConnectionPool(host='127.0.0.1', port=55527): Read timed out. (read timeout=0.05)"
+    "error": "HTTPConnectionPool(host='127.0.0.1', port=64961): Read timed out. (read timeout=0.05)"
   }
 ]
