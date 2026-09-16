@@ -1,28 +1,17 @@
 import requests
 import time
 import random
-import sys
 from datetime import datetime
 from tqdm import tqdm
 
-# ---------- НАСТРОЙКИ ----------
 START_ID = 1_000_000          # начало диапазона
 END_ID   = 1_010_000          # конец диапазона
 DELAY_MIN = 0.3               # минимальная задержка между запросами (сек)
 DELAY_MAX = 0.8               # максимальная задержка
 TIMEOUT = 10                  # таймаут запроса
 LOG_FILE = "found_videos.txt" # файл, куда записываются найденные видео
-BEEP = False                   # звуковой сигнал при находке (Windows)
-# --------------------------------
 
 OEMBED_URL = "https://vimeo.com/api/oembed.json"
-
-
-def beep():
-    """Издаёт короткий звуковой сигнал (только Windows)."""
-    if BEEP and sys.platform.startswith("win"):
-        import winsound
-        winsound.Beep(1000, 300)  # частота 1000 Гц, длительность 300 мс
 
 
 def notify(video_id: int, title: str = ""):
@@ -33,17 +22,13 @@ def notify(video_id: int, title: str = ""):
     - запись в лог-файл.
     """
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    line = f"[{ts}] ✅ НАЙДЕНО ВИДЕО: https://vimeo.com/{video_id}"
+    line = f"[{ts}] НАЙДЕНО ВИДЕО: https://vimeo.com/{video_id}"
     if title:
         line += f"  |  {title}"
 
-    # Печатаем поверх прогресс-бара
     tqdm.write(line)
 
-    # Звук
-    beep()
 
-    # Запись в файл
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(line + "\n")
 
@@ -99,7 +84,6 @@ def main():
 
         time.sleep(random.uniform(DELAY_MIN, DELAY_MAX))
 
-    # ---------- РЕЗУЛЬТАТЫ ----------
     density = valid_count / total_tested if total_tested else 0
     print("\n" + "=" * 50)
     print(f"Проверено ID:        {total_tested}")

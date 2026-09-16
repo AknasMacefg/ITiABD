@@ -430,7 +430,14 @@ def course_3():
         else:
             raise RuntimeError("Не удалось дождаться запуска локального backend")
 
-        driver = webdriver.Chrome()
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--headless=new")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--no-first-run")
+        chrome_options.add_argument("--no-default-browser-check")
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.set_page_load_timeout(10)
+        driver.set_script_timeout(10)
         wait = WebDriverWait(driver, 10)
         driver.get(f"{base_url}/dynamic")
 
@@ -490,7 +497,10 @@ def course_3():
         return result
     finally:
         if driver is not None:
-            driver.quit()
+            try:
+                driver.quit()
+            except Exception as error:
+                print(f"Не удалось корректно закрыть Selenium: {error}")
         backend_process.terminate()
         try:
             backend_process.wait(timeout=5)
@@ -498,28 +508,20 @@ def course_3():
             backend_process.kill()
 
 def course_4():
-    """Show statistics already saved by scenarios 1, 2 and 3."""
-    required_results = {
-        "пункта 1": PROCESSED_DIR / "items_normalized.json",
-        "пункта 2": PROCESSED_DIR / "course_2_requests.json",
-        "пункта 3": PROCESSED_DIR / "selenium_items.csv",
-    }
-    missing = [name for name, path in required_results.items() if not path.exists()]
-    if missing:
-        print("Сначала выполните: " + ", ".join(missing) + ".")
-        return None
-    if not STATISTICS_PATH.exists():
-        print("Статистика еще не сохранена. Выполните пункты 1, 2 и 3.")
-        return None
+    """Run scenarios 1, 2 and 3 on one freshly prepared data set."""
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+    for path in (STATISTICS_PATH, STATISTICS_MARKDOWN_PATH):
+        if path.exists():
+            path.unlink()
+
+    print("Запуск курса 1: подготовка общего набора данных")
+    course_1()
+    print("\nЗапуск курса 2: REST API")
+    course_2()
+    print("\nЗапуск курса 3: Selenium")
+    course_3()
 
     report = pd.read_csv(STATISTICS_PATH)
-    expected_methods = {"CSV/XML/JSON", "REST API", "Selenium"}
-    completed_methods = set(report["Способ"])
-    missing_methods = expected_methods - completed_methods
-    if missing_methods:
-        print("Статистика неполная. Выполните сценарии: " + ", ".join(sorted(missing_methods)))
-        return None
-
     print(report.to_string(index=False))
     print(f"Отчет сохранен: {STATISTICS_MARKDOWN_PATH}")
     return report
