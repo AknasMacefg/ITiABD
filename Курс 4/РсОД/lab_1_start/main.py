@@ -508,20 +508,159 @@ def course_3():
             backend_process.kill()
 
 def course_4():
-    """Run scenarios 1, 2 and 3 on one freshly prepared data set."""
+    """Compare direct data retrieval from files, REST API and Selenium."""
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     for path in (STATISTICS_PATH, STATISTICS_MARKDOWN_PATH):
         if path.exists():
             path.unlink()
 
-    print("Запуск курса 1: подготовка общего набора данных")
-    course_1()
-    print("\nЗапуск курса 2: REST API")
-    course_2()
-    print("\nЗапуск курса 3: Selenium")
-    course_3()
+    csv_separator = select_csv_separator()
+    source_readers = {
+        "CSV/XML/JSON": lambda: {
+            "CSV": read_items_csv(RAW_DIR / "items.csv", csv_separator),
+            "JSON": read_items_json(RAW_DIR / "items.json"),
+            "XML": read_items_xml(RAW_DIR / "items.xml"),
+        },
+    }
 
-    report = pd.read_csv(STATISTICS_PATH)
+    started = time.perf_counter()
+    sources = source_readers["CSV/XML/JSON"]()
+    normalized = []
+    for priority, source in enumerate(sources.values()):
+        current = normalize_items(source)
+        current["_source_priority"] = priority
+        normalized.append(current)
+    combined = pd.concat(normalized, ignore_index=True)
+    combined = combined.drop_duplicates(subset=ITEM_COLUMNS, ignore_index=True)
+    combined = combined.sort_values(
+        ["id", "updated_at", "_source_priority"],
+        ascending=[True, False, True],
+        na_position="last",
+    )
+    file_data = combined.drop_duplicates(subset="id", keep="first").sort_values("id")
+    file_data = file_data[ITEM_COLUMNS].reset_index(drop=True)
+    file_elapsed = time.perf_counter() - started
+    file_count = len(file_data)
+
+    (PROCESSED_DIR / "items_normalized.json").write_text(
+        file_data.to_json(orient="records", force_ascii=False, date_format="iso"),
+        encoding="utf-8",
+    )
+
+    host = "127.0.0.1"
+    port = 8000
+    base_url = f"http://{host}:{port}"
+    backend_process = subprocess.Popen(
+        [
+            sys.executable,
+            "-m",
+            "uvicorn",
+            "backend.main:app",
+            "--host",
+            host,
+            "--port",
+            str(port),
+        ],
+        cwd=BASE_DIR,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.STDOUT,
+    )
+    driver = None
+    try:
+        for _ in range(20):
+            if backend_process.poll() is not None:
+                raise RuntimeError("Локальный backend завершился до запуска")
+            try:
+                requests.get(f"{base_url}/api/items", timeout=2).raise_for_status()
+                break
+            except requests.RequestException:
+                time.sleep(0.25)
+        else:
+            raise RuntimeError("Не удалось дождаться запуска локального backend")
+
+        started = time.perf_counter()
+        api_response = requests.get(f"{base_url}/api/items", timeout=10)
+        api_response.raise_for_status()
+        api_data = api_response.json()
+        api_elapsed = time.perf_counter() - started
+
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--headless=new")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--no-first-run")
+        chrome_options.add_argument("--no-default-browser-check")
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.set_page_load_timeout(10)
+        driver.set_script_timeout(10)
+        wait = WebDriverWait(driver, 10)
+
+        started = time.perf_counter()
+        driver.get(f"{base_url}/dynamic")
+        wait.until(EC.element_to_be_clickable((By.ID, "load-button"))).click()
+        rows = wait.until(
+            lambda browser: browser.find_elements(By.CSS_SELECTOR, "#items-body tr")
+        )
+        selenium_data = []
+        for row in rows:
+            cells = [cell.text for cell in row.find_elements(By.TAG_NAME, "td")]
+            selenium_data.append(
+                {
+                    "id": int(cells[0]),
+                    "name": cells[1],
+                    "category": cells[2],
+                    "value": float(cells[3]) if cells[3] else None,
+                    "active": cells[4],
+                }
+            )
+        selenium_elapsed = time.perf_counter() - started
+    finally:
+        if driver is not None:
+            try:
+                driver.quit()
+            except Exception as error:
+                print(f"Не удалось корректно закрыть Selenium: {error}")
+        backend_process.terminate()
+        try:
+            backend_process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            backend_process.kill()
+
+    statistics = [
+        {
+            "Способ": "CSV/XML/JSON",
+            "Количество записей": file_count,
+            "Уникальных id": file_data["id"].nunique(),
+            "Время, с": round(file_elapsed, 4),
+            "Есть ошибки": "Нет",
+        },
+        {
+            "Способ": "REST API",
+            "Количество записей": len(api_data),
+            "Уникальных id": len({item["id"] for item in api_data}),
+            "Время, с": round(api_elapsed, 4),
+            "Есть ошибки": "Нет",
+        },
+        {
+            "Способ": "Selenium",
+            "Количество записей": len(selenium_data),
+            "Уникальных id": len({item["id"] for item in selenium_data}),
+            "Время, с": round(selenium_elapsed, 4),
+            "Есть ошибки": "Нет",
+        },
+    ]
+    report = pd.DataFrame(statistics)
+    report.to_csv(STATISTICS_PATH, index=False)
+    STATISTICS_MARKDOWN_PATH.write_text(
+        "| Способ | Количество записей | Уникальных id | Время, с | Есть ошибки |\n"
+        "|---|---:|---:|---:|---|\n"
+        + "\n".join(
+            f"| {row['Способ']} | {row['Количество записей']} | "
+            f"{row['Уникальных id']} | {row['Время, с']} | {row['Есть ошибки']} |"
+            for row in statistics
+        )
+        + "\n",
+        encoding="utf-8",
+    )
     print(report.to_string(index=False))
     print(f"Отчет сохранен: {STATISTICS_MARKDOWN_PATH}")
     return report
