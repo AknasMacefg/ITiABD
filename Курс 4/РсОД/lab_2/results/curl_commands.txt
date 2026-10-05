@@ -1,0 +1,14 @@
+curl.exe --version
+curl.exe -i http://127.0.0.1:8000/api/transactions
+curl.exe -i http://127.0.0.1:8000/api/transactions/1
+curl.exe -i -X POST -H "Content-Type: application/json" --data "@post.json" http://127.0.0.1:8000/api/transactions
+curl.exe -i -X PUT -H "Content-Type: application/json" --data "@put.json" http://127.0.0.1:8000/api/transactions/1
+curl.exe -i -X PATCH -H "Content-Type: application/json" --data "@patch.json" http://127.0.0.1:8000/api/transactions/1
+curl.exe -i -X DELETE http://127.0.0.1:8000/api/transactions/1
+curl.exe -I http://127.0.0.1:8000/api/transactions
+curl.exe -i "http://127.0.0.1:8000/api/transactions?currency=RUB" -H "X-Student-Tag: lab-2"
+curl.exe -L -i http://127.0.0.1:8000/api/redirect
+curl.exe http://127.0.0.1:8000/api/transactions -o transactions_response.json
+
+Сборка curl поддерживает HTTP/HTTPS, FTP/FTPS, SMTP/SMTPS и другие протоколы.
+Пароли и реальные учетные данные не следует передавать в командной строке.

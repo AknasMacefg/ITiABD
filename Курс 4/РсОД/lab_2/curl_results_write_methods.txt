@@ -1,0 +1,17 @@
+﻿## PATCH
+HTTP/1.1 422 Unprocessable Content
+date: Mon, 05 Oct 2026 16:25:02 GMT
+server: uvicorn
+content-length: 291
+content-type: application/json
+
+{"detail":[{"type":"missing","loc":["body","org_id"],"msg":"Field required","input":{"amount":13500.0}},{"type":"missing","loc":["body","date"],"msg":"Field required","input":{"amount":13500.0}},{"type":"missing","loc":["body","currency"],"msg":"Field required","input":{"amount":13500.0}}]}
+
+## Query parameters
+HTTP/1.1 200 OK
+date: Mon, 05 Oct 2026 16:25:02 GMT
+server: uvicorn
+content-length: 90
+content-type: application/json
+
+[{"org_id":1,"date":"2026-09-12","amount":13000.0,"currency":"RUB","transaction_id":1001}]
