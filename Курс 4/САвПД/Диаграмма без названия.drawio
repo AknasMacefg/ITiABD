@@ -1,0 +1,156 @@
+<mxfile host="Electron">
+  <diagram name="Страница-1" id="e1maGvWkROYpsUHmT3e8">
+    <mxGraphModel dx="2039" dy="2018" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="E1 Самокат / IoT" vertex="1">
+          <mxGeometry height="50" width="180" x="60" y="-360" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="E2 Пользователь / приложение" vertex="1">
+          <mxGeometry height="50" width="180" x="-503" y="-140" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="E3 Операторская платформа" vertex="1">
+          <mxGeometry height="50" width="180" x="-380" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="E4 Городская ГИС / ГИБДД" vertex="1">
+          <mxGeometry height="50" width="180" x="-80" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="E5 Администрация / дашборд" vertex="1">
+          <mxGeometry height="50" width="180" x="590" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="E6 Сервисная служба" vertex="1">
+          <mxGeometry height="50" width="180" x="-200" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="E7 Парковки / зарядные станции" vertex="1">
+          <mxGeometry height="50" width="180" x="-200" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-8" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="P1 Сбор и валидация телеметрии" vertex="1">
+          <mxGeometry height="60" width="200" x="-210" y="-250" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="P3 Анонимизация и агрегация" vertex="1">
+          <mxGeometry height="60" width="200" x="320" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-11" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="P4 Интеграция городских слоёв" vertex="1">
+          <mxGeometry height="60" width="200" x="320" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="P5 Аналитика рисков, спроса и нарушений" vertex="1">
+          <mxGeometry height="60" width="200" x="580" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-13" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="P6 Управление стимулами и перераспределением" vertex="1">
+          <mxGeometry height="60" width="200" x="80" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-14" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="P7 Визуализация и поддержка решений" vertex="1">
+          <mxGeometry height="60" width="200" x="580" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-15" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="D1 Сырая телеметрия" vertex="1">
+          <mxGeometry height="60" width="180" x="647" y="-60" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-16" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="D2 Поездки" vertex="1">
+          <mxGeometry height="60" width="180" x="467" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-17" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="D3 Геозоны и парковки" vertex="1">
+          <mxGeometry height="60" width="180" x="750" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-18" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="D4 ГИС / ДТП" vertex="1">
+          <mxGeometry height="60" width="180" x="450" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-19" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="D5 Профили, баллы, нарушения" vertex="1">
+          <mxGeometry height="60" width="180" x="940" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-20" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-8" value="GPS 1/30с, заряд, замок, скорость, вибрация">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-21" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-8" value="сырые GPS-треки, ID">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-22" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-15" value="очищенные телеметрические точки">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-23" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-9" value="старт/финиш, фото парковки, QR">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-24" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-9" value="данные о поездках, ID пользователя">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-25" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-16" value="поездка, точка конца, парковочный статус">
+          <mxGeometry relative="1" x="0.266" y="10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-26" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-13" value="нарушение/бонус">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-27" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-10" value="телеметрия">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-28" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-10" value="поездки">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-29" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-11" value="анонимизированные агрегаты">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-30" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-11" value="адреса ДТП, слой тротуаров, ограничения">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-31" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-17" value="актуальные геозоны">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-32" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-18" value="ГИС / ДТП">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-33" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-34" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-35" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-36" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-37" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-14" value="метрики риска, дефицита парковок, перегруза">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-38" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-5" value="дашборд для администрации">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-39" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-13" value="решения по субсидиям, запретам, парковкам">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-40" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-2" value="тариф, бонус, штраф, ближайшая легальная парковка">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-41" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-6" value="задачи на перераспределение/эвакуацию">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-42" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-8" value="статус выполнения">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-43" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-9" value="занятость парковки/зарядки">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-44" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-19" value="профили, баллы, нарушения">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-45" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-9" value="история нарушений/бонусов">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-46" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-3" value="геозоны, тарифы, стимулы">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-49" edge="1" parent="1" source="NtIC9OnUyHoY-B2YZkoe-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" target="NtIC9OnUyHoY-B2YZkoe-9" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="770" y="120" as="sourcePoint" />
+            <mxPoint x="420" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NtIC9OnUyHoY-B2YZkoe-9" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="P2 Определение поездки и парковки" vertex="1">
+          <mxGeometry height="60" width="200" x="180" y="-20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

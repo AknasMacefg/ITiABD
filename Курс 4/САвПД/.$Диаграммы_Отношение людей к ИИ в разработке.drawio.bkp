@@ -1,6 +1,6 @@
 <mxfile host="Electron" scale="1" border="0">
   <diagram name="Страница-1" id="Wb-yMRIZG5--dPkCwGQj">
-    <mxGraphModel dx="2060" dy="2613" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2943" dy="3232" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -122,7 +122,7 @@
             <mxPoint x="2110" y="-170" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HEWR0l6rr3aAgUkoga-0-37" edge="1" parent="1" source="HEWR0l6rr3aAgUkoga-0-32" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;endWidth=19;endSize=27;strokeWidth=1;width=108;fillColor=light-dark(#000000,#FF0000);strokeColor=#B20000;" value="">
+        <mxCell id="HEWR0l6rr3aAgUkoga-0-37" edge="1" parent="1" source="HEWR0l6rr3aAgUkoga-0-32" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;endWidth=19;endSize=27;strokeWidth=1;width=108;fillColor=#a20025;strokeColor=#6F0000;" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
             <mxPoint x="2610" y="150" as="sourcePoint" />
             <mxPoint x="2960" y="-200" as="targetPoint" />
@@ -513,7 +513,7 @@
         <mxCell id="LFDei84wAhk-iRTQ3s0W-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
           <mxGeometry height="954" width="1680" x="8680" y="-584" as="geometry" />
         </mxCell>
-        <mxCell id="LFDei84wAhk-iRTQ3s0W-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=46;" value="&lt;span style=&quot;font-family: quote-cjk-patch, Inter, system-ui, -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, Cantarell, &amp;quot;Open Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; text-align: start;&quot;&gt;Система влияние ИИ на профессиональную деятельность в IT-разработке&lt;/span&gt;" vertex="1">
+        <mxCell id="LFDei84wAhk-iRTQ3s0W-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=46;fontColor=#FFFFFF;fillColor=#000000;" value="&lt;span style=&quot;font-family: quote-cjk-patch, Inter, system-ui, -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, Cantarell, &amp;quot;Open Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; text-align: start;&quot;&gt;Система влияние ИИ на профессиональную деятельность в IT-разработке&lt;/span&gt;" vertex="1">
           <mxGeometry height="410" width="680" x="9195" y="-320" as="geometry" />
         </mxCell>
         <mxCell id="LFDei84wAhk-iRTQ3s0W-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=33;" value="Окружающая среда: IT-индустрия" vertex="1">
