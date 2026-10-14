@@ -561,10 +561,10 @@
         <mxCell id="LFDei84wAhk-iRTQ3s0W-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=26;" value="Бизнес требования" vertex="1">
           <mxGeometry height="30" width="320" x="8800" y="-270" as="geometry" />
         </mxCell>
-        <mxCell id="LFDei84wAhk-iRTQ3s0W-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=26;" value="Технологический ресурс" vertex="1">
+        <mxCell id="LFDei84wAhk-iRTQ3s0W-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=26;" value="Технологии" vertex="1">
           <mxGeometry height="30" width="320" x="8810" y="-160" as="geometry" />
         </mxCell>
-        <mxCell id="LFDei84wAhk-iRTQ3s0W-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=26;" value="Человеческий фактор" vertex="1">
+        <mxCell id="LFDei84wAhk-iRTQ3s0W-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=26;" value="Использование человеком ИИ" vertex="1">
           <mxGeometry height="30" width="320" x="8810" y="-65" as="geometry" />
         </mxCell>
         <mxCell id="LFDei84wAhk-iRTQ3s0W-17" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0.083;exitY=0.384;exitDx=0;exitDy=0;exitPerimeter=0;fontSize=12;strokeWidth=7;" value="">
@@ -770,6 +770,24 @@
         </mxCell>
         <mxCell id="S8STniBp72t8yMNe_9Ho-69" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=26;" value="адаптация" vertex="1">
           <mxGeometry height="30" width="320" x="13380" y="-460" as="geometry" />
+        </mxCell>
+        <mxCell id="BskVzZE-TiTwx-WiNuCG-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;" value="" vertex="1">
+          <mxGeometry height="205" width="410" x="15570" y="-610" as="geometry" />
+        </mxCell>
+        <mxCell id="BskVzZE-TiTwx-WiNuCG-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="195" width="150" x="15360" y="-160" as="geometry" />
+        </mxCell>
+        <mxCell id="BskVzZE-TiTwx-WiNuCG-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="195" width="150" x="15713" y="-152" as="geometry" />
+        </mxCell>
+        <mxCell id="BskVzZE-TiTwx-WiNuCG-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="195" width="150" x="16056" y="-150" as="geometry" />
+        </mxCell>
+        <mxCell id="BskVzZE-TiTwx-WiNuCG-7" edge="1" parent="1" source="BskVzZE-TiTwx-WiNuCG-3" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BskVzZE-TiTwx-WiNuCG-4" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="15480" y="-160" as="sourcePoint" />
+            <mxPoint x="15530" y="-210" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
